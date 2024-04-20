@@ -1425,3 +1425,30 @@ body {
   footer .credits a {
     color: #fff;
   }
+  .back-video{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -10;
+  }
+  /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0078ff; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #0078ff; 
+}
