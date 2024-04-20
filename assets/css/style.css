@@ -667,6 +667,7 @@ width: fit-content;
   background: rgba(78, 78, 78, 0.9);
   transition: 0.3s;
   z-index: 999;
+  
 }
 
 .navbar-mobile .mobile-nav-toggle {
@@ -683,7 +684,7 @@ width: fit-content;
   bottom: 15px;
   left: 15px;
   padding: 10px 0;
-  background-color: #fff;
+  background-color: #ffffffb4;
   overflow-y: auto;
   transition: 0.3s;
 }
@@ -703,7 +704,16 @@ width: fit-content;
   padding: 10px 20px;
   font-size: 15px;
   color: #4e4e4e;
+  display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+margin: 50px 10px 10px 10px;
+    top: 50px;
 }
+
 
 .navbar-mobile a:hover,
 .navbar-mobile .active,
@@ -1454,3 +1464,4 @@ footer .credits a {
 ::-webkit-scrollbar-thumb:hover {
   background: #0078ff; 
 }
+
