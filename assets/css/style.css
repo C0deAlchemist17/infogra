@@ -377,7 +377,7 @@ width: fit-content;
 }
 
 #preloader:before {
-  content: "";
+  content: counter(infogra);
   position: fixed;
   top: calc(50% - 30px);
   left: calc(50% - 30px);
