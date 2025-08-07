@@ -755,7 +755,7 @@ body {
   # Hero Section
   --------------------------------------------------------------*/
   .hero {
-    height: 100vh;
+    height: 60vh ;
     position: relative;
     color: #fff;
   }
