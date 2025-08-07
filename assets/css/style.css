@@ -763,7 +763,7 @@ margin: 50px 10px 10px 10px;
 # Hero Section
 --------------------------------------------------------------*/
 .hero {
-  height: 100vh;
+  height: 60vh ;
   position: relative;
   color: #fff;
 }
@@ -1446,6 +1446,7 @@ footer .credits a {
   right: 0;
   bottom: 0;
   z-index: -10;
+
 } /* width */
 ::-webkit-scrollbar {
   width: 10px;
