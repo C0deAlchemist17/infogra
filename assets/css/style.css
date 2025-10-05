@@ -5,6 +5,9 @@ body {
   background-color: #f5f5f5;
   color: #4e4e4e;
   font-family: 'Cinzel Decorative' ,Arial, Helvetica, sans-serif !important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 h1,
@@ -30,6 +33,15 @@ a:hover {
   color: #0078ff;
   text-decoration: none;
   transition: all 0.5s ease-in-out;
+}
+
+/* Layout: push footer to bottom */
+main#main {
+  flex: 1 0 auto;
+}
+footer {
+  flex-shrink: 0;
+  margin-top: auto;
 }
 
 .p-r {
@@ -102,7 +114,7 @@ width: fit-content;
 }
 
 .overlay-mf {
-  background-color: #0078ff;
+  background-color: rgba(0, 0, 0, 0.45);
 }
 
 .overlay-mf {
@@ -112,7 +124,7 @@ width: fit-content;
   padding: 0;
   height: 100%;
   width: 100%;
-  opacity: 0.7;
+  opacity: 1;
 }
 
 .paralax-mf {
@@ -386,7 +398,7 @@ width: fit-content;
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  animation: animate-preloader 1s linear infinite;
+  animation: animate-preloader 0.6s linear infinite;
 }
 
 @keyframes animate-preloader {
@@ -470,6 +482,8 @@ width: fit-content;
   transition: all 0.5s;
   z-index: 997;
   padding: 20px 0;
+  background: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 #header .logo {
@@ -759,11 +773,24 @@ margin: 50px 10px 10px 10px;
   display: block;
 }
 
+/* Spacing when hero is removed: apply only when main follows header directly */
+header + main {
+  margin-top: 100px;
+}
+
+@media (max-width: 991px) {
+  header + main {
+    margin-top: 80px;
+  }
+}
+
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
 .hero {
-  height: 60vh ;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
   position: relative;
   color: #fff;
 }
@@ -812,7 +839,17 @@ margin: 50px 10px 10px 10px;
 }
 
 .hero-single {
-  height: 350px;
+  min-height: 30vh;
+}
+
+/* Non-home hero height: half screen */
+.hero.hero-single {
+  height: 50vh;
+}
+
+/* Move hero background image upward on non-home pages */
+.hero.hero-single.bg-image {
+  background-position: center top;
 }
 
 .hero-single .hero-content {
@@ -1030,6 +1067,7 @@ margin: 50px 10px 10px 10px;
   padding-top: 40px;
 }
 
+/* Add top space to main image column across portfolio pages */
 .portfolio-details .portfolio-details-slider img {
   width: 100%;
   height: 33rem;
@@ -1158,6 +1196,11 @@ margin: 50px 10px 10px 10px;
 
 .swiper-pagination .swiper-pagination-bullet-active {
   background-color: #fff;
+}
+
+/* Spacing for Bootstrap Icons across the site */
+.bi[class*="bi-"] {
+  margin-top: 5px;
 }
 
 /*--------------------------------------------------------------
@@ -1443,11 +1486,46 @@ footer .credits a {
 } 
 .back-video{
   position: absolute;
-  right: 0;
-  bottom: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   z-index: -10;
-
 } /* width */
+/*--------------------------------------------------------------
+# RTL tweaks
+--------------------------------------------------------------*/
+html[dir="rtl"] body {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="rtl"] .navbar>ul>li {
+  padding: 10px 30px 10px 0; /* mirror LTR padding */
+}
+
+html[dir="rtl"] .title-left {
+  text-align: right;
+}
+html[dir="rtl"] .title-left:before {
+  right: 0;
+  left: auto;
+}
+
+html[dir="rtl"] .breadcrumb {
+  direction: rtl;
+}
+
+html[dir="rtl"] .portfolio-info {
+  text-align: right;
+}
+html[dir="rtl"] .portfolio-info ul li {
+  padding-right: 0;
+}
+html[dir="rtl"] .navbar ul {
+  justify-content: flex-end;
+}
 ::-webkit-scrollbar {
   width: 10px;
 }

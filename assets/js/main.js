@@ -183,6 +183,37 @@
   });
 
   /**
+   * Click-to-zoom for portfolio detail images (no anchor wrapper required)
+   * Applies to all images inside .portfolio-details-slider
+   */
+  const enableImageLightbox = () => {
+    const imgs = select('.portfolio-details-slider img', true)
+    if (!imgs || imgs.length === 0) return
+    imgs.forEach(img => {
+      if (img.dataset.lightboxBound === '1') return
+      img.dataset.lightboxBound = '1'
+      img.style.cursor = 'zoom-in'
+      img.addEventListener('click', () => {
+        const lb = GLightbox({
+          elements: [
+            {
+              href: img.currentSrc || img.src,
+              type: 'image'
+            }
+          ]
+        })
+        lb.open()
+      })
+    })
+  }
+
+  // Run on load and after small delay to catch lazy content
+  window.addEventListener('load', () => {
+    enableImageLightbox()
+    setTimeout(enableImageLightbox, 500)
+  })
+
+  /**
    * Testimonials slider
    */
   new Swiper('.testimonials-slider', {
@@ -222,8 +253,19 @@
    */
   let preloader = select('#preloader');
   if (preloader) {
+    // Remove as soon as DOM is ready for a faster perceived load
+    document.addEventListener('DOMContentLoaded', () => {
+      if (preloader && document.body.contains(preloader)) preloader.remove();
+    });
+
+    // Fallback: ensure removal shortly after in case DOMContentLoaded fires very early
+    setTimeout(() => {
+      if (preloader && document.body.contains(preloader)) preloader.remove();
+    }, 1500);
+
+    // Safety: also remove on full window load
     window.addEventListener('load', () => {
-      preloader.remove()
+      if (preloader && document.body.contains(preloader)) preloader.remove();
     });
   }
 
@@ -231,5 +273,4 @@
    * Initiate Pure Counter 
    */
   new PureCounter();
-
 })()
