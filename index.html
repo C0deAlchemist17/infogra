@@ -26,7 +26,7 @@
       rel="stylesheet"
     />
     <link
-      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.min.css"
       rel="stylesheet"
     />
     <link
@@ -77,7 +77,11 @@
     <div
       id="hero"
       class="hero route bg-image">
-      <video autoplay muted plays-inline loop class="back-video" src="assets/img/mylivewallpapers.com-Sphere-Wire-Mesh-1.mp4" style="background-size: cover; "></video>
+      <video class="back-video" autoplay muted playsinline loop preload="none" poster="assets/img_opt/hero-poster.jpg" style="background-size: cover; ">
+        <source src="assets/img_opt/hero-1280.webm" type="video/webm" />
+        <source src="assets/img_opt/hero-1280.mp4" type="video/mp4" />
+        <source src="assets/img/mylivewallpapers.com-Sphere-Wire-Mesh-1.mp4" type="video/mp4" />
+      </video>
       <div class="overlay-itro"></div>
       <div class="hero-content display-table">
         <div class="table-cell">
@@ -109,11 +113,15 @@
                     <div class="row">
                       <div class="col-sm-6 col-md-5">
                         <div class="about-img">
-                          <img
+                          <picture>
+  <source srcset="assets/img_opt/MY LOGO 002.webp" type="image/webp" />
+  <img
                             src="assets/img/MY LOGO 002.png"
                             class="img-fluid rounded b-shadow-a"
                             alt=""
+                            loading="lazy" decoding="async"
                           />
+</picture>
                         </div>
                       </div>
                       <div class="col-sm-6 col-md-7">
@@ -420,7 +428,7 @@
       <!-- ======= Counter Section ======= -->
       <div
         class="section-counter paralax-mf bg-image"
-        style="background-image: url(assets/img/counters-bg.jpg)"
+        style="background-image: url(assets/img_opt/counters-bg.webp)"
       >
         <div class="overlay-mf"></div>
         <div class="container position-relative">
@@ -519,7 +527,10 @@
                   class="portfolio-lightbox"
                 >
                   <div class="work-img">
-                    <img src="assets/img/work-1.jpg" alt="" class="img-fluid" />
+                    <picture>
+                      <source srcset="assets/img_opt/work-1.webp" type="image/webp" />
+                      <img src="assets/img/work-1.jpg" alt="" class="img-fluid" loading="lazy" decoding="async" />
+                    </picture>
                   </div>
                 </a>
                 <div class="work-content">
@@ -550,7 +561,10 @@
                   class="portfolio-lightbox"
                 >
                   <div class="work-img">
-                    <img src="assets/img/work-2.jpg" alt="" class="img-fluid" />
+                    <picture>
+                      <source srcset="assets/img_opt/work-2.webp" type="image/webp" />
+                      <img src="assets/img/work-2.jpg" alt="" class="img-fluid" loading="lazy" decoding="async" />
+                    </picture>
                   </div>
                 </a>
                 <div class="work-content">
@@ -581,7 +595,10 @@
                   class="portfolio-lightbox"
                 >
                   <div class="work-img">
-                    <img src="assets/img/re ramen en/Screenshot 2025-10-05 003904.png" alt="" class="img-fluid" />
+                    <picture>
+                      <source srcset="assets/img_opt/re ramen en/Screenshot 2025-10-05 003904.webp" type="image/webp" />
+                      <img src="assets/img/re ramen en/Screenshot 2025-10-05 003904.png" alt="" class="img-fluid" loading="lazy" decoding="async" />
+                    </picture>
                   </div>
                 </a>
                 <div class="work-content">
@@ -612,7 +629,10 @@
                   class="portfolio-lightbox"
                 >
                   <div class="work-img">
-                    <img src="assets/img/maazen en/Screenshot 2025-10-05 015252.png" alt="" class="img-fluid" />
+                    <picture>
+                      <source srcset="assets/img_opt/maazen en/Screenshot 2025-10-05 015252.webp" type="image/webp" />
+                      <img src="assets/img/maazen en/Screenshot 2025-10-05 015252.png" alt="" class="img-fluid" loading="lazy" decoding="async" />
+                    </picture>
                   </div>
                 </a>
                 <div class="work-content">
@@ -643,7 +663,10 @@
                   class="portfolio-lightbox"
                 >
                   <div class="work-img">
-                    <img src="assets/img/hab en/Screenshot 2025-09-18 190357.png" alt="" class="img-fluid" />
+                    <picture>
+                      <source srcset="assets/img_opt/hab en/Screenshot 2025-09-18 190357.webp" type="image/webp" />
+                      <img src="assets/img/hab en/Screenshot 2025-09-18 190357.png" alt="" class="img-fluid" loading="lazy" decoding="async" />
+                    </picture>
                   </div>
                 </a>
                 <div class="work-content">
@@ -693,7 +716,10 @@
             class="portfolio-lightbox"
           >
             <div class="work-img">
-              <img src="assets/img/work-4.jpg" alt="" class="img-fluid" />
+              <picture>
+                <source srcset="assets/img_opt/work-4.webp" type="image/webp" />
+                <img src="assets/img/work-4.jpg" alt="" class="img-fluid" loading="lazy" decoding="async" />
+              </picture>
             </div>
           </a>
           <div class="work-content">
@@ -723,7 +749,10 @@
             class="portfolio-lightbox"
           >
             <div class="work-img">
-              <img src="assets/img/work-5.jpg" alt="" class="img-fluid" />
+              <picture>
+                <source srcset="assets/img_opt/work-5.webp" type="image/webp" />
+                <img src="assets/img/work-5.jpg" alt="" class="img-fluid" loading="lazy" decoding="async" />
+              </picture>
             </div>
           </a>
           <div class="work-content">
@@ -753,7 +782,10 @@
             class="portfolio-lightbox"
           >
             <div class="work-img">
-              <img src="assets/img/work-3.jpg" alt="" class="img-fluid" />
+              <picture>
+                <source srcset="assets/img_opt/work-3.webp" type="image/webp" />
+                <img src="assets/img/work-3.jpg" alt="" class="img-fluid" loading="lazy" decoding="async" />
+              </picture>
             </div>
           </a>
           <div class="work-content">
@@ -932,18 +964,25 @@ style="background-image: url(assets/img/overlay-bg.jpg)"
 <a
 href="#"
 class="back-to-top d-flex align-items-center justify-content-center"
-><i class="bi bi-arrow-up-short"></i
-></a>
+><i class="bi bi-arrow-up-short"></i>
+</a>
 
     <!-- Vendor JS Files -->
-    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/typed.js/typed.umd.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-
-    <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script defer src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script defer src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script defer src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script defer src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script defer src="assets/vendor/typed.js/typed.umd.js"></script>
+    <script defer src="assets/vendor/php-email-form/validate.js"></script>
+    <script defer src="assets/js/main.js"></script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+

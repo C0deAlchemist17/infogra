@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>infogra</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css?family=Lemonada&display=swap" rel="stylesheet"></link>
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/stylear.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+      <div class="container d-flex align-items-center justify-content-between">
+          <h1 class="logo"><a href="index.html">إنفوجرا</a></h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+  
+          <nav id="navbar" class="navbar">
+              <ul>
+                  <li><a class="nav-link scrollto active" href="#hero">الرئيسية</a></li>
+                  <li><a class="nav-link scrollto" href="#about">من نحن</a></li>
+                  <li><a class="nav-link scrollto" href="#services">خدماتنا</a></li>
+                  <li><a class="nav-link scrollto" href="#work">أعمالنا</a></li>
+                  <li><a class="nav-link scrollto" href="#contact">تواصل معنا</a></li>
+              </ul>
+              <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav>
+          <!-- .navbar -->
+          <i class="bi bi-list mobile-nav-toggle"></i>
+          <a class="btn" href="index.html">English</a>
+      </div>
+  </header>
+    <!-- End Header -->
+
+    <!-- ======= Hero Section ======= -->
+    <div
+    id="hero"
+    class="hero route bg-image">
+    <video autoplay muted plays-inline loop class="back-video" src="assets/img/mylivewallpapers.com-Sphere-Wire-Mesh-1.mp4" style=" background-size: cover;" ></video>
+    <div class="overlay-itro"></div>
+    <div class="hero-content display-table">
+        <div class="table-cell">
+            <div class="container">
+                <!--<p class="display-6 color-d">مرحباً، عالم!</p>-->
+                <h1 class="hero-title mb-4">نحن إنفوجرا</h1>
+                <p class="hero-subtitle">
+                    <span
+                        class="typed"
+                        data-typed-items="مصممون, مطورون , مستقلون , مبرمجون"
+                    ></span>
+                </p>
+                <!-- <p class="pt-3"><a class="btn btn-primary btn js-scroll px-4" href="#about" role="button">اعرف المزيد</a></p> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- نهاية قسم البطل -->
+
+<main id="main">
+    <!-- ======= قسم من نحن ======= -->
+    <section id="about" class="about-mf sect-pt4 route">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="box-shadow-full">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-5">
+                                        <div class="about-img">
+                                            <img
+                                                src="assets/img/MY LOGO 002.png"
+                                                class="img-fluid rounded b-shadow-a"
+                                                alt=""
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-7">
+                                        <div class="about-info">
+                                            <p>
+                                                <span class="title-s">الاسم: </span>
+                                                <span>إنفوجرا</span>
+                                            </p>
+                                            <!-- <p>
+                                                <span class="title-s">الملف الشخصي: </span>
+                                                <span>مطور كامل المكدس</span>
+                                            </p> -->
+                                            <p>
+                                                <span class="title-s">البريد الإلكتروني: </span>
+                                                <span><a href="mailto:infogra174@gmail.com">infogra174@gmail.com</a></span>
+                                            </p>
+                                            <p>
+                                                <span class="title-s">الهاتف: </span>
+                                                <span><a href="https://wa.me/+201061866211" data-ur1313m3t="true">
+                                            +201061866211 </a>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-mf">
+                                    <p class="title-s">المهارات</p>
+                                    <span>HTML</span> <span class="pull-right">90%</span>
+                                    <div class="progress">
+                                        <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            style="width: 90%"
+                                            aria-valuenow="85"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                        ></div>
+                                    </div>
+                                    <span>CSS3</span> <span class="pull-right">75%</span>
+                                    <div class="progress">
+                                        <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            style="width: 75%"
+                                            aria-valuenow="75"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                        ></div>
+                                    </div>
+                                    <span>PHP</span> <span class="pull-right">50%</span>
+                                    <div class="progress">
+                                        <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            style="width: 50%"
+                                            aria-valuenow="50"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                        ></div>
+                                    </div>
+                                    <span>جافا سكريبت</span>
+                                    <span class="pull-right">60%</span>
+                                    <div class="progress">
+                                        <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            style="width: 60%"
+                                            aria-valuenow="90"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                        ></div>
+                                    </div>
+                                    <span>فوتوشوب</span>
+                                    <span class="pull-right">100%</span>
+                                    <div class="progress">
+                                        <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            style="width: 100%"
+                                            aria-valuenow="90"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                        ></div>
+                                    </div>
+                                    <span>إليستريتور</span>
+                                    <span class="pull-right">85%</span>
+                                    <div class="progress">
+                                        <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            style="width: 85%"
+                                            aria-valuenow="90"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                        ></div>
+                                    </div>
+                                    <span>فيجما</span> <span class="pull-right">90%</span>
+                                    <div class="progress">
+                                        <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            style="width: 90%"
+                                            aria-valuenow="85"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                        ></div>
+                                    </div>
+                                    <span>كانفا و إكس دي</span> <span class="pull-right">95%</span>
+                                    <div class="progress">
+                                        <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            style="width: 95%"
+                                            aria-valuenow="85"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                        ></div>
+                                    </div>
+                                    <span>ريآكت</span> <span class="pull-right">70%</span>
+                                    <div class="progress">
+                                        <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            style="width: 70%"
+                                            aria-valuenow="85"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                        ></div>
+                                    </div> <span>ساس</span> <span class="pull-right">85%</span>
+                                    <div class="progress">
+                                        <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            style="width: 85%"
+                                            aria-valuenow="85"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                        ></div>
+                                    </div> <span>جي كويري</span> <span class="pull-right">90%</span>
+                                    <div class="progress">
+                                        <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            style="width: 90%"
+                                            aria-valuenow="85"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                        ></div>
+                                    </div> 
+                                </div>
+                            </div>
+                  <div class="col-md-6">
+                    <div class="about-me pt-4 pt-md-0">
+                      <div class="title-box-2">
+                        <h5 class="title-left">نبذة عنا</h5>
+                      </div>
+                      <p class="lead">
+                        <h2>نحن نصمم التجربة الرقمية: حيث يلتقي التصميم بالتنمية
+                        </h2>
+
+                        <p>في عصرنا الرقمي الحالي، يُعد حضورك على الإنترنت واجهة عرض متجرك. نحن في [اسم الشركة]، أكثر من مجرد مطورين ومصممين جرافيك؛ نحن رواد التجربة الرقمية. نحن نتفهم قوة موقع الويب الجذاب الذي يُبنى مع وضع رحلة مستخدم سلسة في الاعتبار.
+
+                            يضفر فريقنا المكون من المبدعين المتحمسين والخبراء التقنيين بين المرئيات المذهلة والرموز القوية. نحن لا نبني مواقع ويب فحسب، بل نصنع تجارب استراتيجية مصممة خصيصًا لهوية علامتك التجارية الفريدة وجمهورك المستهدف. </p>
+                      </p>
+                      <p class="lead">
+                        <h3>ما يميزنا:</h3>
+                        
+                        <h5>نهج تشاركي:</h5>
+                        <p> نؤمن بالتواصل المفتوح ونعمل معك عن كثب لفهم رؤيتك وأهدافك.
+                        </p>
+                         <h5>تصميم وتطوير موحد:</h5> 
+                         <p>يعمل فريقنا بشكل متزامن، مما يضمن اتساق العلامة التجارية وتجربة مستخدم سلسة من التصميم إلى الوظيفة.</p>
+                         <h5>استراتيجيات قائمة على البيانات: </h5>
+                         <p>نحن لا ننشئ فقط ؛ نقوم بتحليل سلوك المستخدم لتحسين موقع الويب الخاص بك لتحقيق أقصى تأثير.
+                        </p>
+                         <h5>تقنية متطورة:</h5>
+                         <p>نبقى في الطليعة، حيث نستخدم أحدث الأدوات والتقنيات لبناء مواقع ويب محصنة للمستقبل.</p>
+                      </p>
+                      <p class="lead">
+                       <H3>النتيجة؟ </H3>  
+                       <p>مواقع الويب التي لا تبدو مذهلة فحسب، بل تحول الزوار إلى عملاء مخلصين. دعنا نساعدك في إنشاء حضور قوي على الإنترنت يدفع بالمشاركة ويحقق أهداف عملك.</p>
+
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End About Section -->
+
+      <!-- ======= Services Section ======= -->
+      <section id="services" class="services-mf pt-5 route">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="title-box text-center">
+                <h3 class="title-a">خدماتنا</h3>
+                <p class="subtitle-a">
+                  <p style="font-family: Arial, Helvetica, sans-serif; font-size: large;">إليك بعض من خدماتنا التي قد تهمك.</p>
+                </p>
+                <div class="line-mf"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="service-box">
+                <div class="service-ico">
+                  <span class="ico-circle"
+                    ><i class="bi bi-brush"></i
+                  ></span>
+                </div>
+                <div class="service-content">
+                  <h2 class="s-title">تصميم المواقع</h2>
+                  <p class="s-description text-center">
+                    <p style="font-family: Arial, Helvetica, sans-serif; font-size: large;"> تصميم رحلات المستخدم من خلال صور مؤثرة وتخطيطات بديهية. تلمع علامتك التجارية عبر الإنترنت. </p>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="service-box">
+                <div class="service-ico">
+                  <span class="ico-circle"
+                    ><i class="bi bi-body-text"></i
+                  ></span>
+                </div>
+                <div class="service-content">
+                  <h2 class="s-title">تطوير المواقع</h2>
+                  <p class="s-description text-center">
+                    <p style="font-family: Arial, Helvetica, sans-serif; font-size: large;"> إحياء التصميمات. بناء الجسور بين ما تراه وما يعمل. </p>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="service-box">
+                <div class="service-ico">
+                  <span class="ico-circle"
+                    ><i class="bi bi-bag-check"></i
+                  ></span>
+                </div>
+                <div class="service-content">
+                  <h2 class="s-title">ما بعد البيع</h2>
+                  <p class="s-description text-center">
+                    <p style="font-family: Arial, Helvetica, sans-serif; font-size: large;"> نحن هنا على المدى الطويل. احصل على المساعدة الخبيرة، واستكشاف الأخطاء وإصلاحها بسلاسة، والدعم المستمر لضمان[...]</p>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="service-box">
+                <div class="service-ico">
+                  <span class="ico-circle"
+                    ><i class="bi bi-aspect-ratio"></i
+                  ></span>
+                </div>
+                <div class="service-content">
+                  <h2 class="s-title">تصميم متجاوب</h2>
+                  <p class="s-description text-center">
+                    <p style="font-family: Arial, Helvetica, sans-serif; font-size: large;"> موقع واحد يناسب الجميع. تجربة سلسة عبر أي جهاز، من الكمبيوتر الشخصي إلى الجوال.</p>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="service-box">
+                <div class="service-ico">
+                  <span class="ico-circle"
+                    ><i class="bi bi-palette"></i
+                  ></span>
+                </div>
+                <div class="service-content">
+                  <h2 class="s-title">تصميم جرافيكي</h2>
+                  <p class="s-description text-center">
+                    <p style="font-family: Arial, Helvetica, sans-serif; font-size: large;"> صياغة رسائل واضحة تتصل بجمهورك وتحويل الأفكار إلى صور لا تُنسى[...]</p>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="service-box">
+                <div class="service-ico">
+                  <span class="ico-circle"
+                    ><i class="bi bi-cart4"></i
+                  ></span>
+                </div>
+                <div class="service-content">
+                  <h2 class="s-title">خدمات التسويق</h2>
+                  <p class="s-description text-center">
+                    <p style="font-family: Arial, Helvetica, sans-serif; font-size: large;"> كن مرئيًا. اسمع. احصل على النتائج، نحن نضخم صوت علامتك التجارية ووصولها، مما يزيد المبيعات وولاء العملاء[...]</p>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Services Section -->
+
+      <!-- ======= Counter Section ======= -->
+      <div
+      class="section-counter paralax-mf bg-image"
+      style="background-image: url(assets/img/counters-bg.jpg)"
+  >
+      <div class="overlay-mf"></div>
+      <div class="container position-relative">
+          <div class="row">
+              <div class="col-sm-3 col-lg-3">
+                  <div class="counter-box counter-box pt-4 pt-md-0">
+                      <div class="counter-ico">
+                          <span class="ico-circle"><i class="bi bi-check"></i></span>
+                      </div>
+                      <div class="counter-num">
+                          <p
+                              data-purecounter-start="0"
+                              data-purecounter-end="450"
+                              data-purecounter-duration="1"
+                              class="counter purecounter"
+                          ></p>
+                          <span class="counter-text">الأعمال المكتملة</span>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-sm-3 col-lg-3">
+                  <div class="counter-box pt-4 pt-md-0">
+                      <div class="counter-ico">
+                          <span class="ico-circle"
+                              ><i class="bi bi-journal-richtext"></i
+                          ></span>
+                      </div>
+                      <div class="counter-num">
+                          <p
+                              data-purecounter-start="0"
+                              data-purecounter-end="25"
+                              data-purecounter-duration="1"
+                              class="counter purecounter"
+                          ></p>
+                          <span class="counter-text">سنوات الخبرة</span>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-sm-3 col-lg-3">
+                  <div class="counter-box pt-4 pt-md-0">
+                      <div class="counter-ico">
+                          <span class="ico-circle"><i class="bi bi-people"></i></span>
+                      </div>
+                      <div class="counter-num">
+                          <p
+                              data-purecounter-start="0"
+                              data-purecounter-end="550"
+                              data-purecounter-duration="1"
+                              class="counter purecounter"
+                          ></p>
+                          <span class="counter-text">إجمالي العملاء</span>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-sm-3 col-lg-3">
+                  <div class="counter-box pt-4 pt-md-0">
+                      <div class="counter-ico">
+                          <span class="ico-circle"><i class="bi bi-award"></i></span>
+                      </div>
+                      <div class="counter-num">
+                          <p
+                              data-purecounter-start="0"
+                              data-purecounter-end="48"
+                              data-purecounter-duration="1"
+                              class="counter purecounter"
+                          ></p>
+                          <span class="counter-text">الجوائز التي تم الفوز بها</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+      <!-- End Counter Section -->
+
+          <!-- ======= Portfolio Section ======= -->
+          <section id="work" class="portfolio-mf sect-pt4 route">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="title-box text-center">
+                    <h3 class="title-a">المواقع</h3>
+                    <p class="subtitle-a">
+                      <p style="font-family: Arial, Helvetica, sans-serif; font-size: larger;">بعض أعمال الويب التي ساعدت عملاءنا على تطوير أعمالهم</p>
+                    </p>
+                    <div class="line-mf"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="work-box">
+                    <a
+                      href="assets/img/work-1.jpg"
+                      data-gallery="portfolioGallery"
+                      class="portfolio-lightbox"
+                    >
+                      <div class="work-img">
+                        <img src="assets/img/work-1.jpg" alt="" class="img-fluid" />
+                      </div>
+                    </a>
+                    <div class="work-content">
+                      <div class="row">
+                        <div class="col-sm-8">
+                          <h2 class="w-title">مكتب الخنيزان للمحاماة</h2>
+                          <div class="w-more">
+                            <span class="w-ctegory">تصميم مواقع</span> /
+                            <span class="w-date">1 مارس 2020</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="w-like">
+                            <a href="alkhunaizan ar.html">
+                              <span class="bi bi-plus-circle"></span
+                            ></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="work-box">
+                    <a
+                      href="assets/img/work-2.jpg"
+                      data-gallery="portfolioGallery"
+                      class="portfolio-lightbox"
+                    >
+                      <div class="work-img">
+                        <img src="assets/img/work-2.jpg" alt="" class="img-fluid" />
+                      </div>
+                    </a>
+                    <div class="work-content">
+                      <div class="row">
+                        <div class="col-sm-8">
+                          <h2 class="w-title">محل كريم حافظ للأدوات</h2>
+                          <div class="w-more">
+                            <span class="w-ctegory">تصميم مواقع</span> /
+                            <span class="w-date">17 أبريل 2022</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="w-like">
+                            <a href="kareem hafez ar.html">
+                              <span class="bi bi-plus-circle"></span
+                            ></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="work-box">
+                    <a
+                      href="assets/img/work-2.jpg"
+                      data-gallery="portfolioGallery"
+                      class="portfolio-lightbox"
+                    >
+                      <div class="work-img">
+                        <img src="assets/img/re ramen ar/Screenshot 2025-10-05 005747.png" alt="" class="img-fluid" />
+                      </div>
+                    </a>
+                    <div class="work-content">
+                      <div class="row">
+                        <div class="col-sm-8">
+                          <h2 class="w-title">ري رامن</h2>
+                          <div class="w-more">
+                            <span class="w-ctegory">تصميم مواقع</span> /
+                            <span class="w-date">30 مايو 2025</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="w-like">
+                            <a href="re ramen ar.html">
+                              <span class="bi bi-plus-circle"></span
+                            ></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="work-box">
+                    <a
+                      href="assets/img/work-2.jpg"
+                      data-gallery="portfolioGallery"
+                      class="portfolio-lightbox"
+                    >
+                      <div class="work-img">
+                        <img src="assets/img/maazen ar/Screenshot 2025-10-05 014905.png" alt="" class="img-fluid" />
+                      </div>
+                    </a>
+                    <div class="work-content">
+                      <div class="row">
+                        <div class="col-sm-8">
+                          <h2 class="w-title">ماذن الحرم</h2>
+                          <div class="w-more">
+                            <span class="w-ctegory">تصميم مواقع</span> /
+                            <span class="w-date">05 أكتوبر 2025</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="w-like">
+                            <a href="maazen elharam ar.html">
+                              <span class="bi bi-plus-circle"></span
+                            ></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="work-box">
+                    <a
+                      href="assets/img/work-1.jpg"
+                      data-gallery="portfolioGallery"
+                      class="portfolio-lightbox"
+                    >
+                      <div class="work-img">
+                        <img src="assets/img/hab en/Screenshot 2025-09-18 190357.png" alt="" class="img-fluid" />
+                      </div>
+                    </a>
+                    <div class="work-content">
+                      <div class="row">
+                        <div class="col-sm-8">
+                          <h2 class="w-title">HAB للإنشاءات</h2>
+                          <div class="w-more">
+                            <span class="w-ctegory">تصميم مواقع</span> /
+                            <span class="w-date">19 سبتمبر 2023</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="w-like">
+                            <a href="hab constructions ar.html">
+                              <span class="bi bi-plus-circle"></span
+                            ></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- End Portfolio Section -->
+     <!-- ======= Portfolio Section ======= -->
+     <section id="work" class="portfolio-mf sect-pt4 route">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="title-box text-center">
+              <h3 class="title-a">تصميم الجرافيك</h3>
+              <p class="subtitle-a">
+                <p style="font-family: Arial, Helvetica, sans-serif; font-size: larger;">بعض أعمالنا التي حوّلت الأفكار إلى واقع</p>
+              </p>
+              <div class="line-mf"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">      
+          <div class="col-md-4">
+            <div class="work-box">
+              <a
+                href="assets/img/work-4.jpg"
+                data-gallery="portfolioGallery"
+                class="portfolio-lightbox"
+              >
+                <div class="work-img">
+                  <img src="assets/img/work-4.jpg" alt="" class="img-fluid" />
+                </div>
+              </a>
+              <div class="work-content">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h2 class="w-title">شعار عشوائي</h2>
+                    <div class="w-more">
+                      <span class="w-ctegory">تصميم</span> /
+                      <span class="w-date">18 سبتمبر 2018</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="w-like">
+                      <a href="random logo ar.html">
+                        <span class="bi bi-plus-circle"></span
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> <div class="col-md-4">
+            <div class="work-box">
+              <a
+                href="assets/img/work-5.jpg"
+                data-gallery="portfolioGallery"
+                class="portfolio-lightbox"
+              >
+                <div class="work-img">
+                  <img src="assets/img/work-5.jpg" alt="" class="img-fluid" />
+                </div>
+              </a>
+              <div class="work-content">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h2 class="w-title">تصميم عشوائي</h2>
+                    <div class="w-more">
+                      <span class="w-ctegory">تصميم</span> /
+                      <span class="w-date">18 سبتمبر 2018</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="w-like">
+                      <a href="random designs ar.html">
+                        <span class="bi bi-plus-circle"></span
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> <div class="col-md-4">
+            <div class="work-box">
+              <a
+                href="assets/img/work-3.jpg"
+                data-gallery="portfolioGallery"
+                class="portfolio-lightbox"
+              >
+                <div class="work-img">
+                  <img src="assets/img/work-3.jpg" alt="" class="img-fluid" />
+                </div>
+              </a>
+              <div class="work-content">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h2 class="w-title">شعار الاسم</h2>
+                    <div class="w-more">
+                      <span class="w-ctegory">تصميم</span> /
+                      <span class="w-date">18 سبتمبر 2018</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="w-like">
+                      <a href="portfolio-details copy ar.html">
+                        <span class="bi bi-plus-circle"></span
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Portfolio Section -->
+<!-- ======= قسم الشهادات ======= -->
+<!-- ======= قسم الشهادات ======= -->
+<div
+  class="testimonials paralax-mf bg-image"
+  style="background-image: url(assets/img/overlay-bg.jpg)"
+>
+  <div class="overlay-mf"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div
+          class="testimonials-slider swiper"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="testimonial-box">
+                <div class="author-test">
+                  <img
+                    src="assets/img/testimonial-2.jpg"
+                    alt=""
+                    class="rounded-circle b-shadow-a"
+                  />
+                  <span class="author">عمر فرحات</span>
+                </div>
+                <div class="content-test">
+                  <p class="description lead">
+                    مصمم و مبرمج. بناء الجسور بين المرئيات والكود.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="testimonial-box">
+                <div class="author-test">
+                  <img
+                    src="assets/img/testimonial-3.jpg"
+                    alt=""
+                    class="rounded-circle b-shadow-a"
+                    style="width: 150px;"
+                  />
+                  <span class="author">مهند فرحات</span>
+                </div>
+                <div class="content-test">
+                  <p class="description lead">
+                    الهامس السحري بالذبذبات و ناسج الأحلام السحرية                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="testimonial-box">
+                <div class="author-test">
+                  <img
+                    src="assets/img/testimonial-2.jpg"
+                    alt=""
+                    class="rounded-circle b-shadow-a"
+                  />
+                  <span class="author">جمال فتحي</span>
+                </div>
+                <div class="content-test">
+                  <p class="description lead">
+                    أحول الأفكار إلى واقع رقمي. دعنا نرى ما يمكننا برمجته معًا.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="testimonial-box">
+                <div class="author-test">
+                  <img
+                    src="assets/img/testimonial-2.jpg"
+                    alt=""
+                    class="rounded-circle b-shadow-a"
+                  />
+                  <span class="author">أحمد رضا</span>
+                </div>
+                <div class="content-test">
+                  <p class="description lead">
+                    ثني البكسل ونسج الكود. صناعة واجهات جميلة.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="testimonial-box">
+                <div class="author-test">
+                  <img
+                    src="assets/img/testimonial-2.jpg"
+                    alt=""
+                    class="rounded-circle b-shadow-a"
+                  />
+                  <span class="author">محمد أشرف</span>
+                </div>
+                <div class="content-test">
+                  <p class="description lead">
+                    همس العلامة التجارية. أترجم البيانات إلى تعاويذ مبيعات. دعنا ننمو سحرك!
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- نهاية عنصر الشهادة -->
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+        <!-- <div id="testimonial-mf" class="owl-carousel owl-theme">
+    
+  </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- نهاية قسم الشهادات -->
+<!-- نهاية قسم الشهادات -->
+
+<!-- ======= قسم التواصل ======= -->
+<section id="contact">
+  <div class="container-contact" data-aos="fade-up">
+    <div></div>
+    <iframe
+      style="border: 0; width: 100%; height: 500px"
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2088.81212499983!2d29.898412715652306!3d31.194609471835086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f5c31db2eafdc5%3A0xff897098043a77f9!2z2YXYotiw2YYg2KfZhNit2LHZhQ!5e0!3m2!1sar!2seg!4v1713515636946!5m2!1sar!2seg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+<!-- نهاية قسم التواصل -->
+</main>
+<!-- نهاية #main -->
+
+<!-- ======= قسم الفوتر ======= -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="copyright-box">
+          <p class="copyright">
+            &copy; حقوق الطبع والنشر <strong>انفوجرا</strong>. جميع الحقوق محفوظة
+          </p>
+          <div class="credits">
+            تصميم بواسطة
+            <a href="mailto:thecodealchemist11@gmail.com">انفوجرا</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- نهاية الفوتر -->
+
+    <div id="preloader"></div>
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/typed.js/typed.umd.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
