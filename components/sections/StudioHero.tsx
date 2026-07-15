@@ -29,6 +29,7 @@ const StudioHero = () => {
   })
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e
       setMousePosition({ x: clientX, y: clientY })

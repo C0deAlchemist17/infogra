@@ -42,13 +42,15 @@ export default function ExportPage() {
       // Create download link
       const blob = new Blob([content], { type: mimeType })
       const url = URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.href = url
-      link.download = filename
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-      URL.revokeObjectURL(url)
+      if (typeof window !== 'undefined') {
+        const link = document.createElement('a')
+        link.href = url
+        link.download = filename
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        URL.revokeObjectURL(url)
+      }
 
       setExportResult({ success: true, message: `Successfully exported ${products.length} products to ${format.toUpperCase()}` })
     } catch (error) {
