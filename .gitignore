@@ -40,3 +40,5 @@ yarn-error.log*
 Thumbs.db
 nul
 build-log.txt
+
+.vercel

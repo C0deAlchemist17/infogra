@@ -333,8 +333,10 @@ export default function PCBuilderPage() {
   }, [build, totalPrice])
 
   const handleSaveBuild = useCallback(() => {
-    localStorage.setItem('pc-build', JSON.stringify(build))
-    alert('Build saved to your browser!')
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('pc-build', JSON.stringify(build))
+      alert('Build saved to your browser!')
+    }
   }, [build])
 
   const getCategoryComponents = useCallback((category: string) => {

@@ -20,6 +20,7 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
 
   // Load from localStorage on mount
   useEffect(() => {
+    if (typeof window === 'undefined') return
     try {
       const stored = localStorage.getItem('infogra-wishlist')
       if (stored) {
@@ -32,6 +33,7 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
 
   // Save to localStorage on change
   useEffect(() => {
+    if (typeof window === 'undefined') return
     try {
       localStorage.setItem('infogra-wishlist', JSON.stringify(items))
     } catch (error) {

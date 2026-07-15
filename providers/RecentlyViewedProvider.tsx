@@ -19,6 +19,7 @@ export function RecentlyViewedProvider({ children }: { children: ReactNode }) {
 
   // Load from localStorage on mount
   useEffect(() => {
+    if (typeof window === 'undefined') return
     try {
       const stored = localStorage.getItem('infogra-recently-viewed')
       if (stored) {
@@ -31,6 +32,7 @@ export function RecentlyViewedProvider({ children }: { children: ReactNode }) {
 
   // Save to localStorage on change
   useEffect(() => {
+    if (typeof window === 'undefined') return
     try {
       localStorage.setItem('infogra-recently-viewed', JSON.stringify(items))
     } catch (error) {

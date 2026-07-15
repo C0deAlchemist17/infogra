@@ -42,6 +42,7 @@ export default function AssistantWidget() {
   useEffect(() => {
     if (isOpen) return
     // Check if user has already opened the assistant before
+    if (typeof window === 'undefined') return
     const hasOpened = localStorage.getItem('infogra-assistant-opened')
     if (hasOpened) return
 

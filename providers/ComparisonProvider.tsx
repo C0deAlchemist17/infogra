@@ -21,6 +21,7 @@ export function ComparisonProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<Product[]>([])
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
     try {
       const stored = localStorage.getItem('infogra-comparison')
       if (stored) setItems(JSON.parse(stored))
@@ -30,6 +31,7 @@ export function ComparisonProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
     try {
       localStorage.setItem('infogra-comparison', JSON.stringify(items))
     } catch (error) {
