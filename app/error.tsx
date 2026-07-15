@@ -29,7 +29,11 @@ export default function Error({
           <Button onClick={reset} variant="premium">
             Try Again
           </Button>
-          <Button onClick={() => window.location.href = '/'} variant="outline">
+          <Button onClick={() => {
+            if (typeof window !== 'undefined') {
+              window.location.href = '/'
+            }
+          }} variant="outline">
             Go Home
           </Button>
         </div>

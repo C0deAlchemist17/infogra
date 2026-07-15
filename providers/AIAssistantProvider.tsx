@@ -82,6 +82,7 @@ export function AIAssistantProvider({ children }: { children: ReactNode }) {
 
   // Keyboard shortcut: Ctrl+/ or Cmd+/ to toggle assistant
   useEffect(() => {
+    if (typeof window === 'undefined') return
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key === '/') {
         e.preventDefault()
