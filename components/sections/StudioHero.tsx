@@ -17,6 +17,7 @@ const StudioHero = () => {
   // Custom cursor is handled by StudioHeader, don't duplicate here
   const containerRef = useRef<HTMLDivElement>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [isClient, setIsClient] = useState(false)
   
   const { scrollYProgress } = useScroll()
   const parallaxY = useTransform(scrollYProgress, [0, 1], [0, -50])
@@ -27,6 +28,10 @@ const StudioHero = () => {
     threshold: 0.1,
     triggerOnce: true 
   })
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -88,7 +93,7 @@ const StudioHero = () => {
       {/* Background Elements */}
       <div className="absolute inset-0">
         {/* Three.js Scene */}
-        <ThreeScene />
+        {isClient && <ThreeScene />}
         
         {/* Grid Overlay */}
         <div className="grid-overlay" />

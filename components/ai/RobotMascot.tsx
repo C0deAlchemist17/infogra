@@ -12,12 +12,16 @@ let globalMouseInitialized = false
 
 function initGlobalMouseTracking() {
   if (typeof window === 'undefined' || globalMouseInitialized) return
-  globalMouseInitialized = true
-  window.addEventListener('mousemove', (e) => {
-    // Convert screen coords to normalized -1 to 1 range
-    globalMouseX = (e.clientX / window.innerWidth) * 2 - 1
-    globalMouseY = -(e.clientY / window.innerHeight) * 2 + 1
-  })
+  try {
+    globalMouseInitialized = true
+    window.addEventListener('mousemove', (e) => {
+      // Convert screen coords to normalized -1 to 1 range
+      globalMouseX = (e.clientX / window.innerWidth) * 2 - 1
+      globalMouseY = -(e.clientY / window.innerHeight) * 2 + 1
+    })
+  } catch (error) {
+    console.error('Failed to initialize mouse tracking:', error)
+  }
 }
 
 interface RobotProps {
