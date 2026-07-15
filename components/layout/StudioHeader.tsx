@@ -19,6 +19,7 @@ const StudioHeader = () => {
   const { cursorRef, addHoverEffect, removeHoverEffect } = useCustomCursor()
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
     const handleScroll = () => setIsScrolled(window.scrollY > 50)
     window.addEventListener('scroll', handleScroll)
     handleScroll()
@@ -40,7 +41,9 @@ const StudioHeader = () => {
     if (pathname !== '/') {
       router.push('/' + href)
     } else {
-      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+      if (typeof window !== 'undefined') {
+        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+      }
     }
   }
 
