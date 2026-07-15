@@ -328,8 +328,10 @@ export default function PCBuilderPage() {
     ).filter(Boolean).join('\n')
     
     const message = `Check out my PC Build!\n\n${buildData}\n\nTotal: EGP ${totalPrice.toLocaleString()}\nBuilt with INFOGRA PC Builder`
-    navigator.clipboard.writeText(message)
-    alert('Build summary copied to clipboard!')
+    if (typeof window !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(message)
+      alert('Build summary copied to clipboard!')
+    }
   }, [build, totalPrice])
 
   const handleSaveBuild = useCallback(() => {
