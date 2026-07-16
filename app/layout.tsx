@@ -7,6 +7,7 @@ import StudioHeader from '@/components/layout/StudioHeader'
 import StudioFooter from '@/components/layout/StudioFooter'
 import AppProviders from '@/components/providers/AppProviders'
 import GlobalErrorBoundary from '@/components/providers/GlobalErrorBoundary'
+import { LanguageProvider } from '@/providers/LanguageProvider'
 
 const AssistantWidget = dynamic(() => import('@/components/ai/AssistantWidget'))
 import { siteConfig } from '@/lib/navigation'
@@ -64,21 +65,23 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <div className="noise-overlay" />
         <div className="min-h-screen flex flex-col">
-          <StudioHeader />
-          <main className="flex-grow">
-            <GlobalErrorBoundary>
-              <AppProviders>
-                {children}
-                <AssistantWidget />
-              </AppProviders>
-            </GlobalErrorBoundary>
-          </main>
-          <StudioFooter />
+          <LanguageProvider>
+            <StudioHeader />
+            <main className="flex-grow">
+              <GlobalErrorBoundary>
+                <AppProviders>
+                  {children}
+                  <AssistantWidget />
+                </AppProviders>
+              </GlobalErrorBoundary>
+            </main>
+            <StudioFooter />
+          </LanguageProvider>
         </div>
       </body>
     </html>

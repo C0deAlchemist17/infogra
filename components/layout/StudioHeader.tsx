@@ -5,9 +5,11 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useCustomCursor } from '@/hooks/useCustomCursor'
-import { Menu, X, Phone, ArrowRight, ChevronDown, Search } from 'lucide-react'
+import { Menu, X, Phone, ArrowRight, ChevronDown, Search, Globe } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { mainNavigation, siteConfig } from '@/lib/navigation'
+import { useLanguage } from '@/providers/LanguageProvider'
+import { t } from '@/lib/translations'
 import { cn } from '@/lib/utils'
 
 const StudioHeader = () => {
@@ -17,6 +19,22 @@ const StudioHeader = () => {
   const pathname = usePathname()
   const router = useRouter()
   const { cursorRef, addHoverEffect, removeHoverEffect } = useCustomCursor()
+  const { locale, toggleLocale, isRTL } = useLanguage()
+
+  const navLabel = (name: string): string => {
+    const key: Record<string, string> = {
+      'Home': 'nav.home',
+      'Store': 'nav.store',
+      'Services': 'nav.services',
+      'Work': 'nav.work',
+      'About': 'nav.about',
+      'Blog': 'nav.blog',
+      'Contact': 'nav.contact',
+      'Search': 'nav.search',
+    }
+    const tk = key[name]
+    return tk ? t(locale, tk as any) : name
+  }
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -67,7 +85,7 @@ const StudioHeader = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-center mb-12">
-                <h2 className="text-h3 font-bold text-text-primary">Menu</h2>
+                <h2 className="text-h3 font-bold text-text-primary">{locale === 'ar' ? 'القائمة' : 'Menu'}</h2>
                 <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 rounded-xl hover:bg-background-tertiary" aria-label="Close menu">
                   <X className="w-6 h-6 text-text-primary" />
                 </button>
@@ -77,21 +95,29 @@ const StudioHeader = () => {
                   item.href.startsWith('#') ? (
                     <button key={item.name} onClick={() => { handleHashNav(item.href); setIsMobileMenuOpen(false) }}
                       className="block w-full text-left px-6 py-4 rounded-xl text-text-secondary hover:bg-background-tertiary hover:text-text-primary">
-                      {item.name}
+                      {navLabel(item.name)}
                     </button>
                   ) : (
                     <Link key={item.name} href={item.href}
                       className={cn('block w-full text-left px-6 py-4 rounded-xl transition-all',
                         isActive(item.href) ? 'bg-accent-primary text-white' : 'text-text-secondary hover:bg-background-tertiary hover:text-text-primary')}>
-                      {item.name}
+                      {navLabel(item.name)}
                     </Link>
                   )
                 )}
-                <Link href="/search" className="block w-full text-left px-6 py-4 rounded-xl text-text-secondary hover:bg-background-tertiary hover:text-text-primary">Search</Link>
+                <Link href="/search" className="block w-full text-left px-6 py-4 rounded-xl text-text-secondary hover:bg-background-tertiary hover:text-text-primary">{navLabel('Search')}</Link>
               </nav>
-              <div className="mt-12 pt-8 border-t border-border-subtle">
+              <div className="mt-6 pt-6 border-t border-border-subtle space-y-3">
+                {/* Language Toggle in Mobile Menu */}
+                <button
+                  onClick={() => { toggleLocale(); setIsMobileMenuOpen(false) }}
+                  className="flex items-center gap-3 w-full px-6 py-4 rounded-xl text-text-secondary hover:bg-background-tertiary hover:text-text-primary transition-all"
+                >
+                  <Globe className="w-5 h-5" />
+                  <span>{locale === 'ar' ? 'English' : 'العربية'}</span>
+                </button>
                 <Button asChild size="lg" className="w-full">
-                  <Link href="/contact">Start Your Project <ArrowRight className="w-5 h-5 ml-2" /></Link>
+                  <Link href="/contact">{locale === 'ar' ? 'ابدأ مشروعك' : 'Start Your Project'} <ArrowRight className={`w-5 h-5 ${isRTL ? 'mr-2 rotate-180' : 'ml-2'}`} /></Link>
                 </Button>
               </div>
             </motion.div>
@@ -138,12 +164,12 @@ const StudioHeader = () => {
                   onMouseLeave={() => item.hasDropdown && setIsMegaMenuOpen(false)}>
                   {item.href.startsWith('#') ? (
                     <button onClick={() => handleHashNav(item.href)} onMouseEnter={addHoverEffect} onMouseLeave={removeHoverEffect}
-                      className="px-3 py-2 text-text-secondary hover:text-text-primary transition-colors">{item.name}</button>
+                      className="px-3 py-2 text-text-secondary hover:text-text-primary transition-colors">{navLabel(item.name)}</button>
                   ) : (
                     <Link href={item.href} onMouseEnter={addHoverEffect} onMouseLeave={removeHoverEffect}
                       className={cn('relative px-3 py-2 transition-colors inline-flex items-center gap-1',
                         isActive(item.href) ? 'text-accent-primary' : 'text-text-secondary hover:text-text-primary')}>
-                      {item.name}
+                      {navLabel(item.name)}
                       {item.hasDropdown && <ChevronDown className="w-4 h-4" />}
                       <span className={cn('absolute bottom-0 left-0 right-0 h-0.5 bg-accent-primary transition-opacity', isActive(item.href) ? 'opacity-100' : 'opacity-0')} />
                     </Link>
@@ -153,14 +179,34 @@ const StudioHeader = () => {
             </nav>
 
             <div className="hidden lg:flex items-center gap-3">
-              <Button asChild variant="ghost" size="icon" aria-label="Search">
+              {/* Language Switcher Button */}
+              <motion.button
+                onClick={toggleLocale}
+                onMouseEnter={addHoverEffect}
+                onMouseLeave={removeHoverEffect}
+                className="relative flex items-center gap-2 px-4 py-2 rounded-xl border border-border-subtle hover:border-accent-primary/50 bg-background-primary/50 hover:bg-accent-primary/10 text-text-secondary hover:text-accent-primary transition-all duration-300 group"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label={locale === 'en' ? 'Switch to Arabic' : 'التبديل إلى الإنجليزية'}
+              >
+                <Globe className="w-4 h-4" />
+                <span className="text-sm font-medium">{locale === 'en' ? 'AR' : 'EN'}</span>
+                <motion.div
+                  className="absolute inset-0 rounded-xl bg-accent-primary/5"
+                  initial={false}
+                  animate={{ opacity: isRTL ? 0.5 : 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.button>
+
+              <Button asChild variant="ghost" size="icon" aria-label={locale === 'en' ? 'Search' : 'بحث'}>
                 <Link href="/search"><Search className="w-4 h-4" /></Link>
               </Button>
               <Button asChild variant="outline" size="sm" className="border-accent-primary text-accent-primary">
-                <a href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}><Phone className="w-4 h-4 mr-2" />{siteConfig.phone}</a>
+                <a href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}><Phone className="w-4 h-4 ltr:mr-2 rtl:ml-2" />{siteConfig.phone}</a>
               </Button>
               <Button asChild size="sm" variant="premium">
-                <Link href="/contact">Get Started <ArrowRight className="w-4 h-4 ml-2" /></Link>
+                <Link href="/contact">{locale === 'en' ? 'Get Started' : 'ابدأ مشروعك'} <ArrowRight className={`w-4 h-4 ${isRTL ? 'mr-2 rotate-180' : 'ml-2'}`} /></Link>
               </Button>
             </div>
 
