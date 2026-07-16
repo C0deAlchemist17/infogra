@@ -14,6 +14,8 @@ const SectionBackground = dynamic(() => import('@/components/three/SectionBackgr
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent } from '@/components/ui/card'
+import { useLanguage } from '@/providers/LanguageProvider'
+import { t } from '@/lib/translations'
 
 const StudioContact = () => {
   const [formData, setFormData] = useState({
@@ -33,6 +35,7 @@ const StudioContact = () => {
   })
   
   const { addHoverEffect, removeHoverEffect } = useCustomCursor()
+  const { locale, isRTL } = useLanguage()
 
   const services = [
     'Web Development',
@@ -130,13 +133,13 @@ const StudioContact = () => {
           className="text-center mb-24"
         >
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass border border-border-subtle mb-8">
-            <span className="text-small text-text-secondary">Get in Touch</span>
+            <span className="text-small text-text-secondary">{t(locale, 'contact.badge')}</span>
           </div>
           <h2 id="contact-heading" className="text-h2-sm md:text-h2 lg:text-h1 font-bold text-text-primary mb-8">
-            Let&apos;s Start Your Project
+            {t(locale, 'contact.title')}
           </h2>
           <p className="text-body-lg md:text-h4 lg:text-h3 text-text-secondary max-w-3xl mx-auto leading-relaxed">
-            Ready to transform your digital presence? We&apos;d love to hear from you. Let&apos;s create something extraordinary together.
+            {t(locale, 'contact.subtitle')}
           </p>
         </motion.div>
 
@@ -160,10 +163,10 @@ const StudioContact = () => {
                       <CheckCircle className="w-10 h-10 text-accent-success" />
                     </div>
                     <h3 className="text-h3 font-bold text-text-primary mb-4">
-                      Thank You!
+                      {t(locale, 'contact.thankYou')}
                     </h3>
                     <p className="text-body text-text-secondary">
-                      Your message has been sent successfully. We&apos;ll get back to you within 24 hours.
+                      {t(locale, 'contact.thankYouDesc')}
                     </p>
                   </motion.div>
                 ) : (
@@ -171,7 +174,7 @@ const StudioContact = () => {
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <label htmlFor="name" className="block text-small font-medium text-text-primary mb-2">
-                          Name *
+                          {t(locale, 'contact.name')}
                         </label>
                         <Input
                           id="name"
@@ -180,13 +183,13 @@ const StudioContact = () => {
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          placeholder="John Doe"
+                          placeholder={locale === 'ar' ? 'محمد أحمد' : 'John Doe'}
                           aria-required="true"
                         />
                       </div>
                       <div>
                         <label htmlFor="email" className="block text-small font-medium text-text-primary mb-2">
-                          Email *
+                          {t(locale, 'contact.email')}
                         </label>
                         <Input
                           id="email"
@@ -195,7 +198,7 @@ const StudioContact = () => {
                           value={formData.email}
                           onChange={handleChange}
                           required
-                          placeholder="john@example.com"
+                          placeholder={locale === 'ar' ? 'mohamed@example.com' : 'john@example.com'}
                           aria-required="true"
                         />
                       </div>
@@ -212,7 +215,7 @@ const StudioContact = () => {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          placeholder="+1 234 567 8900"
+                          placeholder={locale === 'ar' ? '+20 123 456 7890' : '+1 234 567 8900'}
                         />
                       </div>
                       <div>
@@ -225,14 +228,14 @@ const StudioContact = () => {
                           name="company"
                           value={formData.company}
                           onChange={handleChange}
-                          placeholder="Acme Corp"
+                          placeholder={locale === 'ar' ? 'شركتك' : 'Acme Corp'}
                         />
                       </div>
                     </div>
 
                     <div>
                       <label htmlFor="service" className="block text-small font-medium text-text-primary mb-2">
-                        Service Interest
+                        {t(locale, 'contact.service')}
                       </label>
                       <select
                         id="service"
@@ -241,7 +244,7 @@ const StudioContact = () => {
                         onChange={handleChange}
                         className="flex h-14 w-full rounded-xl border border-border-subtle bg-background-tertiary/50 px-6 py-3 text-sm text-text-primary placeholder:text-text-tertiary transition-all duration-400 focus:border-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary/20"
                       >
-                        <option value="">Select a service</option>
+                        <option value="">{t(locale, 'contact.selectService')}</option>
                         {services.map(service => (
                           <option key={service} value={service}>{service}</option>
                         ))}
@@ -249,8 +252,7 @@ const StudioContact = () => {
                     </div>
 
                     <div>
-                      <label htmlFor="message" className="block text-small font-medium text-text-primary mb-2">
-                        Message *
+                      <label htmlFor="message" className="block text-small font-medium text-text-primary mb-2">                          {t(locale, 'contact.message')}
                       </label>
                       <textarea
                         id="message"
@@ -260,7 +262,7 @@ const StudioContact = () => {
                         required
                         rows={5}
                         className="flex w-full rounded-xl border border-border-subtle bg-background-tertiary/50 px-6 py-3 text-sm text-text-primary placeholder:text-text-tertiary transition-all duration-400 focus:border-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary/20 resize-none"
-                        placeholder="Tell us about your project..."
+                        placeholder={locale === 'ar' ? 'أخبرنا عن مشروعك...' : 'Tell us about your project...'}
                         aria-required="true"
                       />
                     </div>
@@ -274,15 +276,14 @@ const StudioContact = () => {
                       onMouseEnter={addHoverEffect}
                       onMouseLeave={removeHoverEffect}
                     >
-                      {isSubmitting ? (
-                        <div className="flex items-center justify-center">
-                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                          Sending...
+                      {isSubmitting ? (                          <div className="flex items-center justify-center">
+                          <div className={`w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                          {t(locale, 'contact.sending')}
                         </div>
                       ) : (
                         <div className="flex items-center justify-center">
-                          <Send className="w-5 h-5 mr-2" />
-                          Send Message
+                          <Send className={`w-5 h-5 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                          {t(locale, 'contact.send')}
                         </div>
                       )}
                     </Button>
@@ -300,9 +301,9 @@ const StudioContact = () => {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-h3 font-bold text-text-primary mb-6">Contact Information</h3>
+              <h3 className="text-h3 font-bold text-text-primary mb-6">{t(locale, 'contact.info')}</h3>
               <p className="text-body text-text-secondary mb-8 leading-relaxed">
-                Have a project in mind? We&apos;d love to hear about it. Reach out and let&apos;s start the conversation.
+                {t(locale, 'contact.infoDesc')}
               </p>
             </div>
 
@@ -340,20 +341,20 @@ const StudioContact = () => {
                 <CardContent className="p-8">
                   <div className="flex items-center gap-3 mb-6">
                     <Clock className="w-6 h-6 text-accent-primary" />
-                    <h3 className="text-small font-semibold text-text-primary">Business Hours</h3>
+                    <h3 className="text-small font-semibold text-text-primary">{t(locale, 'contact.hours')}</h3>
                   </div>
                   <div className="space-y-3 text-body text-text-secondary">
                     <div className="flex justify-between">
-                      <span>Monday - Friday</span>
+                      <span>{t(locale, 'contact.monFri')}</span>
                       <span>9:00 AM - 6:00 PM</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Saturday</span>
+                      <span>{t(locale, 'contact.sat')}</span>
                       <span>10:00 AM - 4:00 PM</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Sunday</span>
-                      <span>Closed</span>
+                      <span>{t(locale, 'contact.sun')}</span>
+                      <span>{t(locale, 'contact.closed')}</span>
                     </div>
                   </div>
                 </CardContent>
@@ -370,9 +371,9 @@ const StudioContact = () => {
                 <CardContent className="p-8 relative">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
                   <MessageSquare className="w-10 h-10 mb-6 relative z-10" />
-                  <h3 className="text-h4 font-bold mb-3 relative z-10">Need Quick Help?</h3>
+                  <h3 className="text-h4 font-bold mb-3 relative z-10">{t(locale, 'contact.quickHelp')}</h3>
                   <p className="text-body mb-6 opacity-90 relative z-10 leading-relaxed">
-                    Chat with us directly for immediate assistance.
+                    {t(locale, 'contact.quickHelpDesc')}
                   </p>
                   <Button 
                     variant="outline" 
@@ -382,7 +383,7 @@ const StudioContact = () => {
                     onMouseLeave={removeHoverEffect}
                     onClick={() => window.dispatchEvent(new CustomEvent('toggle-ai-assistant'))}
                   >
-                    Start Chat
+                    {t(locale, 'cta.startChat')}
                   </Button>
                 </CardContent>
               </Card>

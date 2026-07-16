@@ -8,11 +8,14 @@ import { Card, CardContent } from '@/components/ui/card'
 import { ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { faqData } from '@/data/faq'
+import { useLanguage } from '@/providers/LanguageProvider'
+import { t } from '@/lib/translations'
 
 const FAQ = () => {
   const { elementRef, hasBeenVisible } = useScrollTrigger({ threshold: 0.1, triggerOnce: true })
   const { addHoverEffect, removeHoverEffect } = useCustomCursor()
   const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const { locale, isRTL } = useLanguage()
 
   return (
     <section ref={elementRef} className="relative py-40 bg-background-primary overflow-hidden">
@@ -24,13 +27,13 @@ const FAQ = () => {
           className="text-center mb-20"
         >
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass border border-border-subtle mb-8">
-            <span className="text-small text-text-secondary">Help Center</span>
+            <span className="text-small text-text-secondary">{t(locale, 'faq.badge')}</span>
           </div>
           <h2 className="text-h2-sm md:text-h2 lg:text-h1 font-bold text-text-primary mb-8">
-            Frequently Asked <span className="gradient-text">Questions</span>
+            {t(locale, 'faq.title')}
           </h2>
           <p className="text-body-lg md:text-h4 text-text-secondary max-w-3xl mx-auto leading-relaxed">
-            Find answers to common questions about our services, process, and technology store
+            {t(locale, 'faq.subtitle')}
           </p>
         </motion.div>
 
@@ -58,7 +61,7 @@ const FAQ = () => {
                     onClick={() => setOpenIndex(openIndex === index ? null : index)}
                     onMouseEnter={addHoverEffect}
                     onMouseLeave={removeHoverEffect}
-                    className="w-full flex items-center justify-between p-8 text-left"
+                    className={`w-full flex items-center justify-between p-8 ${isRTL ? 'text-right' : 'text-left'}`}
                     aria-expanded={openIndex === index}
                   >
                     <span className="text-body font-semibold text-text-primary pr-8">{faq.q}</span>
