@@ -44,8 +44,8 @@ export default class GlobalErrorBoundary extends Component<Props, State> {
                 <summary className="text-small text-text-tertiary cursor-pointer hover:text-text-secondary mb-2">
                   Error details
                 </summary>
-                <pre className="text-caption text-text-tertiary bg-background-tertiary/50 p-4 rounded-lg overflow-auto whitespace-pre-wrap">
-                  {this.state.error.stack || this.state.error.toString()}
+                <pre className="text-caption text-text-tertiary bg-background-tertiary/50 p-4 rounded-lg overflow-auto">
+                  {this.state.error.toString()}
                 </pre>
               </details>
             )}
