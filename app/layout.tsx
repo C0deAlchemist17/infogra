@@ -2,11 +2,13 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Suspense } from 'react'
 import './globals.css'
+import dynamic from 'next/dynamic'
 import StudioHeader from '@/components/layout/StudioHeader'
 import StudioFooter from '@/components/layout/StudioFooter'
 import AppProviders from '@/components/providers/AppProviders'
-import AssistantWidget from '@/components/ai/AssistantWidget'
 import GlobalErrorBoundary from '@/components/providers/GlobalErrorBoundary'
+
+const AssistantWidget = dynamic(() => import('@/components/ai/AssistantWidget'))
 import { siteConfig } from '@/lib/navigation'
 
 const inter = Inter({
@@ -72,9 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <GlobalErrorBoundary>
               <AppProviders>
                 {children}
-                <Suspense fallback={<div className="fixed bottom-6 left-6 z-50 w-[100px] h-[100px] bg-accent-primary/20 rounded-full animate-pulse" />}>
-                  <AssistantWidget />
-                </Suspense>
+                <AssistantWidget />
               </AppProviders>
             </GlobalErrorBoundary>
           </main>
