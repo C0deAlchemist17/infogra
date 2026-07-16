@@ -205,10 +205,18 @@
 [dir="rtl"] .pl-8 { padding-left: 0; padding-right: 2rem; }
 
 /* Arabic font optimization */
-[lang="ar"] body,
-[lang="ar"] .font-sans {
+[lang="ar"] body {
+  font-family: var(--font-arabic), system-ui, sans-serif;
   letter-spacing: normal;
   word-spacing: normal;
+  line-height: 1.7;
+}
+
+[lang="ar"] p,
+[lang="ar"] .text-body,
+[lang="ar"] .text-body-lg,
+[lang="ar"] .text-body-sm {
+  line-height: 1.8;
 }
 
 /* Custom cursor */

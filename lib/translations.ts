@@ -18,6 +18,10 @@ export type TranslationKey =
   | 'footer.industries' | 'footer.privacy' | 'footer.terms' | 'footer.rights'
   | 'footer.description' | 'footer.stayUpdated' | 'footer.subscribeDesc' | 'footer.subscribe' | 'footer.emailPlaceholder'
   | 'footer.madeWith' | 'footer.inEgypt'
+  | 'footer.linkAbout' | 'footer.linkTeam' | 'footer.linkCaseStudies' | 'footer.linkPortfolio'
+  | 'footer.linkWebDev' | 'footer.linkUiUx' | 'footer.linkMarketing' | 'footer.linkConsulting'
+  | 'footer.linkBlog' | 'footer.linkFaq' | 'footer.linkIndustries' | 'footer.linkContact'
+  | 'footer.linkPrivacy' | 'footer.linkTerms'
   // Hero
   | 'hero.badge' | 'hero.title.line1' | 'hero.title.line2' | 'hero.subtitle' | 'hero.scroll'
   | 'hero.stats.projects' | 'hero.stats.clients' | 'hero.stats.experience' | 'hero.stats.awards'
@@ -81,7 +85,7 @@ export const translations: Record<Locale, TranslationMap> = {
     'nav.home': 'Home', 'nav.store': 'Store', 'nav.services': 'Services', 'nav.work': 'Work',
     'nav.about': 'About', 'nav.blog': 'Blog', 'nav.contact': 'Contact', 'nav.search': 'Search', 'nav.menu': 'Menu',
     'services.web': 'Web Development', 'services.mobile': 'Mobile Apps', 'services.uiux': 'UI/UX Design',
-    'services.branding': 'Branding', 'services.ai': 'AI Solutions', 'services.cloud': 'Cloud Services',
+    'services.branding': 'Complete brand identity and visual strategy', 'services.ai': 'AI Solutions', 'services.cloud': 'Cloud Services',
     'cta.getStarted': 'Get Started', 'cta.startProject': 'Start Your Project', 'cta.viewWork': 'View Our Work',
     'cta.viewAll': 'View All Projects', 'cta.browseStore': 'Browse Store', 'cta.buildPC': 'Build Your Dream PC',
     'cta.learnMore': 'Learn More', 'cta.readCaseStudy': 'Read Full Case Study', 'cta.contactUs': 'Contact Us',
@@ -98,6 +102,12 @@ export const translations: Record<Locale, TranslationMap> = {
     'footer.subscribe': 'Subscribe',
     'footer.emailPlaceholder': 'Enter your email',
     'footer.madeWith': 'Made with', 'footer.inEgypt': 'in Egypt',
+    'footer.linkAbout': 'About Us', 'footer.linkTeam': 'Our Team', 'footer.linkCaseStudies': 'Case Studies',
+    'footer.linkPortfolio': 'Portfolio', 'footer.linkWebDev': 'Web Development', 'footer.linkUiUx': 'UI/UX Design',
+    'footer.linkMarketing': 'Digital Marketing', 'footer.linkConsulting': 'Consulting',
+    'footer.linkBlog': 'Blog', 'footer.linkFaq': 'FAQ', 'footer.linkIndustries': 'Industries',
+    'footer.linkContact': 'Contact',
+    'footer.linkPrivacy': 'Privacy Policy', 'footer.linkTerms': 'Terms of Service',
     'hero.badge': 'Premium Digital Agency',
     'hero.title.line1': 'We Architect', 'hero.title.line2': 'Digital Excellence',
     'hero.subtitle': 'Transform your vision into reality with our premium web development, design, and digital marketing services. We build experiences that captivate and convert.',
@@ -208,7 +218,7 @@ export const translations: Record<Locale, TranslationMap> = {
     'nav.home': 'الرئيسية', 'nav.store': 'المتجر', 'nav.services': 'الخدمات', 'nav.work': 'أعمالنا',
     'nav.about': 'عن الشركة', 'nav.blog': 'المدونة', 'nav.contact': 'تواصل معنا', 'nav.search': 'بحث', 'nav.menu': 'القائمة',
     'services.web': 'تطوير المواقع', 'services.mobile': 'تطبيقات الجوال', 'services.uiux': 'تصميم UI/UX',
-    'services.branding': 'الهوية البصرية', 'services.ai': 'حلول الذكاء الاصطناعي', 'services.cloud': 'الخدمات السحابية',
+    'services.branding': 'هوية تجارية متكاملة واستراتيجية بصرية', 'services.ai': 'حلول الذكاء الاصطناعي', 'services.cloud': 'الخدمات السحابية',
     'cta.getStarted': 'ابدأ مشروعك', 'cta.startProject': 'ابدأ مشروعك', 'cta.viewWork': 'شاهد أعمالنا',
     'cta.viewAll': 'عرض كل المشاريع', 'cta.browseStore': 'تصفح المتجر', 'cta.buildPC': 'ابنِ جهازك المثالي',
     'cta.learnMore': 'اعرف المزيد', 'cta.readCaseStudy': 'اقرأ دراسة الحالة', 'cta.contactUs': 'تواصل معنا',
@@ -225,6 +235,12 @@ export const translations: Record<Locale, TranslationMap> = {
     'footer.subscribe': 'اشتراك',
     'footer.emailPlaceholder': 'أدخل بريدك الإلكتروني',
     'footer.madeWith': 'صنع بـ', 'footer.inEgypt': 'في مصر',
+    'footer.linkAbout': 'من نحن', 'footer.linkTeam': 'فريقنا', 'footer.linkCaseStudies': 'دراسات الحالة',
+    'footer.linkPortfolio': 'معرض الأعمال', 'footer.linkWebDev': 'تطوير المواقع', 'footer.linkUiUx': 'تصميم UI/UX',
+    'footer.linkMarketing': 'التسويق الرقمي', 'footer.linkConsulting': 'الاستشارات',
+    'footer.linkBlog': 'المدونة', 'footer.linkFaq': 'الأسئلة الشائعة', 'footer.linkIndustries': 'المجالات',
+    'footer.linkContact': 'تواصل معنا',
+    'footer.linkPrivacy': 'سياسة الخصوصية', 'footer.linkTerms': 'شروط الخدمة',
     'hero.badge': 'وكالة رقمية متميزة',
     'hero.title.line1': 'نحن نصمم', 'hero.title.line2': 'التميز الرقمي',
     'hero.subtitle': 'حول رؤيتك إلى واقع مع خدماتنا المتميزة في تطوير المواقع والتصميم والتسويق الرقمي. نبني تجارب تأسر وتحول.',

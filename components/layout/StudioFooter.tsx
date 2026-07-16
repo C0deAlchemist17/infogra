@@ -25,6 +25,27 @@ const StudioFooter = () => {
     setTimeout(() => { setIsSubscribed(false); setEmail('') }, 3000)
   }
 
+  const navLabel = (name: string): string => {
+    const key: Record<string, string> = {
+      'About Us': 'footer.linkAbout',
+      'Our Team': 'footer.linkTeam',
+      'Case Studies': 'footer.linkCaseStudies',
+      'Portfolio': 'footer.linkPortfolio',
+      'Web Development': 'footer.linkWebDev',
+      'UI/UX Design': 'footer.linkUiUx',
+      'Digital Marketing': 'footer.linkMarketing',
+      'Consulting': 'footer.linkConsulting',
+      'Blog': 'footer.linkBlog',
+      'FAQ': 'footer.linkFaq',
+      'Industries': 'footer.linkIndustries',
+      'Contact': 'footer.linkContact',
+      'Privacy Policy': 'footer.linkPrivacy',
+      'Terms of Service': 'footer.linkTerms',
+    }
+    const tk = key[name]
+    return tk ? t(locale, tk as any) : name
+  }
+
   const footerSections = [
     { icon: Globe, label: t(locale, 'footer.company'), links: footerNavigation.company },
     { icon: Send, label: t(locale, 'footer.services'), links: footerNavigation.services },
@@ -73,8 +94,8 @@ const StudioFooter = () => {
                     <li key={link.name}>
                       <Link href={link.href} onMouseEnter={addHoverEffect} onMouseLeave={removeHoverEffect}
                         className="text-body-sm text-text-secondary hover:text-accent-primary transition-colors flex items-center gap-2 group">
-                        {link.name}
-                        <ChevronRight className={`w-4 h-4 opacity-0 ${isRTL ? 'translate-x-2 group-hover:translate-x-0' : '-translate-x-2 group-hover:translate-x-0'} group-hover:opacity-100 transition-all`} />
+                        {navLabel(link.name)}
+                        <ChevronRight className={`w-4 h-4 shrink-0 opacity-0 ${isRTL ? 'translate-x-2 group-hover:translate-x-0' : '-translate-x-2 group-hover:translate-x-0'} group-hover:opacity-100 transition-all`} />
                       </Link>
                     </li>
                   ))}
@@ -106,7 +127,7 @@ const StudioFooter = () => {
               <p className="text-small text-text-secondary">© {new Date().getFullYear()} INFOGRA. {t(locale, 'footer.rights')}</p>
               <div className="flex items-center gap-4">
                 {footerNavigation.legal.map((link) => (
-                  <Link key={link.name} href={link.href} className="text-small text-text-tertiary hover:text-accent-primary transition-colors">{link.name}</Link>
+                  <Link key={link.name} href={link.href} className="text-small text-text-tertiary hover:text-accent-primary transition-colors">{navLabel(link.name)}</Link>
                 ))}
               </div>
               <span className="flex items-center gap-1.5 text-small text-text-tertiary">

@@ -31,6 +31,25 @@ const StudioHeader = () => {
       'Blog': 'nav.blog',
       'Contact': 'nav.contact',
       'Search': 'nav.search',
+      'Web Development': 'services.web',
+      'Mobile Apps': 'services.mobile',
+      'UI/UX Design': 'services.uiux',
+      'Branding': 'services.branding',
+      'AI Solutions': 'services.ai',
+      'Cloud Services': 'services.cloud',
+    }
+    const tk = key[name]
+    return tk ? t(locale, tk as any) : name
+  }
+
+  const serviceDesc = (name: string): string => {
+    const key: Record<string, string> = {
+      'Web Development': 'services.webDev',
+      'Mobile Apps': 'services.mobileApps',
+      'UI/UX Design': 'services.design',
+      'Branding': 'services.branding',
+      'AI Solutions': 'services.aiSolutions',
+      'Cloud Services': 'services.cloudServices',
     }
     const tk = key[name]
     return tk ? t(locale, tk as any) : name
@@ -136,8 +155,8 @@ const StudioHeader = () => {
                     <motion.div key={service.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05 }}>
                       <Link href={service.href} className="block p-6 rounded-xl hover:bg-background-tertiary transition-all group"
                         onMouseEnter={addHoverEffect} onMouseLeave={removeHoverEffect}>
-                        <h3 className="text-h4 font-semibold text-text-primary mb-2 group-hover:text-accent-primary transition-colors">{service.name}</h3>
-                        <p className="text-small text-text-secondary">{service.description}</p>
+                        <h3 className="text-h4 font-semibold text-text-primary mb-2 group-hover:text-accent-primary transition-colors">{navLabel(service.name)}</h3>
+                        <p className="text-small text-text-secondary">{serviceDesc(service.name)}</p>
                       </Link>
                     </motion.div>
                   ))}

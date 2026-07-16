@@ -230,6 +230,7 @@ module.exports = {
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
         display: ["Inter", "system-ui", "sans-serif"],
+        arabic: ["var(--font-arabic)", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "monospace"],
       },
     },
