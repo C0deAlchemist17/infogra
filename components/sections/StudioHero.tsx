@@ -117,16 +117,12 @@ const StudioHero = () => {
           transition={{ delay: 1.6, duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
           className="flex flex-col sm:flex-row gap-10 justify-center items-center mb-24">
           <Button size="xl" variant="premium" className="group">
-            <span className="flex items-center">
-              {t(locale, 'cta.startProject')}
-              <ArrowRight className={`w-5 h-5 ${isRTL ? 'mr-3 rotate-180' : 'ml-3'} group-hover:translate-x-1.5 transition-transform duration-300`} />
-            </span>
+            {t(locale, 'cta.startProject')}
+            <ArrowRight className={`w-5 h-5 ${isRTL ? 'mr-3 rotate-180' : 'ml-3'} group-hover:translate-x-1.5 transition-transform duration-300`} />
           </Button>
-          <Button size="xl" variant="outline" className="group border-accent-primary/50 hover:border-accent-primary">
-            <span className="flex items-center">
-              <Play className={`w-5 h-5 ${isRTL ? 'ml-3' : 'mr-3'} group-hover:scale-110 transition-transform duration-300`} />
-              {t(locale, 'cta.viewWork')}
-            </span>
+          <Button size="xl" variant="outline" className="group">
+            <Play className={`w-5 h-5 ${isRTL ? 'ml-3' : 'mr-3'} group-hover:scale-110 transition-transform duration-300`} />
+            {t(locale, 'cta.viewWork')}
           </Button>
         </motion.div>
 
