@@ -96,11 +96,11 @@ const StudioHeader = () => {
             onClick={() => setIsMobileMenuOpen(false)}
           >
             <motion.div
-              initial={{ x: '100%' }}
+              initial={{ x: isRTL ? '-100%' : '100%' }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
+              exit={{ x: isRTL ? '-100%' : '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 200 }}
-              className="absolute right-0 top-0 h-full w-full max-w-sm glass-strong shadow-2xl p-8 border-l border-border-medium"
+              className={`absolute top-0 h-full w-full max-w-sm glass-strong shadow-2xl p-8 border-border-medium ${isRTL ? 'left-0 border-r' : 'right-0 border-l'}`}
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-center mb-12">
@@ -113,18 +113,18 @@ const StudioHeader = () => {
                 {mainNavigation.map((item) =>
                   item.href.startsWith('#') ? (
                     <button key={item.name} onClick={() => { handleHashNav(item.href); setIsMobileMenuOpen(false) }}
-                      className="block w-full text-left px-6 py-4 rounded-xl text-text-secondary hover:bg-background-tertiary hover:text-text-primary">
+                      className={`block w-full px-6 py-4 rounded-xl text-text-secondary hover:bg-background-tertiary hover:text-text-primary ${isRTL ? 'text-right' : 'text-left'}`}>
                       {navLabel(item.name)}
                     </button>
                   ) : (
                     <Link key={item.name} href={item.href}
-                      className={cn('block w-full text-left px-6 py-4 rounded-xl transition-all',
+                      className={cn(`block w-full px-6 py-4 rounded-xl transition-all ${isRTL ? 'text-right' : 'text-left'}`,
                         isActive(item.href) ? 'bg-accent-primary text-white' : 'text-text-secondary hover:bg-background-tertiary hover:text-text-primary')}>
                       {navLabel(item.name)}
                     </Link>
                   )
                 )}
-                <Link href="/search" className="block w-full text-left px-6 py-4 rounded-xl text-text-secondary hover:bg-background-tertiary hover:text-text-primary">{navLabel('Search')}</Link>
+                <Link href="/search" className={`block w-full px-6 py-4 rounded-xl text-text-secondary hover:bg-background-tertiary hover:text-text-primary ${isRTL ? 'text-right' : 'text-left'}`}>{navLabel('Search')}</Link>
               </nav>
               <div className="mt-6 pt-6 border-t border-border-subtle space-y-3">
                 {/* Language Toggle in Mobile Menu */}

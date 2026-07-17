@@ -75,6 +75,29 @@ export type TranslationKey =
   | 'store.warranty' | 'store.warrantyDesc' | 'store.delivery' | 'store.deliveryDesc'
   | 'store.prices' | 'store.pricesDesc' | 'store.authentic' | 'store.authenticDesc'
   | 'store.productWarranty'
+  // PC Builder
+  | 'pcbuilder.badge' | 'pcbuilder.title' | 'pcbuilder.subtitle'
+  | 'pcbuilder.yourBuild' | 'pcbuilder.clear' | 'pcbuilder.save' | 'pcbuilder.share'
+  | 'pcbuilder.componentsSelected' | 'pcbuilder.total' | 'pcbuilder.perfScore' | 'pcbuilder.compat'
+  | 'pcbuilder.selectComponent' | 'pcbuilder.selectComponentDesc'
+  | 'pcbuilder.priceSummary' | 'pcbuilder.inquire' | 'pcbuilder.proTips'
+  | 'pcbuilder.tip1' | 'pcbuilder.tip2' | 'pcbuilder.tip3' | 'pcbuilder.tip4'
+  | 'pcbuilder.cpu' | 'pcbuilder.gpu' | 'pcbuilder.ram' | 'pcbuilder.storage'
+  | 'pcbuilder.motherboard' | 'pcbuilder.psu' | 'pcbuilder.pccase' | 'pcbuilder.cooling'
+  | 'pcbuilder.cpuDesc' | 'pcbuilder.gpuDesc' | 'pcbuilder.ramDesc' | 'pcbuilder.storageDesc'
+  | 'pcbuilder.motherboardDesc' | 'pcbuilder.psuDesc' | 'pcbuilder.pccaseDesc' | 'pcbuilder.coolingDesc'
+  | 'pcbuilder.clickToSelect' | 'pcbuilder.noProducts' | 'pcbuilder.sortPriceAsc' | 'pcbuilder.sortPriceDesc'
+  | 'pcbuilder.sortRating' | 'pcbuilder.sortName'
+  // Projects page
+  | 'projects.badge' | 'projects.title' | 'projects.subtitle'
+  | 'projects.heroDesc' | 'projects.cta'
+  // Project descriptions
+  | 'project.alkhunaizan.title' | 'project.alkhunaizan.desc'
+  | 'project.kareem.title' | 'project.kareem.desc'
+  | 'project.reramen.title' | 'project.reramen.desc'
+  | 'project.maazen.title' | 'project.maazen.desc'
+  | 'project.hab.title' | 'project.hab.desc'
+  | 'project.brand.title' | 'project.brand.desc'
 
 type TranslationMap = Record<TranslationKey, string>
 
@@ -212,6 +235,68 @@ export const translations: Record<Locale, TranslationMap> = {
     'store.prices': 'Best Prices', 'store.pricesDesc': 'Competitive EGP Pricing',
     'store.authentic': 'Authentic', 'store.authenticDesc': '100% Genuine Products',
     'store.productWarranty': '1-3 Year Coverage',
+    // PC Builder
+    'pcbuilder.badge': 'PC Builder Tool',
+    'pcbuilder.title': 'Build Your Dream PC',
+    'pcbuilder.subtitle': 'Choose the perfect components for your custom build. Real products with real prices from our store.',
+    'pcbuilder.yourBuild': 'Your Build',
+    'pcbuilder.clear': 'Clear',
+    'pcbuilder.save': 'Save',
+    'pcbuilder.share': 'Share',
+    'pcbuilder.componentsSelected': 'components selected',
+    'pcbuilder.total': 'Total',
+    'pcbuilder.perfScore': 'Performance Score',
+    'pcbuilder.compat': 'Compatibility',
+    'pcbuilder.selectComponent': 'Select a Component',
+    'pcbuilder.selectComponentDesc': 'Click on any component slot above to browse available options and start building your dream PC.',
+    'pcbuilder.priceSummary': 'Price Summary',
+    'pcbuilder.inquire': 'Inquire on WhatsApp',
+    'pcbuilder.proTips': 'Pro Tips',
+    'pcbuilder.tip1': 'Always choose a PSU with 20%+ headroom for stability',
+    'pcbuilder.tip2': 'DDR5 RAM requires a compatible motherboard',
+    'pcbuilder.tip3': 'High-end GPUs need powerful PSUs (650W+)',
+    'pcbuilder.tip4': 'CPU and motherboard sockets must match',
+    'pcbuilder.cpu': 'Processor (CPU)',
+    'pcbuilder.gpu': 'Graphics Card (GPU)',
+    'pcbuilder.ram': 'Memory (RAM)',
+    'pcbuilder.storage': 'Storage (SSD/HDD)',
+    'pcbuilder.motherboard': 'Motherboard',
+    'pcbuilder.psu': 'Power Supply (PSU)',
+    'pcbuilder.pccase': 'PC Case',
+    'pcbuilder.cooling': 'Cooling System',
+    'pcbuilder.cpuDesc': 'The brain of your computer - determines processing power',
+    'pcbuilder.gpuDesc': 'Handles graphics rendering - essential for gaming and creative work',
+    'pcbuilder.ramDesc': 'Temporary memory for running applications smoothly',
+    'pcbuilder.storageDesc': 'Where your files, games, and operating system are stored',
+    'pcbuilder.motherboardDesc': 'Connects all components together - choose based on CPU socket',
+    'pcbuilder.psuDesc': 'Powers all your components - never cheap out on this!',
+    'pcbuilder.pccaseDesc': 'Houses and protects your components - pick for style and airflow',
+    'pcbuilder.coolingDesc': 'Keeps your components cool under load',
+    'pcbuilder.clickToSelect': 'Click to select',
+    'pcbuilder.noProducts': 'No products available in this category',
+    'pcbuilder.sortPriceAsc': 'Price: Low to High',
+    'pcbuilder.sortPriceDesc': 'Price: High to Low',
+    'pcbuilder.sortRating': 'Best Rated',
+    'pcbuilder.sortName': 'Name A-Z',
+    // Projects page
+    'projects.badge': 'Our Portfolio',
+    'projects.title': 'Featured Projects',
+    'projects.subtitle': 'Digital Excellence in Action',
+    'projects.heroDesc': 'Explore our portfolio of award-winning digital experiences that have helped businesses transform their online presence and achieve remarkable results.',
+    'projects.cta': 'Start Your Project',
+    // Project descriptions
+    'project.alkhunaizan.title': 'Alkhunaizan Law Firm',
+    'project.alkhunaizan.desc': 'Professional legal website with modern design and seamless user experience.',
+    'project.kareem.title': 'Kareem Hafez Toolshop',
+    'project.kareem.desc': 'E-commerce platform for industrial tools with advanced filtering.',
+    'project.reramen.title': 'Re Ramen Restaurant',
+    'project.reramen.desc': 'Modern restaurant website with online ordering system.',
+    'project.maazen.title': 'Maazen Elharam Real Estate',
+    'project.maazen.desc': 'Real estate platform with property listings and search.',
+    'project.hab.title': 'Hab Constructions',
+    'project.hab.desc': 'Construction company showcase with project gallery.',
+    'project.brand.title': 'Brand Identity System',
+    'project.brand.desc': 'Complete brand identity package with guidelines.',
   },
   ar: {
     'site.name': 'إنفوجرا', 'site.tagline': 'مهندسي التجارب الرقمية',
@@ -340,6 +425,68 @@ export const translations: Record<Locale, TranslationMap> = {
     'store.prices': 'أفضل الأسعار', 'store.pricesDesc': 'أسعار تنافسية بالجنيه المصري',
     'store.authentic': 'منتجات أصلية', 'store.authenticDesc': 'منتجات 100% أصلية',
     'store.productWarranty': 'تغطية من 1-3 سنوات',
+    // PC Builder
+    'pcbuilder.badge': 'أداة بناء الكمبيوتر',
+    'pcbuilder.title': 'ابنِ جهاز أحلامك',
+    'pcbuilder.subtitle': 'اختر المكونات المثالية لتجميعك المخصص. منتجات حقيقية بأسعار حقيقية من متجرنا.',
+    'pcbuilder.yourBuild': 'تجميعك',
+    'pcbuilder.clear': 'مسح',
+    'pcbuilder.save': 'حفظ',
+    'pcbuilder.share': 'مشاركة',
+    'pcbuilder.componentsSelected': 'مكونات تم اختيارها',
+    'pcbuilder.total': 'الإجمالي',
+    'pcbuilder.perfScore': 'نتيجة الأداء',
+    'pcbuilder.compat': 'التوافق',
+    'pcbuilder.selectComponent': 'اختر مكوناً',
+    'pcbuilder.selectComponentDesc': 'اضغط على أي خانة مكون أعلاه لتصفح الخيارات المتاحة وابدأ في بناء جهاز أحلامك.',
+    'pcbuilder.priceSummary': 'ملخص الأسعار',
+    'pcbuilder.inquire': 'استفسر عبر واتساب',
+    'pcbuilder.proTips': 'نصائح احترافية',
+    'pcbuilder.tip1': 'اختر دائماً مصدر طاقة بسعة 20% إضافية على الأقل للاستقرار',
+    'pcbuilder.tip2': 'ذاكرة DDR5 تتطلب لوحة أم متوافقة',
+    'pcbuilder.tip3': 'البطاقات الرسومية العالية تحتاج مصادر طاقة قوية (650 واط أو أكثر)',
+    'pcbuilder.tip4': 'منافذ المعالج ولوحة الأم يجب أن تتطابق',
+    'pcbuilder.cpu': 'المعالج (CPU)',
+    'pcbuilder.gpu': 'البطاقة الرسومية (GPU)',
+    'pcbuilder.ram': 'الذاكرة العشوائية (RAM)',
+    'pcbuilder.storage': 'التخزين (SSD/HDD)',
+    'pcbuilder.motherboard': 'لوحة الأم',
+    'pcbuilder.psu': 'مصدر الطاقة (PSU)',
+    'pcbuilder.pccase': 'ケース الكمبيوتر',
+    'pcbuilder.cooling': 'نظام التبريد',
+    'pcbuilder.cpuDesc': 'دماغ الكمبيوتر - يحدد قوة المعالجة',
+    'pcbuilder.gpuDesc': 'يتعامل مع عرض الرسومات - ضروري للألعاب والعمل الإبداعي',
+    'pcbuilder.ramDesc': 'ذاكرة مؤقتة لتشغيل التطبيقات بسلاسة',
+    'pcbuilder.storageDesc': 'مكان تخزين ملفاتك وأنظمتك التشغيليلية وألعابك',
+    'pcbuilder.motherboardDesc': 'يوصل جميع المكونات معاً - اختر بناءً على منفذ المعالج',
+    'pcbuilder.psuDesc': 'يغذي جميع مكوناتك - لا تبخل عليه أبداً!',
+    'pcbuilder.pccaseDesc': 'يحتوي ويحمي مكوناتك - اختر للأناقة وتدفق الهواء',
+    'pcbuilder.coolingDesc': 'يحافظ على مكوناتك باردة تحت الحمل',
+    'pcbuilder.clickToSelect': 'اضغط للتحديد',
+    'pcbuilder.noProducts': 'لا توجد منتجات متاحة في هذا التصنيف',
+    'pcbuilder.sortPriceAsc': 'السعر: من الأقل للأعلى',
+    'pcbuilder.sortPriceDesc': 'السعر: من الأعلى للأقل',
+    'pcbuilder.sortRating': 'الأفضل تقييماً',
+    'pcbuilder.sortName': 'الاسم (أ-ي)',
+    // Projects page
+    'projects.badge': 'معرض أعمالنا',
+    'projects.title': 'مشاريعنا المميزة',
+    'projects.subtitle': 'التميز الرقمي بين يديك',
+    'projects.heroDesc': 'استكشف محفظتنا من التجارب الرقمية الحائزة على جوائز التي ساعدت الشركات على تحويل حضورها الرقمي وتحقيق نتائج ملحوظة.',
+    'projects.cta': 'ابدأ مشروعك',
+    // Project descriptions
+    'project.alkhunaizan.title': 'مكتب الخنيزان القانوني',
+    'project.alkhunaizan.desc': 'موقع قانوني احترافي بتصميم حديث وتجربة مستخدم سلسة.',
+    'project.kareem.title': 'معدات كريم حافظ',
+    'project.kareem.desc': 'منصة تجارة إلكترونية لأدوات الصناعة مع فلترة متقدمة.',
+    'project.reramen.title': 'مطعم ري رامين',
+    'project.reramen.desc': 'موقع مطعم حديث مع نظام طلب عبر الإنترنت.',
+    'project.maazen.title': 'مآذن الحaram العقارية',
+    'project.maazen.desc': 'منصة عقارية مع عرض العقارات والبحث.',
+    'project.hab.title': 'شركة حاب للإنشاءات',
+    'project.hab.desc': 'عرض شركة إنشاءات مع معرض المشاريع.',
+    'project.brand.title': 'نظام الهوية التجارية',
+    'project.brand.desc': 'حزمة هوية تجارية كاملة مع إرشادات.',
   },
 }
 

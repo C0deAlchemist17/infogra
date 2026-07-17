@@ -11,6 +11,8 @@ import {
   Info, ShoppingCart, Star, Trophy, Target, TrendingUp, DollarSign, 
   Wrench, Sparkles, Package, Shield
 } from 'lucide-react'
+import { useLanguage } from '@/providers/LanguageProvider'
+import { t } from '@/lib/translations'
 import { products } from '@/data/products'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
@@ -170,25 +172,25 @@ const categoryIcons: Record<string, any> = {
 }
 
 const categoryLabels: Record<string, string> = {
-  cpu: 'Processor (CPU)',
-  gpu: 'Graphics Card (GPU)',
-  ram: 'Memory (RAM)',
-  storage: 'Storage (SSD/HDD)',
-  motherboard: 'Motherboard',
-  psu: 'Power Supply (PSU)',
-  case: 'PC Case',
-  cooling: 'Cooling System',
+  cpu: 'pcbuilder.cpu',
+  gpu: 'pcbuilder.gpu',
+  ram: 'pcbuilder.ram',
+  storage: 'pcbuilder.storage',
+  motherboard: 'pcbuilder.motherboard',
+  psu: 'pcbuilder.psu',
+  case: 'pcbuilder.pccase',
+  cooling: 'pcbuilder.cooling',
 }
 
 const categoryDescriptions: Record<string, string> = {
-  cpu: 'The brain of your computer - determines processing power',
-  gpu: 'Handles graphics rendering - essential for gaming and creative work',
-  ram: 'Temporary memory for running applications smoothly',
-  storage: 'Where your files, games, and operating system are stored',
-  motherboard: 'Connects all components together - choose based on CPU socket',
-  psu: 'Powers all your components - never cheap out on this!',
-  case: 'Houses and protects your components - pick for style and airflow',
-  cooling: 'Keeps your components cool under load',
+  cpu: 'pcbuilder.cpuDesc',
+  gpu: 'pcbuilder.gpuDesc',
+  ram: 'pcbuilder.ramDesc',
+  storage: 'pcbuilder.storageDesc',
+  motherboard: 'pcbuilder.motherboardDesc',
+  psu: 'pcbuilder.psuDesc',
+  case: 'pcbuilder.pccaseDesc',
+  cooling: 'pcbuilder.coolingDesc',
 }
 
 export default function PCBuilderPage() {
@@ -196,6 +198,7 @@ export default function PCBuilderPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [showTemplates, setShowTemplates] = useState(false)
   const [sortBy, setSortBy] = useState<'price-asc' | 'price-desc' | 'rating' | 'name'>('price-asc')
+  const { locale, isRTL } = useLanguage()
   
   const mockComponents = useMemo(() => mapProductsToComponents(), [])
 
@@ -372,13 +375,13 @@ export default function PCBuilderPage() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-border-subtle mb-6">
               <Wrench className="w-5 h-5 text-accent-primary" />
-              <span className="text-small text-text-secondary">PC Builder Tool</span>
+              <span className="text-small text-text-secondary">{t(locale, 'pcbuilder.badge')}</span>
             </div>
             <h1 className="text-h2 md:text-h1 font-bold text-text-primary mb-4">
-              <span className="gradient-text">Build Your Dream PC</span>
+              <span className="gradient-text">{t(locale, 'pcbuilder.title')}</span>
             </h1>
             <p className="text-body-lg text-text-secondary max-w-2xl mx-auto">
-              Choose the perfect components for your custom build. Real products with real prices from our store.
+              {t(locale, 'pcbuilder.subtitle')}
             </p>
           </motion.div>
         </div>
@@ -401,7 +404,7 @@ export default function PCBuilderPage() {
                 <span className="text-small font-medium text-text-primary">{buildProgress}%</span>
               </div>
               <span className="text-small text-text-tertiary">
-                {Object.keys(build).length}/8 components selected
+                {Object.keys(build).length}/8 {t(locale, 'pcbuilder.componentsSelected')}
               </span>
             </div>
             
@@ -417,7 +420,7 @@ export default function PCBuilderPage() {
                 </Badge>
               )}
               <div className="text-right">
-                <div className="text-caption text-text-tertiary">Total</div>
+                <div className="text-caption text-text-tertiary">{t(locale, 'pcbuilder.total')}</div>
                 <div className="text-body font-bold gradient-text">EGP {totalPrice.toLocaleString()}</div>
               </div>
             </div>
@@ -442,20 +445,20 @@ export default function PCBuilderPage() {
                     <div className="flex items-center justify-between mb-6">
                       <h2 className="text-h3 font-bold text-text-primary flex items-center gap-3">
                         <Package className="w-6 h-6 text-accent-primary" />
-                        Your Build
+                        {t(locale, 'pcbuilder.yourBuild')}
                       </h2>
                       <div className="flex gap-2">
                         <Button variant="outline" size="sm" onClick={handleClearBuild} className="px-4">
-                          <RotateCcw className="w-4 h-4 mr-2" />
-                          Clear
+                          <RotateCcw className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                          {t(locale, 'pcbuilder.clear')}
                         </Button>
                         <Button variant="outline" size="sm" onClick={handleSaveBuild} className="px-4">
-                          <Save className="w-4 h-4 mr-2" />
-                          Save
+                          <Save className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                          {t(locale, 'pcbuilder.save')}
                         </Button>
                         <Button variant="outline" size="sm" onClick={handleShareBuild} className="px-4">
-                          <Share2 className="w-4 h-4 mr-2" />
-                          Share
+                          <Share2 className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                          {t(locale, 'pcbuilder.share')}
                         </Button>
                       </div>
                     </div>
@@ -503,7 +506,7 @@ export default function PCBuilderPage() {
                                   <Icon className="w-5 h-5 text-text-tertiary" />
                                 </div>
                                 <div className="text-caption font-medium text-text-secondary">{categoryLabels[category].split(' ')[0]}</div>
-                                <div className="text-caption text-text-tertiary mt-1">Click to select</div>
+                                <div className="text-caption text-text-tertiary mt-1">{t(locale, 'pcbuilder.clickToSelect')}</div>
                               </>
                             )}
                           </motion.button>
@@ -528,9 +531,9 @@ export default function PCBuilderPage() {
                           <div>
                             <h3 className="text-h4 font-bold text-text-primary flex items-center gap-2">
                               {(() => { const Icon = categoryIcons[selectedCategory]; return <Icon className="w-5 h-5 text-accent-primary" /> })()}
-                              {categoryLabels[selectedCategory]}
+                              {t(locale, categoryLabels[selectedCategory] as any)}
                             </h3>
-                            <p className="text-small text-text-tertiary mt-1">{categoryDescriptions[selectedCategory]}</p>
+                            <p className="text-small text-text-tertiary mt-1">{t(locale, categoryDescriptions[selectedCategory] as any)}</p>
                           </div>
                           <div className="flex items-center gap-3">
                             <select
@@ -538,10 +541,10 @@ export default function PCBuilderPage() {
                               onChange={(e) => setSortBy(e.target.value as any)}
                               className="px-3 py-2 rounded-xl glass border border-border-subtle text-small text-text-primary focus:outline-none focus:border-accent-primary"
                             >
-                              <option value="price-asc">Price: Low to High</option>
-                              <option value="price-desc">Price: High to Low</option>
-                              <option value="rating">Best Rated</option>
-                              <option value="name">Name A-Z</option>
+                              <option value="price-asc">{t(locale, 'pcbuilder.sortPriceAsc')}</option>
+                              <option value="price-desc">{t(locale, 'pcbuilder.sortPriceDesc')}</option>
+                              <option value="rating">{t(locale, 'pcbuilder.sortRating')}</option>
+                              <option value="name">{t(locale, 'pcbuilder.sortName')}</option>
                             </select>
                             <Button variant="ghost" size="sm" onClick={() => setSelectedCategory(null)}>
                               <XCircle className="w-5 h-5" />
@@ -553,7 +556,7 @@ export default function PCBuilderPage() {
                           {getCategoryComponents(selectedCategory).length === 0 ? (
                             <div className="text-center py-12 text-text-tertiary">
                               <Info className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                              <p className="text-body">No products available in this category</p>
+                              <p className="text-body">{t(locale, 'pcbuilder.noProducts')}</p>
                             </div>
                           ) : (
                             getCategoryComponents(selectedCategory).map((component, index) => {
@@ -648,7 +651,7 @@ export default function PCBuilderPage() {
                   <CardContent className="p-6">
                     <h2 className="text-h4 font-bold text-text-primary mb-6 flex items-center gap-2">
                       <Trophy className="w-6 h-6 text-accent-primary" />
-                      Performance Score
+                      {t(locale, 'pcbuilder.perfScore')}
                     </h2>
                     
                     <div className="text-center mb-6">
@@ -706,7 +709,7 @@ export default function PCBuilderPage() {
                   <CardContent className="p-6">
                     <h2 className="text-h4 font-bold text-text-primary mb-4 flex items-center gap-2">
                       <Shield className="w-6 h-6 text-accent-primary" />
-                      Compatibility
+                      {t(locale, 'pcbuilder.compat')}
                     </h2>
 
                     {compatibilityIssues.length === 0 ? (
@@ -755,7 +758,7 @@ export default function PCBuilderPage() {
                   <CardContent className="p-6">
                     <h3 className="text-h4 font-bold text-text-primary mb-4 flex items-center gap-2">
                       <DollarSign className="w-5 h-5 text-accent-primary" />
-                      Price Summary
+                      {t(locale, 'pcbuilder.priceSummary')}
                     </h3>
                     
                     <div className="space-y-2 mb-4">
@@ -791,8 +794,8 @@ export default function PCBuilderPage() {
                         }
                       }}
                     >
-                      <ShoppingCart className="w-5 h-5 mr-2" />
-                      Inquire on WhatsApp
+                      <ShoppingCart className={`w-5 h-5 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                      {t(locale, 'pcbuilder.inquire')}
                     </Button>
                   </CardContent>
                 </Card>
@@ -806,23 +809,23 @@ export default function PCBuilderPage() {
               >
                 <Card className="glass border-border-subtle">
                   <CardContent className="p-6">
-                    <h3 className="text-h4 font-bold text-text-primary mb-4">💡 Pro Tips</h3>
+                    <h3 className="text-h4 font-bold text-text-primary mb-4">💡 {t(locale, 'pcbuilder.proTips')}</h3>
                     <ul className="space-y-3 text-small text-text-secondary">
                       <li className="flex items-start gap-2">
                         <Star className="w-4 h-4 text-accent-primary shrink-0 mt-0.5" />
-                        <span>Always choose a PSU with 20%+ headroom for stability</span>
+                        <span>{t(locale, 'pcbuilder.tip1')}</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <Star className="w-4 h-4 text-accent-primary shrink-0 mt-0.5" />
-                        <span>DDR5 RAM requires a compatible motherboard</span>
+                        <span>{t(locale, 'pcbuilder.tip2')}</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <Star className="w-4 h-4 text-accent-primary shrink-0 mt-0.5" />
-                        <span>High-end GPUs need powerful PSUs (650W+)</span>
+                        <span>{t(locale, 'pcbuilder.tip3')}</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <Star className="w-4 h-4 text-accent-primary shrink-0 mt-0.5" />
-                        <span>CPU and motherboard sockets must match</span>
+                        <span>{t(locale, 'pcbuilder.tip4')}</span>
                       </li>
                     </ul>
                   </CardContent>
