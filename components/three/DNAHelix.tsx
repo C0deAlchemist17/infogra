@@ -1,8 +1,9 @@
 'use client'
 
-import { useRef, useMemo } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useRef, useMemo, Suspense } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
+import ThreeErrorBoundary from './ThreeErrorBoundary'
 
 interface ConnectorData {
   position: [number, number, number]
@@ -13,7 +14,7 @@ interface ConnectorData {
   sphereEnd: [number, number, number]
 }
 
-export default function DNAHelix() {
+function DNAHelixScene() {
   const groupRef = useRef<THREE.Group>(null)
   
   const { strand1Geom, strand2Geom, connectorsData } = useMemo(() => {
@@ -106,5 +107,19 @@ export default function DNAHelix() {
         </group>
       ))}
     </group>
+  )
+}
+
+export default function DNAHelix() {
+  return (
+    <ThreeErrorBoundary>
+      <Canvas dpr={[1, 1.5]} gl={{ antialias: true, alpha: true }} style={{ background: 'transparent' }}>
+        <Suspense fallback={null}>
+          <ambientLight intensity={0.5} />
+          <pointLight position={[5, 5, 5]} intensity={0.8} color="#3b82f6" />
+          <DNAHelixScene />
+        </Suspense>
+      </Canvas>
+    </ThreeErrorBoundary>
   )
 }

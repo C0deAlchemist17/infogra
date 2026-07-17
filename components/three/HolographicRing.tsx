@@ -1,9 +1,10 @@
 'use client'
 
-import { useRef, useMemo } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useRef, useMemo, Suspense } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { Float } from '@react-three/drei'
 import * as THREE from 'three'
+import ThreeErrorBoundary from './ThreeErrorBoundary'
 
 interface RingProps {
   radius: number
@@ -90,7 +91,7 @@ function FloatingParticles({ count = 200, color = '#8b5cf6' }: { count?: number;
   )
 }
 
-export default function HolographicRing() {
+function HolographicRingScene() {
   return (
     <Float speed={1} rotationIntensity={0.1} floatIntensity={0.2}>
       <group>
@@ -114,5 +115,20 @@ export default function HolographicRing() {
         <FloatingParticles />
       </group>
     </Float>
+  )
+}
+
+export default function HolographicRing() {
+  return (
+    <ThreeErrorBoundary>
+      <Canvas dpr={[1, 1.5]} gl={{ antialias: true, alpha: true }} style={{ background: 'transparent' }}>
+        <Suspense fallback={null}>
+          <ambientLight intensity={0.3} />
+          <pointLight position={[5, 5, 5]} intensity={0.8} color="#8b5cf6" />
+          <pointLight position={[-5, -5, -5]} intensity={0.5} color="#06b6d4" />
+          <HolographicRingScene />
+        </Suspense>
+      </Canvas>
+    </ThreeErrorBoundary>
   )
 }
