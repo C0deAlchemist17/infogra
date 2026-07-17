@@ -240,12 +240,12 @@ export default function PCBuilderPage() {
   }, [build])
 
   const performanceLabel = useMemo(() => {
-    if (performanceScore >= 90) return { text: 'Extreme', color: 'text-accent-error' }
-    if (performanceScore >= 75) return { text: 'High', color: 'text-accent-primary' }
-    if (performanceScore >= 50) return { text: 'Medium', color: 'text-accent-highlight' }
-    if (performanceScore >= 25) return { text: 'Entry', color: 'text-accent-success' }
-    return { text: 'Incomplete', color: 'text-text-tertiary' }
-  }, [performanceScore])
+    if (performanceScore >= 90) return { text: locale === 'ar' ? 'متطرف' : 'Extreme', color: 'text-accent-error' }
+    if (performanceScore >= 75) return { text: locale === 'ar' ? 'عالي' : 'High', color: 'text-accent-primary' }
+    if (performanceScore >= 50) return { text: locale === 'ar' ? 'متوسط' : 'Medium', color: 'text-accent-highlight' }
+    if (performanceScore >= 25) return { text: locale === 'ar' ? 'مبدئي' : 'Entry', color: 'text-accent-success' }
+    return { text: locale === 'ar' ? 'غير مكتمل' : 'Incomplete', color: 'text-text-tertiary' }
+  }, [performanceScore, locale])
 
   const compatibilityIssues = useMemo(() => {
     const issues: CompatibilityIssue[] = []
@@ -505,7 +505,7 @@ export default function PCBuilderPage() {
                                 <div className="w-10 h-10 bg-background-tertiary rounded-xl flex items-center justify-center mb-2">
                                   <Icon className="w-5 h-5 text-text-tertiary" />
                                 </div>
-                                <div className="text-caption font-medium text-text-secondary">{categoryLabels[category].split(' ')[0]}</div>
+                                <div className="text-caption font-medium text-text-secondary">{t(locale, categoryLabels[category] as any)}</div>
                                 <div className="text-caption text-text-tertiary mt-1">{t(locale, 'pcbuilder.clickToSelect')}</div>
                               </>
                             )}
@@ -628,9 +628,9 @@ export default function PCBuilderPage() {
                         <div className="w-24 h-24 bg-accent-primary/10 rounded-3xl flex items-center justify-center mx-auto mb-6">
                           <Wrench className="w-12 h-12 text-accent-primary" />
                         </div>
-                        <h3 className="text-h3 font-bold text-text-primary mb-3">Select a Component</h3>
+                        <h3 className="text-h3 font-bold text-text-primary mb-3">{t(locale, 'pcbuilder.selectComponent')}</h3>
                         <p className="text-body text-text-secondary max-w-md mx-auto">
-                          Click on any component slot above to browse available options and start building your dream PC.
+                          {t(locale, 'pcbuilder.selectComponentDesc')}
                         </p>
                       </div>
                     )}
@@ -676,7 +676,7 @@ export default function PCBuilderPage() {
                       {Object.entries(build).map(([category, component]) => (
                         component ? (
                           <div key={category} className="flex justify-between items-center text-small">
-                            <span className="text-text-secondary capitalize">{categoryLabels[category]?.split(' ')[0]}</span>
+                            <span className="text-text-secondary">{t(locale, categoryLabels[category] as any)}</span>
                             <span className="font-medium text-text-primary">{component.power}W</span>
                           </div>
                         ) : null
@@ -684,12 +684,12 @@ export default function PCBuilderPage() {
                       
                       <div className="pt-3 border-t border-border-subtle">
                         <div className="flex justify-between items-center">
-                          <span className="text-body font-semibold text-text-primary">Total Power</span>
+                          <span className="text-body font-semibold text-text-primary">{locale === 'ar' ? 'القدرة الإجمالية' : 'Total Power'}</span>
                           <span className="text-h4 font-bold gradient-text">{totalPower}W</span>
                         </div>
                         {build.psu && (
                           <div className="flex justify-between items-center mt-2">
-                            <span className="text-small text-text-secondary">PSU Capacity</span>
+                            <span className="text-small text-text-secondary">{locale === 'ar' ? 'سعة مصدر الطاقة' : 'PSU Capacity'}</span>
                             <span className="text-small font-medium text-text-primary">{build.psu.specifications['Wattage'] || 'N/A'}</span>
                           </div>
                         )}
@@ -715,7 +715,7 @@ export default function PCBuilderPage() {
                     {compatibilityIssues.length === 0 ? (
                       <div className="text-center py-6">
                         <CheckCircle className="w-12 h-12 text-accent-success mx-auto mb-3" />
-                        <p className="text-body font-medium text-text-primary">All good!</p>
+                        <p className="text-body font-medium text-text-primary">{locale === 'ar' ? 'كل شيء جيد!' : 'All good!'}</p>
                       </div>
                     ) : (
                       <div className="space-y-3">
@@ -773,8 +773,7 @@ export default function PCBuilderPage() {
                     </div>
                     
                     <div className="pt-4 border-t border-border-subtle">
-                      <div className="flex justify-between items-center">
-                        <span className="text-body font-bold text-text-primary">Total</span>
+                      <div className="flex justify-between items-center">                          <span className="text-body font-bold text-text-primary">{locale === 'ar' ? 'الإجمالي' : 'Total'}</span>
                         <span className="text-h3 font-bold gradient-text">EGP {totalPrice.toLocaleString()}</span>
                       </div>
                     </div>
@@ -786,9 +785,11 @@ export default function PCBuilderPage() {
                       onClick={() => {
                         const buildSummary = Object.entries(build)
                           .filter(([_, comp]) => comp)
-                          .map(([cat, comp]) => `${categoryLabels[cat]}: ${comp!.name} - EGP ${comp!.price.toLocaleString()}`)
+                          .map(([cat, comp]) => `${t(locale, categoryLabels[cat] as any)}: ${comp!.name} - EGP ${comp!.price.toLocaleString()}`)
                           .join('%0A')
-                        const message = encodeURIComponent(`Hello INFOGRA! I'm interested in building this PC:%0A%0A${buildSummary}%0A%0ATotal: EGP ${totalPrice.toLocaleString()}%0A%0APlease help me with this build!`)
+                        const message = encodeURIComponent(locale === 'ar'
+                          ? `مرحباً إنفوجرا! أنا مهتم ببناء هذا الكمبيوتر:%0A%0A${buildSummary}%0A%0Aالإجمالي: EGP ${totalPrice.toLocaleString()}%0A%0APlease help me with this build!`
+                          : `Hello INFOGRA! I'm interested in building this PC:%0A%0A${buildSummary}%0A%0ATotal: EGP ${totalPrice.toLocaleString()}%0A%0APlease help me with this build!`)
                         if (typeof window !== 'undefined') {
                           window.open(`https://wa.me/201061866211?text=${message}`, '_blank')
                         }
