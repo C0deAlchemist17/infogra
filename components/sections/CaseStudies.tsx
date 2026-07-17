@@ -8,6 +8,12 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { useLanguage } from '@/providers/LanguageProvider'
 import { t } from '@/lib/translations'
+import dynamic from 'next/dynamic'
+
+const SectionBackground = dynamic(() => import('@/components/three/SectionBackground'), {
+  ssr: false,
+  loading: () => null
+})
 
 const CaseStudies = () => {
   const { elementRef, hasBeenVisible } = useScrollTrigger({ threshold: 0.1, triggerOnce: true })
@@ -39,6 +45,7 @@ const CaseStudies = () => {
 
   return (
     <section ref={elementRef} className="relative py-40 bg-background-secondary/50">
+      <SectionBackground opacity={0.15} />
       <div className="container mx-auto px-8">
         <motion.div initial={{ opacity: 0, y: 40 }} animate={hasBeenVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.5, ease: [0.25, 0.1, 0.25, 1] }} className="text-center mb-24">

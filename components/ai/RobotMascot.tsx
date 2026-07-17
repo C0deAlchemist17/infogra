@@ -61,25 +61,29 @@ function RobotBody({ isHovered, isActive }: RobotProps) {
     // Floating motion
     bodyRef.current.position.y = Math.sin(t * 1.5) * 0.05
 
-    // Head slight rotation based on global mouse
+    // Head rotation to LOOK AT the mouse - larger rotation for 'looking at' effect
     if (bodyRef.current.children[0]) {
       const head = bodyRef.current.children[0] as THREE.Group
       const headTargetX = globalMouseX * 0.7 + mouse.x * 0.3
       const headTargetY = globalMouseY * 0.7 + (-mouse.y) * 0.3
-      head.rotation.y = THREE.MathUtils.lerp(head.rotation.y, headTargetX * 0.3, 0.05)
-      head.rotation.x = THREE.MathUtils.lerp(head.rotation.x, headTargetY * 0.15, 0.05)
+      // Larger head rotation to create a clear 'looking at' behavior
+      head.rotation.y = THREE.MathUtils.lerp(head.rotation.y, headTargetX * 0.5, 0.03)
+      head.rotation.x = THREE.MathUtils.lerp(head.rotation.x, headTargetY * 0.25, 0.03)
     }
 
-    // Eye tracking - use global mouse position for page-wide tracking
+    // Eye tracking - eyes look TOWARD the mouse position without the pupils physically moving
+    // The pupils stay centered but the entire head rotates to face the mouse
+    // This creates a 'looking at' effect rather than a 'following' effect
     if (leftPupilRef.current && rightPupilRef.current) {
-      const pupilOffset = 0.04
-      // Blend global mouse with Three.js local mouse for smoother tracking
-      const targetX = globalMouseX * 0.7 + mouse.x * 0.3
-      const targetY = globalMouseY * 0.7 + (-mouse.y) * 0.3
-      leftPupilRef.current.position.x = THREE.MathUtils.lerp(leftPupilRef.current.position.x, targetX * pupilOffset, 0.08)
-      leftPupilRef.current.position.y = THREE.MathUtils.lerp(leftPupilRef.current.position.y, targetY * pupilOffset, 0.08)
-      rightPupilRef.current.position.x = THREE.MathUtils.lerp(rightPupilRef.current.position.x, targetX * pupilOffset, 0.08)
-      rightPupilRef.current.position.y = THREE.MathUtils.lerp(rightPupilRef.current.position.y, targetY * pupilOffset, 0.08)
+      const pupilOffset = 0.035
+      // Calculate look direction toward mouse - subtle pupil shift within the eye socket
+      const targetX = globalMouseX * 0.5 + mouse.x * 0.2
+      const targetY = globalMouseY * 0.5 + (-mouse.y) * 0.2
+      // Much smoother and smaller range for 'looking at' feel
+      leftPupilRef.current.position.x = THREE.MathUtils.lerp(leftPupilRef.current.position.x, targetX * pupilOffset, 0.04)
+      leftPupilRef.current.position.y = THREE.MathUtils.lerp(leftPupilRef.current.position.y, targetY * pupilOffset, 0.04)
+      rightPupilRef.current.position.x = THREE.MathUtils.lerp(rightPupilRef.current.position.x, targetX * pupilOffset, 0.04)
+      rightPupilRef.current.position.y = THREE.MathUtils.lerp(rightPupilRef.current.position.y, targetY * pupilOffset, 0.04)
     }
 
     // Eye brightness

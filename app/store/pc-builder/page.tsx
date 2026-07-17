@@ -463,26 +463,27 @@ export default function PCBuilderPage() {
                       </div>
                     </div>
 
-                    {/* Visual Build Grid */}
+                    {/* Visual Build Grid - Enhanced with animations */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                       {(['cpu', 'motherboard', 'ram', 'gpu', 'storage', 'psu', 'case', 'cooling'] as const).map((category) => {
                         const Icon = categoryIcons[category]
                         const component = build[category]
                         
-                        return (
-                          <motion.button
+                        return (                          <motion.button
                             key={category}
                             onClick={() => setSelectedCategory(selectedCategory === category ? null : category)}
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
+                            whileHover={{ scale: 1.03, y: -2 }}
+                            whileTap={{ scale: 0.97 }}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: ['cpu','motherboard','ram','gpu','storage','psu','case','cooling'].indexOf(category) * 0.05 }}
                             className={`relative p-4 rounded-xl border-2 transition-all duration-300 text-left ${
                               selectedCategory === category
-                                ? 'border-accent-primary bg-accent-primary/10'
+                                ? 'border-accent-primary bg-accent-primary/10 shadow-glow'
                                 : component
-                                ? 'border-accent-success/50 bg-accent-success/5'
-                                : 'border-border-subtle bg-background-tertiary/30 hover:border-accent-primary/30'
-                            }`}
-                          >
+                                ? 'border-accent-success/50 bg-accent-success/5 shadow-sm'
+                                : 'border-border-subtle bg-background-tertiary/30 hover:border-accent-primary/30 hover:shadow-glow'
+                            }`}>
                             {component ? (
                               <>
                                 <div className="w-10 h-10 bg-accent-success/20 rounded-xl flex items-center justify-center mb-2">
@@ -490,15 +491,17 @@ export default function PCBuilderPage() {
                                 </div>
                                 <div className="text-caption font-medium text-text-primary truncate">{component.name.split(' ').slice(0, 3).join(' ')}</div>
                                 <div className="text-caption text-accent-primary font-bold mt-1">EGP {component.price.toLocaleString()}</div>
-                                <button
+                                <motion.button
                                   onClick={(e) => {
                                     e.stopPropagation()
                                     handleRemoveComponent(category)
                                   }}
-                                  className="absolute top-2 right-2 w-6 h-6 rounded-full bg-accent-error/20 flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-accent-error/40 transition-all"
+                                  whileHover={{ scale: 1.2 }}
+                                  whileTap={{ scale: 0.9 }}
+                                  className="absolute top-2 right-2 w-6 h-6 rounded-full bg-accent-error/20 flex items-center justify-center opacity-0 hover:opacity-100 hover:bg-accent-error/40 transition-all"
                                 >
                                   <XCircle className="w-4 h-4 text-accent-error" />
-                                </button>
+                                </motion.button>
                               </>
                             ) : (
                               <>
