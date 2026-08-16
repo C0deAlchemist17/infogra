@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Component, ReactNode } from 'react'
+import React, { Component, ReactNode, useEffect, useState } from 'react'
 
 interface Props {
   children: ReactNode
@@ -10,16 +10,45 @@ interface Props {
 interface State {
   hasError: boolean
   error: Error | null
+  webglAvailable: boolean
+}
+
+function WebGLChecker({ onWebGLStatus }: { onWebGLStatus: (available: boolean) => void }) {
+  useEffect(() => {
+    const checkWebGL = () => {
+      try {
+        const canvas = document.createElement('canvas')
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl') as WebGLRenderingContext | null
+        if (gl) {
+          const debugInfo = gl.getExtension('WEBGL_debug_renderer_info')
+          if (debugInfo) {
+            const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL)
+            console.log('WebGL Renderer:', renderer)
+          }
+          onWebGLStatus(true)
+        } else {
+          onWebGLStatus(false)
+        }
+      } catch (e) {
+        console.error('WebGL check failed:', e)
+        onWebGLStatus(false)
+      }
+    }
+
+    checkWebGL()
+  }, [onWebGLStatus])
+
+  return null
 }
 
 export default class ThreeErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
-    this.state = { hasError: false, error: null }
+    this.state = { hasError: false, error: null, webglAvailable: true }
   }
 
   static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error }
+    return { hasError: true, error, webglAvailable: true }
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
@@ -27,8 +56,12 @@ export default class ThreeErrorBoundary extends Component<Props, State> {
     console.error('Error info:', errorInfo.componentStack)
   }
 
+  setWebGLStatus = (available: boolean) => {
+    this.setState({ webglAvailable: available })
+  }
+
   render() {
-    if (this.state.hasError) {
+    if (!this.state.webglAvailable || this.state.hasError) {
       return this.props.fallback || (
         <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-background-primary to-background-secondary">
           <div className="text-center p-8">
@@ -39,13 +72,20 @@ export default class ThreeErrorBoundary extends Component<Props, State> {
             </div>
             <h3 className="text-h4 font-semibold text-text-primary mb-2">3D Scene Unavailable</h3>
             <p className="text-body text-text-secondary">
-              WebGL is not supported or the 3D scene failed to load.
+              {!this.state.webglAvailable 
+                ? 'WebGL is not supported on your device. The website will continue to function without 3D effects.'
+                : 'The 3D scene failed to load. The website will continue to function normally.'}
             </p>
           </div>
         </div>
       )
     }
 
-    return this.props.children
+    return (
+      <>
+        <WebGLChecker onWebGLStatus={this.setWebGLStatus} />
+        {this.props.children}
+      </>
+    )
   }
 }

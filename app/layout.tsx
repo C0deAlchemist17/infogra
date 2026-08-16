@@ -12,6 +12,10 @@ import { LanguageProvider } from '@/providers/LanguageProvider'
 const AssistantWidget = dynamic(() => import('@/components/ai/AssistantWidget'))
 import { siteConfig } from '@/lib/navigation'
 
+const GlobalThreeScene = dynamic(() => import('@/components/three/Experience'), {
+  ssr: false,
+})
+
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
@@ -72,10 +76,17 @@ const jsonLd = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className={`${inter.variable} ${notoSansArabic.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${notoSansArabic.variable} font-sans antialiased bg-background-primary relative`}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <div className="noise-overlay" />
-        <div className="min-h-screen flex flex-col">
+        
+        {/* Global 3D Background */}
+        <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+          <GlobalThreeScene />
+        </div>
+        
+        <div className="noise-overlay fixed inset-0 pointer-events-none z-0 mix-blend-overlay" />
+        
+        <div className="min-h-screen flex flex-col relative z-10">
           <LanguageProvider>
             <StudioHeader />
             <main className="flex-grow">

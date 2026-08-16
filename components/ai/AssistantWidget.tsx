@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { X, Send, Sparkles, Trash2, Keyboard } from 'lucide-react'
 
-const RobotMascot = dynamic(() => import('./RobotMascot'), {
+const GlobalAIRobot = dynamic(() => import('@/components/three/objects/GlobalAIRobot').then(mod => ({ default: mod.GlobalAIRobot })), {
   ssr: false,
   loading: () => (
     <div className="w-[100px] h-[100px] bg-accent-primary/20 rounded-full animate-pulse" />
@@ -215,7 +215,7 @@ export default function AssistantWidget() {
 
             {/* Robot mascot */}
             <div className="relative w-[120px] h-[120px]">
-              <RobotMascot isHovered={isHovered} isActive={isOpen} size={120} />
+              <GlobalAIRobot isHovered={isHovered} isActive={isOpen} size={120} onClick={() => setIsOpen(!isOpen)} />
             </div>
 
             {/* Notification dot */}

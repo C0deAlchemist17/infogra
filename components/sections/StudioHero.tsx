@@ -10,10 +10,7 @@ import dynamic from 'next/dynamic'
 import { useLanguage } from '@/providers/LanguageProvider'
 import { t } from '@/lib/translations'
 
-const ThreeScene = dynamic(() => import('@/components/three/ThreeScene'), {
-  ssr: false,
-  loading: () => null
-})
+
 
 const StudioHero = () => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -68,7 +65,7 @@ const StudioHero = () => {
       aria-label={isRTL ? 'القسم الرئيسي' : 'Hero section'}
       style={{ minHeight: '100vh' }}>
       <div className="absolute inset-0">
-        {isClient && <ThreeScene />}
+
         <div className="grid-overlay" />
         <div className="noise-overlay" />
         <div className="lens-flare" />

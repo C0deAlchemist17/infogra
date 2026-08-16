@@ -27,9 +27,9 @@ module.exports = {
       colors: {
         // INFOGRA Premium Color System
         background: {
-          primary: '#030712',
-          secondary: '#0f172a',
-          tertiary: '#1e293b',
+          primary: 'rgba(3, 7, 18, 0.4)', // #030712 with opacity
+          secondary: 'rgba(15, 23, 42, 0.6)', // #0f172a with opacity
+          tertiary: 'rgba(30, 41, 59, 0.7)', // #1e293b with opacity
         },
         accent: {
           primary: '#3b82f6',
