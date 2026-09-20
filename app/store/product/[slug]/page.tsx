@@ -7,21 +7,54 @@ import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { 
-  ChevronRight, Star, Shield, Truck, RefreshCw, 
-  MessageCircle, ShoppingCart, Heart, Share2, 
+import {
+  ChevronRight, Star, Shield, Truck, RefreshCw,
+  MessageCircle, ShoppingCart, Heart, Share2,
   CheckCircle, Package
 } from 'lucide-react'
-import { products } from '@/data/products'
 import ProductCard from '@/components/store/ProductCard'
 import { siteConfig } from '@/lib/navigation'
+import { useState, useEffect } from 'react'
 
 export default function ProductPage() {
   const params = useParams()
   const router = useRouter()
   const slug = params.slug as string
+  const [product, setProduct] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  const [allProducts, setAllProducts] = useState<any[]>([])
 
-  const product = products.find(p => p.slug === slug)
+  useEffect(() => {
+    async function fetchProduct() {
+      try {
+        setLoading(true)
+        const response = await fetch('/api/products?storage=true&limit=10000')
+        const data = await response.json()
+        const products = data.products || []
+        setAllProducts(products)
+
+        const foundProduct = products.find((p: any) => p.slug === slug)
+        setProduct(foundProduct || null)
+      } catch (error) {
+        console.error('Error fetching product:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProduct()
+  }, [slug])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background-primary flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto mb-4"></div>
+          <p className="text-body text-text-secondary">Loading product...</p>
+        </div>
+      </div>
+    )
+  }
 
   if (!product) {
     return (
@@ -35,8 +68,8 @@ export default function ProductPage() {
     )
   }
 
-  const relatedProducts = products
-    .filter(p => p.category === product.category && p.id !== product.id)
+  const relatedProducts = allProducts
+    .filter((p: any) => p.category === product.category && p.id !== product.id)
     .slice(0, 4)
 
   const generateWhatsAppLink = () => {
@@ -97,7 +130,7 @@ export default function ProductPage() {
             {/* Thumbnail Gallery */}
             {product.images && product.images.length > 1 && (
               <div className="flex gap-3">
-                {product.images.map((img, index) => (
+                {product.images.map((img: string, index: number) => (
                   <div key={index} className="w-20 h-20 rounded-lg overflow-hidden border-2 border-border-subtle hover:border-accent-primary transition-colors cursor-pointer">
                     <Image src={img} alt={`${product.name} ${index + 1}`} width={80} height={80} className="w-full h-full object-cover" />
                   </div>
@@ -121,7 +154,7 @@ export default function ProductPage() {
             {/* Rating */}
             <div className="flex items-center gap-3 mb-6">
               <div className="flex items-center">
-                {[...Array(5)].map((_, i) => (
+                {[...Array(5)].map((_: any, i: number) => (
                   <Star
                     key={i}
                     className={`w-5 h-5 ${i < Math.floor(product.rating) ? 'text-accent-primary fill-accent-primary' : 'text-text-tertiary'}`}
@@ -210,7 +243,7 @@ export default function ProductPage() {
               <CardContent className="p-6">
                 <h2 className="text-h3 font-bold text-text-primary mb-6">Specifications</h2>
                 <div className="grid md:grid-cols-2 gap-4">
-                  {Object.entries(product.specifications).map(([key, value]) => (
+                  {Object.entries(product.specifications).map(([key, value]: [string, any]) => (
                     <div key={key} className="flex justify-between py-3 border-b border-border-subtle">
                       <span className="text-body text-text-secondary">{key}</span>
                       <span className="text-body font-medium text-text-primary">{value}</span>
@@ -234,7 +267,7 @@ export default function ProductPage() {
               <CardContent className="p-6">
                 <h2 className="text-h3 font-bold text-text-primary mb-6">Features</h2>
                 <div className="grid md:grid-cols-2 gap-4">
-                  {product.features.map((feature, index) => (
+                  {product.features.map((feature: string, index: number) => (
                     <div key={index} className="flex items-center gap-3">
                       <CheckCircle className="w-5 h-5 text-accent-success shrink-0" />
                       <span className="text-body text-text-secondary">{feature}</span>
@@ -256,7 +289,7 @@ export default function ProductPage() {
           >
             <h2 className="text-h3 font-bold text-text-primary mb-8">Related Products</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {relatedProducts.map((p, index) => (
+              {relatedProducts.map((p: any, index: number) => (
                 <ProductCard key={p.id} product={p} index={index} />
               ))}
             </div>

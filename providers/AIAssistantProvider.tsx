@@ -22,7 +22,7 @@ interface AIAssistantContextType {
 const AIAssistantContext = createContext<AIAssistantContextType | undefined>(undefined)
 
 const defaultPreferences: UserPreferences = {
-  language: 'en',
+  language: undefined, // No default - detect from user input
   budget: undefined,
   interests: [],
   viewedProducts: [],
@@ -39,11 +39,26 @@ function extractBudget(content: string): [number, number] | undefined {
     /تحت\s*(\d[\d,]*)/,
     /ميزانية\s*(\d[\d,]*)/,
     /budget\s*(\d[\d,]*)/i,
+    // Egyptian Arabic patterns
+    /في حدود\s*(\d[\d,]*)/,
+    /حول\s*(\d[\d,]*)/,
+    /تقريبا\s*(\d[\d,]*)/,
+    /حوالي\s*(\d[\d,]*)/,
+    // Mixed patterns
+    /(\d[\d,]*)\s*egp/i,
+    /(\d[\d,]*)\s*ج\.م/i,
+    /(\d[\d,]*)\s*جنيه/i,
+    /(\d[\d,]*)\s*k/i,
+    /(\d[\d,]*)\s*الف/i,
   ]
   for (const pattern of budgetPatterns) {
     const match = content.match(pattern)
     if (match) {
-      const num = parseInt(match[1].replace(/,/g, ''), 10)
+      let num = parseInt(match[1].replace(/,/g, ''), 10)
+      // Handle "k" or "الف" (thousand)
+      if (content.toLowerCase().includes('k') || content.includes('الف')) {
+        num = num * 1000
+      }
       if (!isNaN(num) && num > 0) return [0, num]
     }
   }
@@ -53,11 +68,15 @@ function extractBudget(content: string): [number, number] | undefined {
 function extractInterests(content: string): string[] {
   const interests: string[] = []
   const interestKeywords: Record<string, string[]> = {
-    gaming: ['gaming', 'game', 'gamer', 'ألعاب', 'قيمر'],
-    programming: ['programming', 'code', 'developer', 'برمجة', 'مطور'],
-    design: ['design', 'designer', 'ui', 'ux', 'تصميم'],
-    business: ['business', 'office', 'company', 'أعمال', 'مكتب'],
-    editing: ['editing', 'video', 'photo', 'photo editing', 'مونتاج', 'تصوير'],
+    gaming: ['gaming', 'game', 'gamer', 'ألعاب', 'قيمر', 'جيمنج', 'لعب', 'لعيب'],
+    programming: ['programming', 'code', 'developer', 'برمجة', 'مطور', 'كود', 'سوفتوير'],
+    design: ['design', 'designer', 'ui', 'ux', 'تصميم', 'ديزاين', 'جرافيك'],
+    business: ['business', 'office', 'company', 'أعمال', 'مكتب', 'شركة'],
+    editing: ['editing', 'video', 'photo', 'photo editing', 'مونتاج', 'تصوير', 'فيديو'],
+    content: ['content', 'social media', 'content creation', 'محتوى', 'سوشيال ميديا'],
+    music: ['music', 'audio', 'sound', 'موسيقى', 'صوت', 'أوديو'],
+    student: ['student', 'study', 'school', 'university', 'طالب', 'دراسة', 'جامعة'],
+    casual: ['casual', 'home', 'personal', 'استخدام شخصي', 'بيت', 'منزلي'],
   }
   const contentLower = content.toLowerCase()
   for (const [interest, keywords] of Object.entries(interestKeywords)) {
@@ -96,24 +115,14 @@ export function AIAssistantProvider({ children }: { children: ReactNode }) {
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [isOpen])
 
-  // Welcome message on first open
+  // Welcome message on first open - removed to let user initiate conversation
+  // This ensures language detection happens from user input, not default
   useEffect(() => {
     if (isOpen && messages.length === 0) {
-      const isArabic = preferences.language === 'ar'
-      const welcomeMessage: Message = {
-        id: 'welcome',
-        role: 'assistant',
-        content: isArabic
-          ? 'مرحباً! 👋 أنا مساعد INFOGRA الذكي. كيف يمكنني مساعدتك اليوم؟'
-          : 'Hello! 👋 I\'m the INFOGRA AI Assistant. How can I help you today?',
-        timestamp: Date.now(),
-        suggestions: isArabic
-          ? ['المنتجات المميزة', 'خدماتنا', 'بناء PC', 'تواصل معنا']
-          : ['Featured Products', 'Our Services', 'Build PC', 'Contact Us']
-      }
-      setMessages([welcomeMessage])
+      // Empty welcome - let user speak first for language detection
+      setSuggestions(['Featured Products', 'Our Services', 'Build PC', 'Contact Us'])
     }
-  }, [isOpen, messages.length, preferences.language])
+  }, [isOpen, messages.length])
 
   // Update suggestions based on page type
   useEffect(() => {
@@ -175,7 +184,7 @@ export function AIAssistantProvider({ children }: { children: ReactNode }) {
         viewedProducts: preferences.viewedProducts,
       }
       
-      const result = generateResponse(content, pageType, detectedLang, currentPrefs)
+      const result = await generateResponse(content, pageType, detectedLang, currentPrefs)
 
       const assistantMessage: Message = {
         id: `assistant-${Date.now()}`,

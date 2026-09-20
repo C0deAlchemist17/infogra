@@ -23,10 +23,13 @@ export function RecentlyViewedProvider({ children }: { children: ReactNode }) {
     try {
       const stored = localStorage.getItem('infogra-recently-viewed')
       if (stored) {
-        setItems(JSON.parse(stored))
+        const parsed = JSON.parse(stored)
+        if (Array.isArray(parsed)) {
+          setItems(parsed)
+        }
       }
     } catch (error) {
-      console.error('Failed to load recently viewed:', error)
+      // Silently fail - localStorage might be disabled or full
     }
   }, [])
 
@@ -36,7 +39,7 @@ export function RecentlyViewedProvider({ children }: { children: ReactNode }) {
     try {
       localStorage.setItem('infogra-recently-viewed', JSON.stringify(items))
     } catch (error) {
-      console.error('Failed to save recently viewed:', error)
+      // Silently fail - localStorage might be disabled or full
     }
   }, [items])
 

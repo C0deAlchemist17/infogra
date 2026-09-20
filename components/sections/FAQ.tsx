@@ -18,7 +18,7 @@ const FAQ = () => {
   const { locale, isRTL } = useLanguage()
 
   return (
-    <section ref={elementRef} className="relative py-40 bg-background-primary overflow-hidden">
+    <section ref={elementRef} className="relative py-24 bg-background-primary overflow-hidden">
       <div className="container mx-auto px-8">
         <motion.div
           initial={{ opacity: 0, y: 40 }}

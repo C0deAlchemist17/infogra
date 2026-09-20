@@ -5,11 +5,6 @@ import { useScrollTrigger } from '@/hooks/useScrollTrigger'
 import { useCustomCursor } from '@/hooks/useCustomCursor'
 import { ArrowRight, Users, Target, Award, Globe, Heart, Zap, Sparkles, TrendingUp, Code, Layers, CheckCircle2, Clock } from 'lucide-react'
 import dynamic from 'next/dynamic'
-
-const SectionBackground = dynamic(() => import('@/components/three/SectionBackground'), {
-  ssr: false,
-  loading: () => null
-})
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 
@@ -233,7 +228,6 @@ const About = () => {
 
         {/* Mission & Vision */}
         <section className="relative py-32">
-          <SectionBackground opacity={0.3} />
           <div className="container mx-auto px-8">
             <div className="grid md:grid-cols-2 gap-16">
               <motion.div
@@ -428,7 +422,6 @@ const About = () => {
 
         {/* Technology Stack */}
         <section className="relative py-32">
-          <SectionBackground opacity={0.2} />
           <div className="container mx-auto px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}

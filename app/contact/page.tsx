@@ -64,8 +64,8 @@ export default function Contact() {
     {
       icon: Mail,
       title: t(locale, 'contact.email'),
-      value: 'infogra174@gmail.com',
-      link: 'mailto:infogra174@gmail.com'
+      value: 'infograofficial1@gmail.com',
+      link: 'mailto:infograofficial1@gmail.com'
     },
     {
       icon: Phone,
@@ -90,7 +90,7 @@ export default function Contact() {
         className="relative min-h-[60vh] flex items-center justify-center overflow-hidden"
       >
         <div className="absolute inset-0">
-          <div className="grid-overlay" />
+          {/* Grid overlay removed - causing unwanted horizontal lines */}
           <div className="absolute inset-0 bg-gradient-to-b from-background-primary via-background-primary/90 to-background-primary" />
         </div>
 

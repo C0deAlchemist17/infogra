@@ -1,13 +1,12 @@
 'use client'
 
-import StudioHero from '@/components/sections/StudioHero'
+import MetaballHero from '@/components/sections/MetaballHero'
 import StudioServices from '@/components/sections/StudioServices'
 import StudioWork from '@/components/sections/StudioWork'
 import Technologies from '@/components/sections/Technologies'
 import Statistics from '@/components/sections/Statistics'
-import CaseStudies from '@/components/sections/CaseStudies'
 import StorePreview from '@/components/sections/StorePreview'
-import Testimonials from '@/components/sections/Testimonials'
+// Testimonials removed per user request
 import Process from '@/components/sections/Process'
 import WhyInfogra from '@/components/sections/WhyInfogra'
 import TrustedBy from '@/components/sections/TrustedBy'
@@ -18,14 +17,13 @@ import ContactCTA from '@/components/sections/ContactCTA'
 export default function Home() {
   return (
     <>
-      <StudioHero />
+      <MetaballHero />
       <StudioServices />
       <StudioWork />
       <Technologies />
       <Statistics />
-      <CaseStudies />
       <StorePreview />
-      <Testimonials />
+      {/* Testimonials removed per user request */}
       <Process />
       <WhyInfogra />
       <TrustedBy />

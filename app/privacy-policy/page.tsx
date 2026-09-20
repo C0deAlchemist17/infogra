@@ -32,7 +32,7 @@ export default function PrivacyPolicyPage() {
             </section>
             <section>
               <h2 className="text-h4 font-semibold text-text-primary mb-3">Contact Us</h2>
-              <p>For privacy-related questions, contact us at <a href="mailto:infogra174@gmail.com" className="text-accent-primary hover:underline">infogra174@gmail.com</a>.</p>
+              <p>For privacy-related questions, contact us at <a href="mailto:infograofficial1@gmail.com" className="text-accent-primary hover:underline">infograofficial1@gmail.com</a>.</p>
             </section>
           </div>
         </div>

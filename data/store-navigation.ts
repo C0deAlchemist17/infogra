@@ -304,9 +304,9 @@ export const getSubcategoryBySlug = (slug: string): (StoreSubcategory & { parent
 // Footer navigation for store
 export const storeFooter = {
   customerService: [
-    { name: 'Track Order', nameAr: 'تتبع الطلب', href: '/store/track-order' },
-    { name: 'Return Policy', nameAr: 'سياسة الإرجاع', href: '/store/returns' },
-    { name: 'Warranty', nameAr: 'الضمان', href: '/store/warranty' },
+    { name: 'Track Order', nameAr: 'تتبع الطلب', href: '/contact' },
+    { name: 'Return Policy', nameAr: 'سياسة الإرجاع', href: '/contact' },
+    { name: 'Warranty', nameAr: 'الضمان', href: '/contact' },
     { name: 'FAQ', nameAr: 'الأسئلة الشائعة', href: '/faq' },
     { name: 'Contact Us', nameAr: 'تواصل معنا', href: '/contact' },
   ],

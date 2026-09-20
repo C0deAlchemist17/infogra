@@ -6,13 +6,7 @@ import { useCustomCursor } from '@/hooks/useCustomCursor'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Code, Smartphone, Palette, Megaphone, Brain, Cloud, Cpu, BarChart, ArrowRight, Sparkles, CheckCircle, ChevronRight, Zap, Globe } from 'lucide-react'
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
-
-const SectionBackground = dynamic(() => import('@/components/three/SectionBackground'), {
-  ssr: false,
-  loading: () => null
-})
 
 const services = [
   {
@@ -100,7 +94,6 @@ export default function ServicesPage() {
     <div className="min-h-screen bg-background-primary">
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-        <SectionBackground opacity={0.4} />
         <div className="absolute inset-0 bg-gradient-to-b from-background-primary/30 via-background-primary/60 to-background-primary" />
         
         <div className="container mx-auto px-8 relative z-10">
@@ -221,7 +214,6 @@ export default function ServicesPage() {
 
       {/* Process Section */}
       <section ref={processRef} className="relative py-24 bg-background-secondary/50">
-        <SectionBackground opacity={0.2} />
         <div className="container mx-auto px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}

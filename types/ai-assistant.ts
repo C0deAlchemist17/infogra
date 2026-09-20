@@ -54,7 +54,7 @@ export type PageType =
   | 'other'
 
 export interface UserPreferences {
-  language: 'en' | 'ar'
+  language?: 'en' | 'ar'
   budget?: [number, number]
   interests: string[]
   viewedProducts: string[]

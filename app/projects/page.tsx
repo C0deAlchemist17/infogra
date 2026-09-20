@@ -94,9 +94,93 @@ const Projects = () => {
       description: t(locale, 'project.brand.desc'),
       tags: ['Branding', 'Guidelines', 'Design System'],
       color: 'from-pink-500 to-rose-500',
-      featured: false,
+      featured: true,
       image: '/assets/img/design/UI&UX plan 01 (ps).jpg',
       slug: 'brand-identity'
+    },
+    {
+      id: 7,
+      title: 'Bakery Brand Identity',
+      category: 'design',
+      categoryName: t(locale, 'work.filterDesign'),
+      description: 'Modern bakery brand with logo and visual identity.',
+      tags: ['Logo Design', 'Branding', 'Visual Identity'],
+      color: 'from-amber-500 to-orange-500',
+      featured: false,
+      image: '/assets/img/design/random logo/BAKER V1.jpg',
+      slug: 'bakery-brand'
+    },
+    {
+      id: 8,
+      title: 'Pamela Fashion Brand',
+      category: 'design',
+      categoryName: t(locale, 'work.filterDesign'),
+      description: 'Fashion brand identity with elegant logo design.',
+      tags: ['Fashion', 'Logo Design', 'Branding'],
+      color: 'from-rose-500 to-pink-500',
+      featured: false,
+      image: '/assets/img/design/random logo/PAMELA V1.jpg',
+      slug: 'pamela-fashion'
+    },
+    {
+      id: 9,
+      title: 'Jony Beats Music Brand',
+      category: 'design',
+      categoryName: t(locale, 'work.filterDesign'),
+      description: 'Music producer brand with dynamic logo design.',
+      tags: ['Music', 'Logo Design', 'Branding'],
+      color: 'from-violet-500 to-purple-500',
+      featured: false,
+      image: '/assets/img/design/random logo/jony_beats.jpg',
+      slug: 'jony-beats'
+    },
+    {
+      id: 10,
+      title: 'Firm Corporate Identity',
+      category: 'design',
+      categoryName: t(locale, 'work.filterDesign'),
+      description: 'Corporate identity for professional services firm.',
+      tags: ['Corporate', 'Logo Design', 'Branding'],
+      color: 'from-slate-500 to-gray-500',
+      featured: false,
+      image: '/assets/img/design/random logo/firm v1.jpg',
+      slug: 'firm-corporate'
+    },
+    {
+      id: 11,
+      title: 'Exit Nightlife Brand',
+      category: 'design',
+      categoryName: t(locale, 'work.filterDesign'),
+      description: 'Nightlife venue brand with vibrant identity.',
+      tags: ['Nightlife', 'Logo Design', 'Branding'],
+      color: 'from-fuchsia-500 to-pink-500',
+      featured: false,
+      image: '/assets/img/design/random logo/nexit v1.jpg',
+      slug: 'exit-nightlife'
+    },
+    {
+      id: 12,
+      title: 'YS Creative Studio',
+      category: 'design',
+      categoryName: t(locale, 'work.filterDesign'),
+      description: 'Creative studio brand with modern identity.',
+      tags: ['Creative', 'Logo Design', 'Branding'],
+      color: 'from-cyan-500 to-blue-500',
+      featured: false,
+      image: '/assets/img/design/random logo/ys v1.jpg',
+      slug: 'ys-creative'
+    },
+    {
+      id: 13,
+      title: 'Zina Beauty Brand',
+      category: 'design',
+      categoryName: t(locale, 'work.filterDesign'),
+      description: 'Beauty brand identity with elegant design.',
+      tags: ['Beauty', 'Logo Design', 'Branding'],
+      color: 'from-pink-500 to-rose-500',
+      featured: false,
+      image: '/assets/img/design/random logo/zina v1.jpg',
+      slug: 'zina-beauty'
     }
   ]
 
@@ -118,8 +202,8 @@ const Projects = () => {
           className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background-primary"
         >
           <div className="absolute inset-0">
-            <div className="grid-overlay" />
-            <div className="noise-overlay" />
+            {/* Grid overlay removed - causing unwanted horizontal lines */}
+            {/* Noise overlay removed - causing grey flashing */}
           </div>
 
           <motion.div

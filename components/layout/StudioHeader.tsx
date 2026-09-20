@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useCustomCursor } from '@/hooks/useCustomCursor'
-import { Menu, X, Phone, ArrowRight, ChevronDown, Search, Globe } from 'lucide-react'
+import { Menu, X, Phone, ArrowRight, ChevronDown, Search, Globe, ShoppingBag } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { mainNavigation, siteConfig } from '@/lib/navigation'
 import { useLanguage } from '@/providers/LanguageProvider'
@@ -100,12 +100,12 @@ const StudioHeader = () => {
               animate={{ x: 0 }}
               exit={{ x: isRTL ? '-100%' : '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 200 }}
-              className={`absolute top-0 h-full w-full max-w-sm glass-strong shadow-2xl p-8 border-border-medium ${isRTL ? 'left-0 border-r' : 'right-0 border-l'}`}
+              className={`absolute top-0 h-full w-full max-w-sm glass-strong shadow-2xl p-4 border-border-medium ${isRTL ? 'left-0 border-r' : 'right-0 border-l'}`}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex justify-between items-center mb-12">
-                <h2 className="text-h3 font-bold text-text-primary">{locale === 'ar' ? 'القائمة' : 'Menu'}</h2>
-                <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 rounded-xl hover:bg-background-tertiary" aria-label="Close menu">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-display font-bold text-text-primary">{locale === 'ar' ? 'القائمة' : 'Menu'}</h2>
+                <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 rounded-lg hover:bg-background-tertiary" aria-label="Close menu">
                   <X className="w-6 h-6 text-text-primary" />
                 </button>
               </div>
@@ -113,29 +113,29 @@ const StudioHeader = () => {
                 {mainNavigation.map((item) =>
                   item.href.startsWith('#') ? (
                     <button key={item.name} onClick={() => { handleHashNav(item.href); setIsMobileMenuOpen(false) }}
-                      className={`block w-full px-6 py-4 rounded-xl text-text-secondary hover:bg-background-tertiary hover:text-text-primary ${isRTL ? 'text-right' : 'text-left'}`}>
+                      className={`block w-full px-4 py-3 rounded-lg text-body-lg text-text-secondary hover:bg-background-tertiary hover:text-text-primary ${isRTL ? 'text-right' : 'text-left'}`}>
                       {navLabel(item.name)}
                     </button>
                   ) : (
                     <Link key={item.name} href={item.href}
-                      className={cn(`block w-full px-6 py-4 rounded-xl transition-all ${isRTL ? 'text-right' : 'text-left'}`,
+                      className={cn(`block w-full px-4 py-3 rounded-lg transition-all ${isRTL ? 'text-right' : 'text-left'}`,
                         isActive(item.href) ? 'bg-accent-primary text-white' : 'text-text-secondary hover:bg-background-tertiary hover:text-text-primary')}>
                       {navLabel(item.name)}
                     </Link>
                   )
                 )}
-                <Link href="/search" className={`block w-full px-6 py-4 rounded-xl text-text-secondary hover:bg-background-tertiary hover:text-text-primary ${isRTL ? 'text-right' : 'text-left'}`}>{navLabel('Search')}</Link>
+                <Link href="/search" className={`block w-full px-4 py-3 rounded-lg text-body-lg text-text-secondary hover:bg-background-tertiary hover:text-text-primary ${isRTL ? 'text-right' : 'text-left'}`}>{navLabel('Search')}</Link>
               </nav>
-              <div className="mt-6 pt-6 border-t border-border-subtle space-y-3">
+              <div className="mt-6 pt-4 border-t border-border-subtle space-y-3">
                 {/* Language Toggle in Mobile Menu */}
                 <button
                   onClick={() => { toggleLocale(); setIsMobileMenuOpen(false) }}
-                  className="flex items-center gap-3 w-full px-6 py-4 rounded-xl text-text-secondary hover:bg-background-tertiary hover:text-text-primary transition-all"
+                  className="flex items-center gap-2 w-full px-4 py-3 rounded-lg text-body-lg text-text-secondary hover:bg-background-tertiary hover:text-text-primary transition-all"
                 >
-                  <Globe className="w-5 h-5" />
+                  <Globe className="w-6 h-6" />
                   <span>{locale === 'ar' ? 'English' : 'العربية'}</span>
                 </button>
-                <Button asChild size="lg" className="w-full">
+                <Button asChild size="default" className="w-full">
                   <Link href="/contact">{locale === 'ar' ? 'ابدأ مشروعك' : 'Start Your Project'} <ArrowRight className={`w-5 h-5 ${isRTL ? 'mr-2 rotate-180' : 'ml-2'}`} /></Link>
                 </Button>
               </div>
@@ -147,16 +147,16 @@ const StudioHeader = () => {
       <AnimatePresence>
         {isMegaMenuOpen && (
           <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-            className="fixed top-20 left-0 right-0 z-40 hidden lg:block">
+            className="fixed top-12 left-0 right-0 z-40 hidden lg:block">
             <div className="glass-strong border-t border-border-subtle shadow-large">
-              <div className="container mx-auto px-8 py-12">
-                <div className="grid grid-cols-3 gap-8">
+              <div className="container mx-auto px-4 py-4">
+                <div className="grid grid-cols-3 gap-4">
                   {mainNavigation.find(n => n.hasDropdown)?.children?.map((service, index) => (
                     <motion.div key={service.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05 }}>
-                      <Link href={service.href} className="block p-6 rounded-xl hover:bg-background-tertiary transition-all group"
+                      <Link href={service.href} className="block p-3 rounded-lg hover:bg-background-tertiary transition-all group"
                         onMouseEnter={addHoverEffect} onMouseLeave={removeHoverEffect}>
-                        <h3 className="text-h4 font-semibold text-text-primary mb-2 group-hover:text-accent-primary transition-colors">{navLabel(service.name)}</h3>
-                        <p className="text-small text-text-secondary">{serviceDesc(service.name)}</p>
+                        <h3 className="text-body font-semibold text-text-primary mb-1 group-hover:text-accent-primary transition-colors">{navLabel(service.name)}</h3>
+                        <p className="text-caption text-text-secondary">{serviceDesc(service.name)}</p>
                       </Link>
                     </motion.div>
                   ))}
@@ -172,24 +172,25 @@ const StudioHeader = () => {
         initial={{ y: -100 }} animate={{ y: 0 }} transition={{ type: 'spring', damping: 30, stiffness: 200 }}
         role="banner"
       >
-        <div className="container mx-auto px-4 md:px-8">
+        <div className="container mx-auto px-6 md:px-8">
           <div className="flex items-center justify-between">
-            <Link href="/" className="text-2xl font-bold gradient-text" aria-label="INFOGRA Home">INFOGRA</Link>
+            <Link href="/" className="text-display-lg font-bold gradient-text" aria-label="INFOGRA Home">INFOGRA</Link>
 
-            <nav className="hidden lg:flex items-center gap-6" aria-label="Main navigation">
+            <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
               {mainNavigation.map((item) => (
                 <div key={item.name} className="relative"
                   onMouseEnter={() => item.hasDropdown && setIsMegaMenuOpen(true)}
                   onMouseLeave={() => item.hasDropdown && setIsMegaMenuOpen(false)}>
                   {item.href.startsWith('#') ? (
                     <button onClick={() => handleHashNav(item.href)} onMouseEnter={addHoverEffect} onMouseLeave={removeHoverEffect}
-                      className="px-3 py-2 text-text-secondary hover:text-text-primary transition-colors">{navLabel(item.name)}</button>
+                      className="px-6 py-2 text-body-lg text-text-secondary hover:text-text-primary transition-colors">{navLabel(item.name)}</button>
                   ) : (
                     <Link href={item.href} onMouseEnter={addHoverEffect} onMouseLeave={removeHoverEffect}
-                      className={cn('relative px-3 py-2 transition-colors inline-flex items-center gap-1',
+                      className={cn('relative px-6 py-2 transition-colors inline-flex items-center gap-0.5',
                         isActive(item.href) ? 'text-accent-primary' : 'text-text-secondary hover:text-text-primary')}>
+                      {item.name === 'Store' && <ShoppingBag className="w-5 h-5" />}
                       {navLabel(item.name)}
-                      {item.hasDropdown && <ChevronDown className="w-4 h-4" />}
+                      {item.hasDropdown && <ChevronDown className="w-5 h-5" />}
                       <span className={cn('absolute bottom-0 left-0 right-0 h-0.5 bg-accent-primary transition-opacity', isActive(item.href) ? 'opacity-100' : 'opacity-0')} />
                     </Link>
                   )}
@@ -197,21 +198,21 @@ const StudioHeader = () => {
               ))}
             </nav>
 
-            <div className="hidden lg:flex items-center gap-3">
+            <div className="hidden lg:flex items-center gap-2">
               {/* Language Switcher Button */}
               <motion.button
                 onClick={toggleLocale}
                 onMouseEnter={addHoverEffect}
                 onMouseLeave={removeHoverEffect}
-                className="relative flex items-center gap-2 px-4 py-2 rounded-xl border border-border-subtle hover:border-accent-primary/50 bg-background-primary/50 hover:bg-accent-primary/10 text-text-secondary hover:text-accent-primary transition-all duration-300 group"
+                className="relative flex items-center gap-1.5 px-2 py-1 rounded-lg border border-border-subtle hover:border-accent-primary/50 bg-background-primary/50 hover:bg-accent-primary/10 text-text-secondary hover:text-accent-primary transition-all duration-300 group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={locale === 'en' ? 'Switch to Arabic' : 'التبديل إلى الإنجليزية'}
               >
                 <Globe className="w-4 h-4" />
-                <span className="text-sm font-medium">{locale === 'en' ? 'AR' : 'EN'}</span>
+                <span className="text-body-sm font-medium">{locale === 'en' ? 'AR' : 'EN'}</span>
                 <motion.div
-                  className="absolute inset-0 rounded-xl bg-accent-primary/5"
+                  className="absolute inset-0 rounded-lg bg-accent-primary/5"
                   initial={false}
                   animate={{ opacity: isRTL ? 0.5 : 0 }}
                   transition={{ duration: 0.3 }}
@@ -219,18 +220,18 @@ const StudioHeader = () => {
               </motion.button>
 
               <Button asChild variant="ghost" size="icon" aria-label={locale === 'en' ? 'Search' : 'بحث'}>
-                <Link href="/search"><Search className="w-4 h-4" /></Link>
+                <Link href="/search"><Search className="w-6 h-6" /></Link>
               </Button>
-              <Button asChild variant="outline" size="sm" className="border-accent-primary text-accent-primary">
-                <a href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}><Phone className="w-4 h-4 ltr:mr-2 rtl:ml-2" />{siteConfig.phone}</a>
+              <Button asChild variant="outline" size="lg" className="border-accent-primary text-accent-primary text-body-lg px-6 py-3">
+                <a href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}><Phone className="w-6 h-6 ltr:mr-2 rtl:ml-2" />{siteConfig.phone}</a>
               </Button>
-              <Button asChild size="sm" variant="premium">
-                <Link href="/contact">{locale === 'en' ? 'Get Started' : 'ابدأ مشروعك'} <ArrowRight className={`w-4 h-4 ${isRTL ? 'mr-2 rotate-180' : 'ml-2'}`} /></Link>
+              <Button asChild size="lg" variant="premium" className="text-body-lg px-6 py-3">
+                <Link href="/contact">{locale === 'en' ? 'Get Started' : 'ابدأ مشروعك'} <ArrowRight className={`w-6 h-6 ${isRTL ? 'mr-2 rotate-180' : 'ml-2'}`} /></Link>
               </Button>
             </div>
 
-            <button onClick={() => setIsMobileMenuOpen(true)} className="lg:hidden p-2 rounded-xl text-text-primary hover:bg-background-tertiary" aria-label="Open menu">
-              <Menu className="w-6 h-6" />
+            <button onClick={() => setIsMobileMenuOpen(true)} className="lg:hidden p-1.5 rounded-lg text-text-primary hover:bg-background-tertiary" aria-label="Open menu">
+              <Menu className="w-4 h-4" />
             </button>
           </div>
         </div>

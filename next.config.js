@@ -1,25 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['localhost', 'images.unsplash.com', 'upload.wikimedia.org', 'elhamdstore.com'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'upload.wikimedia.org',
-      },
-      {
-        protocol: 'https',
-        hostname: 'elhamdstore.com',
-      },
-    ],
-    formats: ['image/webp', 'image/avif'],
-    minimumCacheTTL: 60,
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    unoptimized: true, // Disable all image optimization to avoid errors
   },
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion', 'three']
@@ -30,9 +12,32 @@ const nextConfig = {
       net: false,
       tls: false,
     }
+    // Performance optimization
+    config.optimization = {
+      ...config.optimization,
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          three: {
+            test: /[\\/]node_modules[\\/](three|@react-three\/fiber|@react-three\/drei)[\\/]/,
+            name: 'three-vendor',
+            priority: 10,
+          },
+          ui: {
+            test: /[\\/]node_modules[\\/](@radix-ui|framer-motion)[\\/]/,
+            name: 'ui-vendor',
+            priority: 9,
+          },
+        },
+      },
+    }
     return config
   },
   transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
+  swcMinify: true,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
 }
 
 module.exports = nextConfig

@@ -6,16 +6,6 @@ import { useScrollTrigger } from '@/hooks/useScrollTrigger'
 import { TrendingUp, Users, Award, Target } from 'lucide-react'
 import { useLanguage } from '@/providers/LanguageProvider'
 import { t } from '@/lib/translations'
-import dynamic from 'next/dynamic'
-
-const SectionBackground = dynamic(() => import('@/components/three/SectionBackground'), {
-  ssr: false,
-  loading: () => null
-})
-const HolographicRing = dynamic(() => import('@/components/three/HolographicRing'), {
-  ssr: false,
-  loading: () => null
-})
 
 const AnimatedCounter = ({ value, suffix = '', duration = 2 }: { value: number, suffix?: string, duration?: number }) => {
   const [count, setCount] = useState(0)
@@ -41,8 +31,6 @@ const AnimatedCounter = ({ value, suffix = '', duration = 2 }: { value: number, 
 const Statistics = () => {
   const { elementRef, hasBeenVisible } = useScrollTrigger({ threshold: 0.1, triggerOnce: true })
   const { locale } = useLanguage()
-  const [isClient, setIsClient] = useState(false)
-  useEffect(() => { setIsClient(true) }, [])
 
   const stats = [
     { icon: TrendingUp, value: 150, suffix: '+', label: t(locale, 'stats.delivered'), description: 'Across multiple industries' },
@@ -52,17 +40,7 @@ const Statistics = () => {
   ]
 
   return (
-    <section ref={elementRef} className="relative py-40 bg-background-primary">
-      <SectionBackground opacity={0.12} />
-      {/* Holographic rings floating in background */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }}>
-        <div className="absolute right-10 top-10 w-72 h-72 opacity-25">
-          {isClient && <HolographicRing />}
-        </div>
-        <div className="absolute left-10 bottom-10 w-56 h-56 opacity-20">
-          {isClient && <HolographicRing />}
-        </div>
-      </div>
+    <section ref={elementRef} className="relative py-24 bg-[#0a0a1a]">
       <div className="container mx-auto px-8">
         <motion.div initial={{ opacity: 0, y: 40 }} animate={hasBeenVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.5, ease: [0.25, 0.1, 0.25, 1] }} className="text-center mb-24">

@@ -11,6 +11,7 @@ import { PortfolioScene } from './scenes/PortfolioScene'
 import { AboutScene } from './scenes/AboutScene'
 import { StoreScene } from './scenes/StoreScene'
 import { ContactScene } from './scenes/ContactScene'
+import { GlobalGlobe } from '../objects/GlobalGlobe'
 
 interface SceneManagerProps {
   currentRoute: string
@@ -53,7 +54,7 @@ export function SceneManager({ currentRoute }: SceneManagerProps) {
     if (currentScene) {
       const [start, end] = currentScene.scrollRange
       const range = end - start
-      const progress = (scrollProgress - start) / range
+      const progress = range > 0 ? (scrollProgress - start) / range : 0
       setTransitionProgress(Math.max(0, Math.min(1, progress)))
     }
   }, [scrollProgress, activeScene])
@@ -62,6 +63,9 @@ export function SceneManager({ currentRoute }: SceneManagerProps) {
 
   return (
     <group>
+      {/* Global globe background across all scenes */}
+      <GlobalGlobe progress={transitionProgress} deviceTier={deviceTier} />
+      
       {SceneComponent && (
         <SceneComponent 
           progress={transitionProgress}

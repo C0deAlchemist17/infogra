@@ -21,73 +21,26 @@ export default function AssistantWidget() {
   const [isHovered, setIsHovered] = useState(false)
   const [inputValue, setInputValue] = useState('')
   const [showTooltip, setShowTooltip] = useState(false)
-  const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const panelRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
+  const messagesContainerRef = useRef<HTMLDivElement>(null)
 
   // Auto-scroll to bottom
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight
+    }
   }, [messages, isTyping])
 
-  // Focus input when opened
+  // Focus input when panel opens (not on page load)
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => inputRef.current?.focus(), 300)
-    }
-  }, [isOpen])
-
-  // Show tooltip periodically when not opened, stop after first open
-  useEffect(() => {
-    if (isOpen) return
-    // Check if user has already opened the assistant before
-    if (typeof window === 'undefined') return
-    const hasOpened = localStorage.getItem('infogra-assistant-opened')
-    if (hasOpened) return
-
-    let showCount = 0
-    let tooltipVisible = false
-    let mounted = true
-
-    const intervalId = setInterval(() => {
-      if (!mounted || showCount >= 3) {
-        clearInterval(intervalId)
-        return
-      }
-      if (!tooltipVisible) {
-        setShowTooltip(true)
-        tooltipVisible = true
-        showCount++
-        // Auto-hide after 3 seconds
-        setTimeout(() => {
-          if (mounted) {
-            setShowTooltip(false)
-            tooltipVisible = false
-          }
-        }, 3000)
-      }
-    }, 10000)
-
-    // Show first tooltip after 5 seconds
-    const initialTimeout = setTimeout(() => {
-      if (mounted && showCount === 0) {
-        setShowTooltip(true)
-        tooltipVisible = true
-        showCount++
-        setTimeout(() => {
-          if (mounted) {
-            setShowTooltip(false)
-            tooltipVisible = false
-          }
-        }, 4000)
-      }
-    }, 5000)
-
-    return () => {
-      mounted = false
-      clearInterval(intervalId)
-      clearTimeout(initialTimeout)
+      setTimeout(() => {
+        inputRef.current?.focus()
+        // Ensure keyboard events are captured
+        inputRef.current?.click()
+      }, 300)
     }
   }, [isOpen])
 
@@ -137,10 +90,29 @@ export default function AssistantWidget() {
     return () => window.removeEventListener('toggle-ai-assistant', handleToggle as EventListener)
   }, [setIsOpen, isOpen])
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (inputValue.trim()) {
-      sendMessage(inputValue.trim())
+      const message = inputValue.trim()
+      sendMessage(message)
       setInputValue('')
+
+      // Automatically send email to infograofficial1@gmail.com
+      try {
+        await fetch('/api/send-message', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: message,
+            userName: 'Website Visitor',
+            userEmail: 'infograofficial1@gmail.com',
+          }),
+        })
+        console.log('Message sent to infograofficial1@gmail.com')
+      } catch (error) {
+        console.error('Failed to send email:', error)
+      }
     }
   }
 
@@ -177,8 +149,8 @@ export default function AssistantWidget() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.9 }}
                 className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-3 py-2 glass-dark rounded-xl shadow-lg whitespace-nowrap"
-              >                  <div className="flex items-center gap-2 text-small text-white/70">
-                  <Keyboard className="w-4 h-4 text-white/70" />
+              >                  <div className="flex items-center gap-2 text-small text-white">
+                  <Keyboard className="w-4 h-4 text-white" />
                   <span>Press <kbd className="px-1.5 py-0.5 bg-white/10 rounded text-caption font-mono text-white">Ctrl+/</kbd> to toggle</span>
                 </div>
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-2 h-2 glass-dark border-r border-b border-white/10 transform rotate-45 -mt-1" />
@@ -251,7 +223,7 @@ export default function AssistantWidget() {
                     </div>
                     <div>
                       <h3 className="text-body font-semibold text-white">INFOGRA Assistant</h3>
-                      <p className="text-caption text-white/70">AI-Powered Helper</p>
+                      <p className="text-caption text-white">AI-Powered Helper</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -260,7 +232,7 @@ export default function AssistantWidget() {
                       className="p-2 rounded-lg hover:bg-white/20 transition-colors"
                       title="Clear chat"
                     >
-                      <Trash2 className="w-4 h-4 text-white/60" />
+                      <Trash2 className="w-4 h-4 text-white" />
                     </button>
                     <button
                       onClick={() => setIsOpen(false)}
@@ -274,7 +246,15 @@ export default function AssistantWidget() {
               </div>
 
               {/* Messages */}
-              <div className="h-[400px] overflow-y-auto p-5 space-y-4">
+              <div 
+                ref={messagesContainerRef}
+                className="h-[400px] overflow-y-auto p-5 space-y-4 custom-scrollbar" 
+                style={{ overscrollBehavior: 'contain' }}
+                onClick={() => inputRef.current?.focus()}
+                onWheel={(e) => {
+                  e.stopPropagation()
+                }}
+              >
                 {messages.map((message) => (
                   <motion.div
                     key={message.id}
@@ -291,7 +271,7 @@ export default function AssistantWidget() {
                       }`}
                     >
                       {/* Markdown rendered content */}
-                      <div className="text-body prose prose-sm max-w-none [&_*]:text-inherit prose-headings:text-white prose-p:text-white prose-strong:text-white prose-li:text-white prose-a:text-accent-highlight">
+                      <div className="text-body prose prose-sm max-w-none prose-invert [&_*]:text-white prose-headings:text-white prose-p:text-white prose-strong:text-white prose-li:text-white prose-a:text-accent-highlight prose-code:text-white prose-pre:text-white prose-blockquote:text-white">
                         <ReactMarkdown>{message.content}</ReactMarkdown>
                       </div>
 
@@ -310,7 +290,7 @@ export default function AssistantWidget() {
                                 <div className="w-12 h-12 bg-white/10 rounded-lg flex-shrink-0" />
                                 <div className="flex-1 min-w-0">
                                   <p className="text-small font-medium text-white truncate">{product.name}</p>
-                                  <p className="text-accent-primary font-semibold">EGP {product.price.toLocaleString()}</p>
+                                  <p className="text-white font-semibold">EGP {product.price.toLocaleString()}</p>
                                 </div>
                               </div>
                             </motion.div>
@@ -330,7 +310,7 @@ export default function AssistantWidget() {
                               onClick={() => handleNavigation(service.href)}
                             >
                               <p className="text-small font-medium text-white">{service.name}</p>
-                              <p className="text-caption text-white/70">{service.description}</p>
+                              <p className="text-caption text-white">{service.description}</p>
                             </motion.div>
                           ))}
                         </div>
@@ -380,13 +360,11 @@ export default function AssistantWidget() {
                             transition={{ repeat: Infinity, duration: 0.6, delay: 0.3 }}
                           />
                         </div>
-                        <span className="text-small text-white/60">Thinking...</span>
+                        <span className="text-small text-white">Thinking...</span>
                       </div>
                     </div>
                   </motion.div>
                 )}
-
-                <div ref={messagesEndRef} />
               </div>
 
               {/* Suggestions */}
@@ -400,7 +378,7 @@ export default function AssistantWidget() {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: index * 0.05 }}
                         onClick={() => handleSuggestionClick(suggestion)}
-                        className="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 rounded-full text-small text-white/80 hover:text-white transition-all whitespace-nowrap"
+                        className="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 rounded-full text-small text-white transition-all whitespace-nowrap"
                       >
                         {suggestion}
                       </motion.button>
@@ -420,6 +398,7 @@ export default function AssistantWidget() {
                     onKeyDown={handleKeyDown}
                     placeholder="Ask me anything..."
                     className="flex-1 bg-white/10 border border-white/20 rounded-xl px-6 py-4 text-body text-white placeholder:text-white/50 focus:outline-none focus:border-white/40 transition-colors"
+                    // Only autofocus when panel opens, not on page load
                   />
                   <Button
                     onClick={handleSend}
@@ -427,7 +406,7 @@ export default function AssistantWidget() {
                     size="icon"
                     className="shrink-0"
                   >
-                    <Send className="w-5 h-5" />
+                    <Send className="w-5 h-5 text-white" />
                   </Button>
                 </div>
               </div>

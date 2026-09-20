@@ -56,7 +56,7 @@ export const siteConfig = {
   name: 'INFOGRA',
   tagline: 'Digital Experience Architects',
   url: typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_SITE_URL ? process.env.NEXT_PUBLIC_SITE_URL : 'https://infogra.tech',
-  email: 'infogra174@gmail.com',
+  email: 'infograofficial1@gmail.com',
   phone: '+20 106 186 6211',
   whatsapp: '201061866211',
   address: 'Alexandria, Egypt',

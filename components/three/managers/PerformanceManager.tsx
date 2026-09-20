@@ -71,7 +71,7 @@ export function PerformanceManager({ children }: PerformanceManagerProps) {
     performanceRef.current = settings
 
     // Configure renderer based on performance
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, deviceTier === 'low' ? 1 : 2))
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, deviceTier === 'low' ? 1 : 1.2))
     
     // Handle reduced motion preference
     if (isReducedMotion) {

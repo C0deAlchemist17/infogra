@@ -22,7 +22,7 @@ export default function PageHero({ eyebrow, title, description, children }: Page
       className="relative min-h-[50vh] flex items-center justify-center overflow-hidden pt-32 pb-16"
     >
       <div className="absolute inset-0">
-        <div className="grid-overlay" />
+        {/* Grid overlay removed - causing unwanted horizontal lines */}
         <div className="absolute inset-0 bg-gradient-to-b from-background-primary via-background-primary/90 to-background-primary" />
       </div>
 

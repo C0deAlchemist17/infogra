@@ -40,9 +40,9 @@ export function ScrollController({ children }: ScrollControllerProps) {
       scrollYRef.current = window.scrollY
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight
       maxScrollRef.current = maxScroll
-      
+
       // Calculate normalized scroll progress (0 to 1)
-      const progress = Math.min(scrollYRef.current / maxScroll, 1)
+      const progress = maxScroll > 0 ? Math.min(scrollYRef.current / maxScroll, 1) : 0
       setScrollProgress(progress)
 
       // Calculate current section based on registered sections
@@ -56,7 +56,7 @@ export function ScrollController({ children }: ScrollControllerProps) {
         const elementTop = rect.top + window.scrollY
         const elementHeight = rect.height
 
-        if (scrollYRef.current >= elementTop && scrollYRef.current < elementTop + elementHeight) {
+        if (elementHeight > 0 && scrollYRef.current >= elementTop && scrollYRef.current < elementTop + elementHeight) {
           newSection = i
           newSectionProgress = (scrollYRef.current - elementTop) / elementHeight
           break

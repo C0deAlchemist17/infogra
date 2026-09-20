@@ -32,6 +32,15 @@ export type TranslationKey =
   | 'services.badge' | 'services.title' | 'services.subtitle' | 'services.explore'
   | 'services.webDev' | 'services.mobileApps' | 'services.design' | 'services.marketing'
   | 'services.aiSolutions' | 'services.cloudServices' | 'services.customSoftware' | 'services.analytics'
+  // Service features
+  | 'services.feature.webApps' | 'services.feature.ecommerce' | 'services.feature.cms' | 'services.feature.api'
+  | 'services.feature.ios' | 'services.feature.android' | 'services.feature.crossPlatform' | 'services.feature.maintenance'
+  | 'services.feature.research' | 'services.feature.wireframing' | 'services.feature.prototyping' | 'services.feature.designSystems'
+  | 'services.feature.seo' | 'services.feature.socialMedia' | 'services.feature.content' | 'services.feature.ppc'
+  | 'services.feature.ml' | 'services.feature.nlp' | 'services.feature.cv' | 'services.feature.automation'
+  | 'services.feature.migration' | 'services.feature.devops' | 'services.feature.infrastructure' | 'services.feature.security'
+  | 'services.feature.enterprise' | 'services.feature.saas' | 'services.feature.integration' | 'services.feature.consulting'
+  | 'services.feature.visualization' | 'services.feature.predictive' | 'services.feature.reporting' | 'services.feature.dashboards'
   // Work section
   | 'work.badge' | 'work.title' | 'work.subtitle' | 'work.filterAll' | 'work.filterWeb' | 'work.filterDesign' | 'work.viewProject'
   // Technologies section
@@ -152,6 +161,39 @@ export const translations: Record<Locale, TranslationMap> = {
     'services.cloudServices': 'Scalable cloud infrastructure and deployment',
     'services.customSoftware': 'Tailored software solutions for your business',
     'services.analytics': 'Data insights and business intelligence',
+    // Service features
+    'services.feature.webApps': 'Custom Web Apps',
+    'services.feature.ecommerce': 'E-commerce Solutions',
+    'services.feature.cms': 'CMS Development',
+    'services.feature.api': 'API Integration',
+    'services.feature.ios': 'iOS Development',
+    'services.feature.android': 'Android Development',
+    'services.feature.crossPlatform': 'Cross-Platform',
+    'services.feature.maintenance': 'App Maintenance',
+    'services.feature.research': 'User Research',
+    'services.feature.wireframing': 'Wireframing',
+    'services.feature.prototyping': 'Prototyping',
+    'services.feature.designSystems': 'Design Systems',
+    'services.feature.seo': 'SEO Optimization',
+    'services.feature.socialMedia': 'Social Media',
+    'services.feature.content': 'Content Marketing',
+    'services.feature.ppc': 'PPC Advertising',
+    'services.feature.ml': 'Machine Learning',
+    'services.feature.nlp': 'Natural Language Processing',
+    'services.feature.cv': 'Computer Vision',
+    'services.feature.automation': 'Automation',
+    'services.feature.migration': 'Cloud Migration',
+    'services.feature.devops': 'DevOps',
+    'services.feature.infrastructure': 'Infrastructure',
+    'services.feature.security': 'Security',
+    'services.feature.enterprise': 'Enterprise Software',
+    'services.feature.saas': 'SaaS Products',
+    'services.feature.integration': 'Integration',
+    'services.feature.consulting': 'Consulting',
+    'services.feature.visualization': 'Data Visualization',
+    'services.feature.predictive': 'Predictive Analytics',
+    'services.feature.reporting': 'Reporting',
+    'services.feature.dashboards': 'Dashboards',
     'work.badge': 'Our Work', 'work.title': 'Featured Projects',
     'work.subtitle': 'Explore our portfolio of award-winning digital experiences',
     'work.filterAll': 'All Projects', 'work.filterWeb': 'Web Development', 'work.filterDesign': 'Graphic Design',
@@ -347,6 +389,39 @@ export const translations: Record<Locale, TranslationMap> = {
     'services.cloudServices': 'بنية تحتية سحابية قابلة للتوسع',
     'services.customSoftware': 'حلول برمجية مخصصة لأعمالك',
     'services.analytics': 'تحليلات بيانات وذكاء أعمال',
+    // Service features
+    'services.feature.webApps': 'تطبيقات ويب مخصصة',
+    'services.feature.ecommerce': 'حلول التجارة الإلكترونية',
+    'services.feature.cms': 'تطوير أنظمة إدارة المحتوى',
+    'services.feature.api': 'تكامل واجهات برمجة التطبيقات',
+    'services.feature.ios': 'تطوير iOS',
+    'services.feature.android': 'تطوير Android',
+    'services.feature.crossPlatform': 'تطبيقات متعددة المنصات',
+    'services.feature.maintenance': 'صيانة التطبيقات',
+    'services.feature.research': 'بحث المستخدمين',
+    'services.feature.wireframing': 'تصميم المخططات',
+    'services.feature.prototyping': 'النمذجة',
+    'services.feature.designSystems': 'أنظمة التصميم',
+    'services.feature.seo': 'تحسين محركات البحث',
+    'services.feature.socialMedia': 'التسويق عبر وسائل التواصل',
+    'services.feature.content': 'التسويق بالمحتوى',
+    'services.feature.ppc': 'الإعلانات المدفوعة',
+    'services.feature.ml': 'التعلم الآلي',
+    'services.feature.nlp': 'معالجة اللغة الطبيعية',
+    'services.feature.cv': 'الرؤية الحاسوبية',
+    'services.feature.automation': 'الأتمتة',
+    'services.feature.migration': 'الهجرة السحابية',
+    'services.feature.devops': 'التشغيل والصيانة',
+    'services.feature.infrastructure': 'البنية التحتية',
+    'services.feature.security': 'الأمان',
+    'services.feature.enterprise': 'البرمجيات المؤسسية',
+    'services.feature.saas': 'منتجات SaaS',
+    'services.feature.integration': 'التكامل',
+    'services.feature.consulting': 'الاستشارات',
+    'services.feature.visualization': 'تصور البيانات',
+    'services.feature.predictive': 'التحليلات التنبؤية',
+    'services.feature.reporting': 'التقارير',
+    'services.feature.dashboards': 'لوحات المعلومات',
     'work.badge': 'أعمالنا', 'work.title': 'مشاريعنا المميزة',
     'work.subtitle': 'استكشف محفظتنا من التجارب الرقمية الحائزة على جوائز',
     'work.filterAll': 'كل المشاريع', 'work.filterWeb': 'تطوير المواقع', 'work.filterDesign': 'التصميم الجرافيكي',

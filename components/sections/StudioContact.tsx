@@ -50,8 +50,8 @@ const StudioContact = () => {
     {
       icon: Mail,
       title: 'Email',
-      value: 'infogra174@gmail.com',
-      link: 'mailto:infogra174@gmail.com',
+      value: 'infograofficial1@gmail.com',
+      link: 'mailto:infograofficial1@gmail.com',
       color: 'from-blue-500 to-cyan-500'
     },
     {
@@ -72,7 +72,7 @@ const StudioContact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     // Form validation
     if (!formData.name.trim()) {
       alert('Please enter your name')
@@ -86,16 +86,24 @@ const StudioContact = () => {
       alert('Please enter a message')
       return
     }
-    
+
     setIsSubmitting(true)
-    
+
     try {
+      // Send to contact API
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.service ? `${formData.service} Inquiry` : 'Website Contact',
+          message: formData.message,
+          phone: formData.phone,
+          company: formData.company
+        })
       })
-      
+
       if (response.ok) {
         setIsSubmitted(true)
         setFormData({ name: '', email: '', phone: '', company: '', message: '', service: '' })
@@ -107,7 +115,7 @@ const StudioContact = () => {
     } finally {
       setIsSubmitting(false)
     }
-    
+
     setTimeout(() => setIsSubmitted(false), 5000)
   }
 
@@ -122,10 +130,10 @@ const StudioContact = () => {
     <section
       ref={elementRef}
       id="contact"
-      className="relative py-40 bg-background-secondary/50"
+      className="relative py-32 bg-background-secondary/50"
     >
       <SectionBackground opacity={0.2} />
-      <div className="container mx-auto px-8">
+      <div className="container mx-auto px-12">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={hasBeenVisible ? { opacity: 1, y: 0 } : {}}
@@ -133,17 +141,17 @@ const StudioContact = () => {
           className="text-center mb-24"
         >
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass border border-border-subtle mb-8">
-            <span className="text-small text-text-secondary">{t(locale, 'contact.badge')}</span>
+            <span className="text-body text-text-secondary">{t(locale, 'contact.badge')}</span>
           </div>
-          <h2 id="contact-heading" className="text-h2-sm md:text-h2 lg:text-h1 font-bold text-text-primary mb-8">
+          <h2 id="contact-heading" className="text-display font-bold text-text-primary mb-8">
             {t(locale, 'contact.title')}
           </h2>
-          <p className="text-body-lg md:text-h4 lg:text-h3 text-text-secondary max-w-3xl mx-auto leading-relaxed">
+          <p className="text-body-lg md:text-h2 lg:text-h1 text-text-secondary max-w-4xl mx-auto leading-relaxed">
             {t(locale, 'contact.subtitle')}
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-16">
+        <div className="grid lg:grid-cols-3 gap-12">
           {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -60 }}
@@ -152,28 +160,28 @@ const StudioContact = () => {
             className="lg:col-span-2"
           >
             <Card className="glass-strong border-border-subtle">
-              <CardContent className="p-16">
+              <CardContent className="p-12">
                 {isSubmitted ? (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="text-center py-12"
+                    className="text-center py-16"
                   >
-                    <div className="w-20 h-20 bg-accent-success/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <CheckCircle className="w-10 h-10 text-accent-success" />
+                    <div className="w-24 h-24 bg-accent-success/20 rounded-full flex items-center justify-center mx-auto mb-8">
+                      <CheckCircle className="w-12 h-12 text-accent-success" />
                     </div>
-                    <h3 className="text-h3 font-bold text-text-primary mb-4">
+                    <h3 className="text-display font-bold text-text-primary mb-6">
                       {t(locale, 'contact.thankYou')}
                     </h3>
-                    <p className="text-body text-text-secondary">
+                    <p className="text-body-lg text-text-secondary">
                       {t(locale, 'contact.thankYouDesc')}
                     </p>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6" role="form" aria-labelledby="contact-heading">
-                    <div className="grid md:grid-cols-2 gap-6">
+                  <form onSubmit={handleSubmit} className="space-y-8" role="form" aria-labelledby="contact-heading">
+                    <div className="grid md:grid-cols-2 gap-8">
                       <div>
-                        <label htmlFor="name" className="block text-small font-medium text-text-primary mb-2">
+                        <label htmlFor="name" className="block text-body font-medium text-text-primary mb-3">
                           {t(locale, 'contact.name')}
                         </label>
                         <Input
@@ -185,10 +193,11 @@ const StudioContact = () => {
                           required
                           placeholder={locale === 'ar' ? 'محمد أحمد' : 'John Doe'}
                           aria-required="true"
+                          className="h-14 text-body-lg"
                         />
                       </div>
                       <div>
-                        <label htmlFor="email" className="block text-small font-medium text-text-primary mb-2">
+                        <label htmlFor="email" className="block text-body font-medium text-text-primary mb-3">
                           {t(locale, 'contact.email')}
                         </label>
                         <Input
@@ -200,13 +209,14 @@ const StudioContact = () => {
                           required
                           placeholder={locale === 'ar' ? 'mohamed@example.com' : 'john@example.com'}
                           aria-required="true"
+                          className="h-14 text-body-lg"
                         />
                       </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid md:grid-cols-2 gap-8">
                       <div>
-                        <label htmlFor="phone" className="block text-small font-medium text-text-primary mb-2">
+                        <label htmlFor="phone" className="block text-body font-medium text-text-primary mb-3">
                           Phone
                         </label>
                         <Input
@@ -216,10 +226,11 @@ const StudioContact = () => {
                           value={formData.phone}
                           onChange={handleChange}
                           placeholder={locale === 'ar' ? '+20 123 456 7890' : '+1 234 567 8900'}
+                          className="h-14 text-body-lg"
                         />
                       </div>
                       <div>
-                        <label htmlFor="company" className="block text-small font-medium text-text-primary mb-2">
+                        <label htmlFor="company" className="block text-body font-medium text-text-primary mb-3">
                           Company
                         </label>
                         <Input
@@ -229,12 +240,13 @@ const StudioContact = () => {
                           value={formData.company}
                           onChange={handleChange}
                           placeholder={locale === 'ar' ? 'شركتك' : 'Acme Corp'}
+                          className="h-14 text-body-lg"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label htmlFor="service" className="block text-small font-medium text-text-primary mb-2">
+                      <label htmlFor="service" className="block text-body font-medium text-text-primary mb-3">
                         {t(locale, 'contact.service')}
                       </label>
                       <select
@@ -242,7 +254,7 @@ const StudioContact = () => {
                         name="service"
                         value={formData.service}
                         onChange={handleChange}
-                        className="flex h-14 w-full rounded-xl border border-border-subtle bg-background-tertiary/50 px-6 py-3 text-sm text-text-primary placeholder:text-text-tertiary transition-all duration-400 focus:border-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary/20"
+                        className="flex h-14 w-full rounded-xl border border-border-subtle bg-background-tertiary/50 px-6 py-3 text-body-lg text-text-primary placeholder:text-text-tertiary transition-all duration-400 focus:border-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary/20"
                       >
                         <option value="">{t(locale, 'contact.selectService')}</option>
                         {services.map(service => (
@@ -252,7 +264,8 @@ const StudioContact = () => {
                     </div>
 
                     <div>
-                      <label htmlFor="message" className="block text-small font-medium text-text-primary mb-2">                          {t(locale, 'contact.message')}
+                      <label htmlFor="message" className="block text-body font-medium text-text-primary mb-3">
+                        {t(locale, 'contact.message')}
                       </label>
                       <textarea
                         id="message"
@@ -260,8 +273,8 @@ const StudioContact = () => {
                         value={formData.message}
                         onChange={handleChange}
                         required
-                        rows={5}
-                        className="flex w-full rounded-xl border border-border-subtle bg-background-tertiary/50 px-6 py-3 text-sm text-text-primary placeholder:text-text-tertiary transition-all duration-400 focus:border-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary/20 resize-none"
+                        rows={6}
+                        className="flex w-full rounded-xl border border-border-subtle bg-background-tertiary/50 px-6 py-4 text-body-lg text-text-primary placeholder:text-text-tertiary transition-all duration-400 focus:border-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary/20 resize-none"
                         placeholder={locale === 'ar' ? 'أخبرنا عن مشروعك...' : 'Tell us about your project...'}
                         aria-required="true"
                       />
@@ -272,17 +285,18 @@ const StudioContact = () => {
                       size="lg"
                       variant="premium"
                       disabled={isSubmitting}
-                      className="w-full"
+                      className="w-full text-body-lg px-8 py-5"
                       onMouseEnter={addHoverEffect}
                       onMouseLeave={removeHoverEffect}
                     >
-                      {isSubmitting ? (                          <div className="flex items-center justify-center">
-                          <div className={`w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                      {isSubmitting ? (
+                        <div className="flex items-center justify-center">
+                          <div className={`w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin ${isRTL ? 'ml-3' : 'mr-3'}`} />
                           {t(locale, 'contact.sending')}
                         </div>
                       ) : (
                         <div className="flex items-center justify-center">
-                          <Send className={`w-5 h-5 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+                          <Send className={`w-6 h-6 ${isRTL ? 'ml-3' : 'mr-3'}`} />
                           {t(locale, 'contact.send')}
                         </div>
                       )}
@@ -301,35 +315,36 @@ const StudioContact = () => {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-h3 font-bold text-text-primary mb-6">{t(locale, 'contact.info')}</h3>
-              <p className="text-body text-text-secondary mb-8 leading-relaxed">
+              <h3 className="text-display font-bold text-text-primary mb-6">{t(locale, 'contact.info')}</h3>
+              <p className="text-body-lg text-text-secondary mb-8 leading-relaxed">
                 {t(locale, 'contact.infoDesc')}
               </p>
             </div>
 
-            {contactInfo.map((info, index) => (
-              <motion.div
-                key={info.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={hasBeenVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.6 + index * 0.15, duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
-              >
-                <Card className="glass border-border-subtle hover:border-accent-primary/30 transition-all duration-700 hover:-translate-y-1">
-                  <CardContent className="p-8">
-                    <div className={`w-14 h-14 bg-gradient-to-br ${info.color} rounded-xl flex items-center justify-center mb-6`}>
-                      <info.icon className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-small font-semibold text-text-primary mb-3">{info.title}</h3>
-                    <a 
+            <div className="space-y-6">
+              {contactInfo.map((info, index) => (
+                <motion.div
+                  key={info.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={hasBeenVisible ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.6 + index * 0.15, duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="flex items-center gap-4"
+                >
+                  <div className={`w-16 h-16 bg-gradient-to-br ${info.color} rounded-xl flex items-center justify-center flex-shrink-0`}>
+                    <info.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-body font-semibold text-text-primary mb-2">{info.title}</h3>
+                    <a
                       href={info.link}
-                      className="text-body text-text-secondary hover:text-accent-primary transition-colors"
+                      className="text-body-lg text-text-secondary hover:text-accent-primary transition-colors"
                     >
                       {info.value}
                     </a>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
 
             {/* Business Hours */}
             <motion.div
@@ -339,11 +354,11 @@ const StudioContact = () => {
             >
               <Card className="glass border-border-subtle">
                 <CardContent className="p-8">
-                  <div className="flex items-center gap-3 mb-6">
-                    <Clock className="w-6 h-6 text-accent-primary" />
-                    <h3 className="text-small font-semibold text-text-primary">{t(locale, 'contact.hours')}</h3>
+                  <div className="flex items-center gap-4 mb-6">
+                    <Clock className="w-8 h-8 text-accent-primary" />
+                    <h3 className="text-body font-semibold text-text-primary">{t(locale, 'contact.hours')}</h3>
                   </div>
-                  <div className="space-y-3 text-body text-text-secondary">
+                  <div className="space-y-4 text-body-lg text-text-secondary">
                     <div className="flex justify-between">
                       <span>{t(locale, 'contact.monFri')}</span>
                       <span>9:00 AM - 6:00 PM</span>
@@ -370,15 +385,15 @@ const StudioContact = () => {
               <Card className="bg-gradient-primary border-none text-white overflow-hidden">
                 <CardContent className="p-8 relative">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
-                  <MessageSquare className="w-10 h-10 mb-6 relative z-10" />
-                  <h3 className="text-h4 font-bold mb-3 relative z-10">{t(locale, 'contact.quickHelp')}</h3>
-                  <p className="text-body mb-6 opacity-90 relative z-10 leading-relaxed">
+                  <MessageSquare className="w-12 h-12 mb-6 relative z-10" />
+                  <h3 className="text-h3 font-bold mb-4 relative z-10">{t(locale, 'contact.quickHelp')}</h3>
+                  <p className="text-body-lg mb-6 opacity-90 relative z-10 leading-relaxed">
                     {t(locale, 'contact.quickHelpDesc')}
                   </p>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="border-2 border-white text-white hover:bg-white hover:text-accent-primary w-full relative z-10"
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-2 border-white text-white hover:bg-white hover:text-accent-primary w-full relative z-10 text-body-lg"
                     onMouseEnter={addHoverEffect}
                     onMouseLeave={removeHoverEffect}
                     onClick={() => window.dispatchEvent(new CustomEvent('toggle-ai-assistant'))}

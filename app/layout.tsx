@@ -8,11 +8,12 @@ import StudioFooter from '@/components/layout/StudioFooter'
 import AppProviders from '@/components/providers/AppProviders'
 import GlobalErrorBoundary from '@/components/providers/GlobalErrorBoundary'
 import { LanguageProvider } from '@/providers/LanguageProvider'
-
-const AssistantWidget = dynamic(() => import('@/components/ai/AssistantWidget'))
+import LoadingScreen from '@/components/loading/LoadingScreen'
 import { siteConfig } from '@/lib/navigation'
 
-const GlobalThreeScene = dynamic(() => import('@/components/three/Experience'), {
+const AssistantWidget = dynamic(() => import('@/components/ai/AssistantWidget'))
+
+const GlobalThreeScene = dynamic(() => import('@/components/three/BackgroundWrapper'), {
   ssr: false,
 })
 
@@ -40,6 +41,11 @@ export const metadata: Metadata = {
   creator: 'Infogra',
   publisher: 'Infogra',
   robots: { index: true, follow: true },
+  icons: {
+    icon: '/assets/img/favicon.png',
+    shortcut: '/assets/img/favicon.png',
+    apple: '/assets/img/favicon.png',
+  },
   openGraph: {
     title: 'Infogra - Digital Experience Architects',
     description: 'We architect digital experiences where innovative design meets powerful development.',
@@ -76,15 +82,18 @@ const jsonLd = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className={`${inter.variable} ${notoSansArabic.variable} font-sans antialiased bg-background-primary relative`}>
+      <body className={`${inter.variable} ${notoSansArabic.variable} font-sans antialiased bg-[#0a0a1a] text-white relative`} style={{ minHeight: '100vh', fontFamily: 'var(--font-arabic), var(--font-inter), system-ui, sans-serif' }}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        
-        {/* Global 3D Background */}
+
+        {/* Loading Screen disabled - causing grey flashing issue */}
+        {/* <LoadingScreen /> */}
+
+        {/* Global 3D Background - Optimized for performance */}
         <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
-          <GlobalThreeScene />
+          <Suspense fallback={null}>
+            <GlobalThreeScene />
+          </Suspense>
         </div>
-        
-        <div className="noise-overlay fixed inset-0 pointer-events-none z-0 mix-blend-overlay" />
         
         <div className="min-h-screen flex flex-col relative z-10">
           <LanguageProvider>

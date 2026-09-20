@@ -15,12 +15,6 @@ import { useLanguage } from '@/providers/LanguageProvider'
 import { t } from '@/lib/translations'
 import { products } from '@/data/products'
 import Image from 'next/image'
-import dynamic from 'next/dynamic'
-
-const SectionBackground = dynamic(() => import('@/components/three/SectionBackground'), {
-  ssr: false,
-  loading: () => null
-})
 
 interface Component {
   id: string
@@ -365,7 +359,6 @@ export default function PCBuilderPage() {
     <div className="min-h-screen bg-background-primary">
       {/* Hero Section */}
       <section className="relative py-16 bg-gradient-to-b from-background-secondary to-background-primary overflow-hidden">
-        <SectionBackground opacity={0.3} />
         <div className="container mx-auto px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

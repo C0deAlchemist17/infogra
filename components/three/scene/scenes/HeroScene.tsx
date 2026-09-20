@@ -1,10 +1,9 @@
 'use client'
 
-import { useRef, useMemo, useEffect } from 'react'
+import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Points, PointMaterial } from '@react-three/drei'
+import { Points, PointMaterial, Line, Stars } from '@react-three/drei'
 import * as THREE from 'three'
-import { gsap } from 'gsap'
 
 interface HeroSceneProps {
   progress: number
@@ -14,131 +13,232 @@ interface HeroSceneProps {
 }
 
 export function HeroScene({ progress, scrollProgress, isActive, deviceTier }: HeroSceneProps) {
-  const particlesRef = useRef<THREE.Points>(null)
   const groupRef = useRef<THREE.Group>(null)
+  const particlesRef = useRef<THREE.Points>(null)
+  const linesRef = useRef<THREE.Group>(null)
   
-  const particleCount = deviceTier === 'low' ? 300 : deviceTier === 'medium' ? 600 : 1200
+  const particleCount = deviceTier === 'low' ? 400 : deviceTier === 'medium' ? 600 : 800
+  const lineCount = 30
   
-  const { positions, initialPositions, targetPositions } = useMemo(() => {
+  const { positions, colors, originalPositions } = useMemo(() => {
     const pos = new Float32Array(particleCount * 3)
-    const initialPos = new Float32Array(particleCount * 3)
-    const targetPos = new Float32Array(particleCount * 3)
+    const origPos = new Float32Array(particleCount * 3)
+    const col = new Float32Array(particleCount * 3)
+    
+    const color1 = new THREE.Color('#3b82f6')
+    const color2 = new THREE.Color('#8b5cf6')
+    const color3 = new THREE.Color('#06b6d4')
+    const color4 = new THREE.Color('#f59e0b')
+    const color5 = new THREE.Color('#10b981')
     
     for (let i = 0; i < particleCount; i++) {
       const i3 = i * 3
       
-      // Initial scattered positions (digital birth state)
-      initialPos[i3] = (Math.random() - 0.5) * 30
-      initialPos[i3 + 1] = (Math.random() - 0.5) * 30
-      initialPos[i3 + 2] = (Math.random() - 0.5) * 20 - 10
-      
-      // Target positions - assemble into INFOGRA-inspired structure
-      // Create a complex geometric shape representing technology
+      // Create spherical distribution for initial star field
       const theta = Math.random() * Math.PI * 2
       const phi = Math.acos(2 * Math.random() - 1)
-      const radius = 2 + Math.random() * 2
+      const radius = 8 + Math.random() * 15
       
-      targetPos[i3] = radius * Math.sin(phi) * Math.cos(theta)
-      targetPos[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta)
-      targetPos[i3 + 2] = radius * Math.cos(phi) - 5
+      pos[i3] = radius * Math.sin(phi) * Math.cos(theta)
+      pos[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta)
+      pos[i3 + 2] = radius * Math.cos(phi) - 10
       
-      // Current positions start at initial
-      pos[i3] = initialPos[i3]
-      pos[i3 + 1] = initialPos[i3 + 1]
-      pos[i3 + 2] = initialPos[i3 + 2]
-    }
-    
-    return { positions: pos, initialPositions: initialPos, targetPositions: targetPos }
-  }, [particleCount])
-
-  useEffect(() => {
-    if (!particlesRef.current) return
-    
-    const geometry = particlesRef.current.geometry
-    const positionAttribute = geometry.attributes.position
-    
-    // Animate particles from scattered to assembled based on progress
-    const animateParticles = () => {
-      for (let i = 0; i < particleCount; i++) {
-        const i3 = i * 3
-        
-        // Interpolate between initial and target positions
-        const assemblyProgress = Math.min(progress * 1.5, 1) // Speed up assembly
-        const easeProgress = 1 - Math.pow(1 - assemblyProgress, 3) // Ease out cubic
-        
-        positionAttribute.array[i3] = THREE.MathUtils.lerp(
-          initialPositions[i3],
-          targetPositions[i3],
-          easeProgress
-        )
-        positionAttribute.array[i3 + 1] = THREE.MathUtils.lerp(
-          initialPositions[i3 + 1],
-          targetPositions[i3 + 1],
-          easeProgress
-        )
-        positionAttribute.array[i3 + 2] = THREE.MathUtils.lerp(
-          initialPositions[i3 + 2],
-          targetPositions[i3 + 2],
-          easeProgress
-        )
+      origPos[i3] = pos[i3]
+      origPos[i3 + 1] = pos[i3 + 1]
+      origPos[i3 + 2] = pos[i3 + 2]
+      
+      // Multi-color gradient
+      const colorMix = i / particleCount
+      const mixedColor = new THREE.Color()
+      if (colorMix < 0.2) {
+        mixedColor.lerpColors(color1, color2, colorMix * 5)
+      } else if (colorMix < 0.4) {
+        mixedColor.lerpColors(color2, color3, (colorMix - 0.2) * 5)
+      } else if (colorMix < 0.6) {
+        mixedColor.lerpColors(color3, color4, (colorMix - 0.4) * 5)
+      } else if (colorMix < 0.8) {
+        mixedColor.lerpColors(color4, color5, (colorMix - 0.6) * 5)
+      } else {
+        mixedColor.lerpColors(color5, color1, (colorMix - 0.8) * 5)
       }
       
-      positionAttribute.needsUpdate = true
+      col[i3] = mixedColor.r
+      col[i3 + 1] = mixedColor.g
+      col[i3 + 2] = mixedColor.b
     }
     
-    animateParticles()
-  }, [progress, particleCount, initialPositions, targetPositions])
+    return { positions: pos, colors: col, originalPositions: origPos }
+  }, [particleCount])
+  
+  const lines = useMemo(() => {
+    const lineData = []
+    for (let i = 0; i < lineCount; i++) {
+      const angle = (i / lineCount) * Math.PI * 2
+      const radius = 10 + Math.random() * 8
+      lineData.push({
+        angle,
+        radius,
+        speed: 0.15 + Math.random() * 0.25,
+        phase: Math.random() * Math.PI * 2
+      })
+    }
+    return lineData
+  }, [])
 
   useFrame((state) => {
+    const time = state.clock.elapsedTime
+    
     if (groupRef.current) {
-      // Subtle rotation of the entire particle system
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.05
-      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.03) * 0.1
-      
-      // Gentle floating motion
-      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.2
+      // Continuous automatic rotation - slower for performance
+      const smoothRotation = time * 0.01
+      groupRef.current.rotation.y = smoothRotation
+      groupRef.current.rotation.x = Math.sin(time * 0.01) * 0.02
+      groupRef.current.position.y = Math.sin(time * 0.1) * 0.03
     }
     
     if (particlesRef.current) {
-      // Individual particle subtle movement
       const positions = particlesRef.current.geometry.attributes.position.array
+      
+      // Pattern selection based on scroll progress (changes when scrolling)
+      const scrollPattern = Math.floor(scrollProgress * 4) // 4 patterns based on scroll
+      const timePattern = (time * 0.2) % 1 // Time-based pattern when not scrolling
+      const scrollInfluence = scrollProgress * 0.2 // Reduced influence for performance
+      
       for (let i = 0; i < particleCount; i++) {
         const i3 = i * 3
-        // Add subtle noise to assembled particles
-        if (progress > 0.5) {
-          positions[i3] += Math.sin(state.clock.elapsedTime + i) * 0.001
-          positions[i3 + 1] += Math.cos(state.clock.elapsedTime + i) * 0.001
+        
+        const origX = originalPositions[i3]
+        const origY = originalPositions[i3 + 1]
+        const origZ = originalPositions[i3 + 2]
+        
+        let targetX, targetY, targetZ
+        
+        // Different patterns based on scroll position
+        if (scrollPattern === 0) {
+          // Spiral pattern - at start of scroll
+          const spiralAngle = (i / particleCount) * Math.PI * 6 + time * 0.15
+          const spiralRadius = 4 + (i / particleCount) * 8
+          targetX = Math.cos(spiralAngle) * spiralRadius
+          targetY = Math.sin(spiralAngle) * spiralRadius * 0.4
+          targetZ = Math.sin(spiralAngle * 2) * 2 - 10
+        } else if (scrollPattern === 1) {
+          // Galaxy pattern - at 25% scroll
+          const galaxyAngle = (i / particleCount) * Math.PI * 8
+          const galaxyRadius = 2 + (i / particleCount) * 10 * (1 + Math.sin(galaxyAngle) * 0.2)
+          targetX = Math.cos(galaxyAngle) * galaxyRadius
+          targetY = Math.sin(galaxyAngle) * galaxyRadius * 0.2
+          targetZ = (i / particleCount - 0.5) * 6 - 10
+        } else if (scrollPattern === 2) {
+          // Wave pattern - at 50% scroll
+          const wavePhase = (i / particleCount) * Math.PI * 3
+          targetX = (i / particleCount - 0.5) * 15
+          targetY = Math.sin(wavePhase + time * 0.8) * 3
+          targetZ = Math.cos(wavePhase + time * 0.6) * 3 - 10
+        } else {
+          // Constellation pattern - at 75%+ scroll
+          const constellationPhase = (i / particleCount) * Math.PI * 4
+          targetX = origX + Math.sin(constellationPhase + time * 0.4) * 1.5
+          targetY = origY + Math.cos(constellationPhase + time * 0.3) * 1.5
+          targetZ = origZ + Math.sin(constellationPhase + time * 0.5) * 1.5
         }
+        
+        // Automatic movement continues regardless of scroll
+        const blendFactor = Math.pow(Math.sin((time * 0.15) % 1 * Math.PI), 0.5)
+        const scrollOffset = scrollInfluence * Math.sin(i * 0.01 + time * 0.4) * 1
+        
+        positions[i3] = THREE.MathUtils.lerp(origX, targetX, blendFactor * 0.15) + scrollOffset
+        positions[i3 + 1] = THREE.MathUtils.lerp(origY, targetY, blendFactor * 0.15) + scrollOffset * 0.3
+        positions[i3 + 2] = THREE.MathUtils.lerp(origZ, targetZ, blendFactor * 0.15)
       }
+      
       particlesRef.current.geometry.attributes.position.needsUpdate = true
+    }
+    
+    if (linesRef.current) {
+      linesRef.current.children.forEach((line, i) => {
+        if (line instanceof THREE.Line) {
+          const lineData = lines[i]
+          // Lines continue moving automatically - slower
+          const angle = lineData.angle + time * lineData.speed * 0.4
+          const radius = lineData.radius + Math.sin(time * 0.8 + lineData.phase) * 1
+          
+          const x = Math.cos(angle) * radius
+          const y = Math.sin(time * 1 + lineData.phase) * 2
+          const z = Math.sin(angle) * radius
+          
+          line.position.set(x, y, z)
+          line.rotation.y = time * 0.04
+          line.rotation.x = Math.sin(time * 0.12 + lineData.phase) * 0.08
+        }
+      })
     }
   })
 
   return (
     <group ref={groupRef}>
+      {/* Rich star field */}
+      <Stars radius={100} depth={50} count={500} factor={4} saturation={0.15} fade speed={0.5} />
+      
+      {/* Dynamic particle system */}
       <Points ref={particlesRef} positions={positions} stride={3} frustumCulled={false}>
         <PointMaterial
           transparent
-          color="#3b82f6"
-          size={deviceTier === 'low' ? 0.05 : deviceTier === 'medium' ? 0.04 : 0.03}
+          vertexColors
+          size={deviceTier === 'low' ? 0.05 : deviceTier === 'medium' ? 0.035 : 0.025}
           sizeAttenuation={true}
           depthWrite={false}
-          opacity={0.8}
+          opacity={0.7}
+          blending={THREE.AdditiveBlending}
         />
       </Points>
       
-      {/* Add subtle glowing core when assembled */}
-      {progress > 0.7 && (
-        <mesh>
-          <sphereGeometry args={[1.5, 32, 32]} />
-          <meshBasicMaterial
-            color="#6366f1"
-            transparent
-            opacity={0.1 * (progress - 0.7) * 3.33}
-            side={THREE.BackSide}
-          />
-        </mesh>
-      )}
+      {/* Animated constellation lines */}
+      <group ref={linesRef}>
+        {lines.map((line, i) => (
+          <group key={i}>
+            <Line
+              points={[
+                [0, 0, 0],
+                [line.radius, 0, 0]
+              ]}
+              color="#6366f1"
+              opacity={0.15}
+              lineWidth={0.15}
+            />
+          </group>
+        ))}
+      </group>
+      
+      {/* Orbital rings - simplified for performance */}
+      <mesh rotation={[Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[8, 0.01, 64]} />
+        <meshBasicMaterial
+          color="#3b82f6"
+          transparent
+          opacity={0.1}
+          blending={THREE.AdditiveBlending}
+        />
+      </mesh>
+      
+      <mesh rotation={[Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[12, 0.008, 64]} />
+        <meshBasicMaterial
+          color="#8b5cf6"
+          transparent
+          opacity={0.05}
+          blending={THREE.AdditiveBlending}
+        />
+      </mesh>
+      
+      <mesh rotation={[Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[16, 0.005, 64]} />
+        <meshBasicMaterial
+          color="#06b6d4"
+          transparent
+          opacity={0.03}
+          blending={THREE.AdditiveBlending}
+        />
+      </mesh>
     </group>
   )
 }

@@ -24,9 +24,14 @@ export function ComparisonProvider({ children }: { children: ReactNode }) {
     if (typeof window === 'undefined') return
     try {
       const stored = localStorage.getItem('infogra-comparison')
-      if (stored) setItems(JSON.parse(stored))
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        if (Array.isArray(parsed)) {
+          setItems(parsed)
+        }
+      }
     } catch (error) {
-      console.error('Failed to load comparison:', error)
+      // Silently fail - localStorage might be disabled or full
     }
   }, [])
 
@@ -35,7 +40,7 @@ export function ComparisonProvider({ children }: { children: ReactNode }) {
     try {
       localStorage.setItem('infogra-comparison', JSON.stringify(items))
     } catch (error) {
-      console.error('Failed to save comparison:', error)
+      // Silently fail - localStorage might be disabled or full
     }
   }, [items])
 

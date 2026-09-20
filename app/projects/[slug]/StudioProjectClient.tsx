@@ -49,7 +49,7 @@ const StudioProjectClient = ({ project, slug }: ProjectClientProps) => {
       >
         {/* Background */}
         <div className="absolute inset-0">
-          <div className="grid-overlay" />
+          {/* Grid overlay removed - causing unwanted horizontal lines */}
           <div className="absolute inset-0 bg-gradient-to-b from-background-primary via-background-primary/90 to-background-primary" />
         </div>
 

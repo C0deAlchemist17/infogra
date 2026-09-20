@@ -21,6 +21,23 @@ export interface Product {
   isNew?: boolean
   isBestSeller?: boolean
   isFeatured?: boolean
+  status?: 'active' | 'archived' | 'out-of-stock'
+  // Price synchronization control
+  syncPrice?: boolean // If false, manual price overrides are protected
+  // Source metadata
+  sourceMetadata?: {
+    source: string // e.g., 'Kimo Store'
+    sourceProductId?: string
+    sourceUrl?: string
+    sourceSku?: string
+    lastSeen?: string
+    lastSynced?: string
+    sourcePrice?: number
+  }
+  // Timestamps
+  createdAt?: string
+  updatedAt?: string
+  deletedAt?: string
 }
 
 export interface Category {

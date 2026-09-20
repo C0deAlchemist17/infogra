@@ -1,52 +1,36 @@
 'use client'
 
 import { Canvas } from '@react-three/fiber'
-import { Suspense, useRef, useEffect } from 'react'
+import { Suspense } from 'react'
 import * as THREE from 'three'
 import ThreeErrorBoundary from './ThreeErrorBoundary'
-import { PerformanceManager } from './managers/PerformanceManager'
-import { Lighting } from './lighting/Lighting'
-import { CameraRig } from './camera/CameraRig'
-import { SceneManager } from './scene/SceneManager'
-import { ScrollController } from './controls/ScrollController'
-import { InteractionManager } from './controls/InteractionManager'
-import { TransitionManager } from './transitions/TransitionManager'
+import { StarField } from './StarField'
 
 interface ExperienceProps {
   route?: string
 }
 
 export default function Experience({ route = 'home' }: ExperienceProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-
   return (
     <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
       <ThreeErrorBoundary>
         <Canvas
-          ref={canvasRef}
-          dpr={[1, 2]}
+          dpr={[1, 1.2]}
           gl={{
-            antialias: true,
+            antialias: false, // Disable antialias for performance
             powerPreference: 'high-performance',
             alpha: true,
-            stencil: true,
+            stencil: false,
             depth: true,
+            toneMapping: THREE.ACESFilmicToneMapping,
+            toneMappingExposure: 1.0,
+            outputColorSpace: THREE.SRGBColorSpace,
           }}
           style={{ background: 'transparent' }}
+          camera={{ position: [0, 0, 100], fov: 75 }}
         >
           <Suspense fallback={null}>
-            <PerformanceManager>
-              <Lighting />
-              <CameraRig>
-                <ScrollController>
-                  <InteractionManager>
-                    <TransitionManager>
-                      <SceneManager currentRoute={route} />
-                    </TransitionManager>
-                  </InteractionManager>
-                </ScrollController>
-              </CameraRig>
-            </PerformanceManager>
+            <StarField count={1500} />
           </Suspense>
         </Canvas>
       </ThreeErrorBoundary>

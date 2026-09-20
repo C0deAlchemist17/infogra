@@ -24,10 +24,13 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
     try {
       const stored = localStorage.getItem('infogra-wishlist')
       if (stored) {
-        setItems(JSON.parse(stored))
+        const parsed = JSON.parse(stored)
+        if (Array.isArray(parsed)) {
+          setItems(parsed)
+        }
       }
     } catch (error) {
-      console.error('Failed to load wishlist:', error)
+      // Silently fail - localStorage might be disabled or full
     }
   }, [])
 
@@ -37,7 +40,7 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
     try {
       localStorage.setItem('infogra-wishlist', JSON.stringify(items))
     } catch (error) {
-      console.error('Failed to save wishlist:', error)
+      // Silently fail - localStorage might be disabled or full
     }
   }, [items])
 

@@ -23,7 +23,7 @@ const WhyInfogra = () => {
   ]
 
   return (
-    <section ref={elementRef} className="relative py-40 bg-background-secondary/50 overflow-hidden">
+    <section ref={elementRef} className="relative py-24 bg-background-secondary/50 overflow-hidden">
       <div className="container mx-auto px-8">
         <motion.div initial={{ opacity: 0, y: 40 }} animate={hasBeenVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.5, ease: [0.25, 0.1, 0.25, 1] }} className="text-center mb-20">
